@@ -98,7 +98,7 @@ header {
   justify-content: space-between;
   gap: 2rem;
 
-  h2 {
+  div h2 {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -125,7 +125,12 @@ nav {
   }
 }
 
-/* Botones del Header */
+header div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
 header div a {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
@@ -138,14 +143,16 @@ header div a {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Aquí va el hover directo */
 header div a:hover {
   background-color: var(--primary-dark);
   color: var(--primary-light);
 }
 
-
-
+header div img {
+  width: 40px;
+  height: auto;
+  border-radius: 50%;
+}
 
 /* Hero */
 main>section:nth-child(1) {
@@ -158,6 +165,10 @@ main>section:nth-child(1) {
 
   h1 {
     padding-top: 36px;
+  }
+
+  p {
+    color: var(--text-muted);
   }
 
   &>img {
@@ -230,7 +241,6 @@ form button[type="submit"] {
 form button[type="submit"]:hover,
 form button[type="submit"]:focus {
   background-color: var(--primary-hover);
-  outline: 2px solid white;
   outline-offset: 2px;
 }
 
@@ -249,7 +259,7 @@ main>section:nth-child(2) {
     }
 
     p {
-      opacity: .75;
+      color: var(--text-muted);
     }
   }
 
@@ -281,20 +291,20 @@ main>section:nth-child(2) footer {
 }
 
 /* Feature Cards */
-/* article {
+article {
   background-color: var(--card-bg);
   padding: 2rem;
   margin-bottom: 16px;
-  border-radius: 0.5rem;                   
-  box-shadow: 0px 1px 3px 0 var(--shadow); 
+  border-radius: 0.5rem;
+  box-shadow: 0px 1px 3px 0 var(--shadow);
 
   svg {
-    color: var(--primary-light);          
-    background: rgba(0, 153, 255, 0.3);  
-    border-radius: 9999px;               
-    width: 64px;                         
-    height: 64px;                        
-    padding: 16px;                       
+    color: var(--primary-light);
+    background: rgba(0, 153, 255, 0.3);
+    border-radius: 9999px;
+    width: 64px;
+    height: 64px;
+    padding: 16px;
   }
 
   h3 {
@@ -304,7 +314,7 @@ main>section:nth-child(2) footer {
   p {
     color: var(--text-muted);
   }
-} */
+}
 
 /* Footer */
 footer {
@@ -316,30 +326,5 @@ footer {
   small {
     color: var(--text-muted);
     font-size: 0.875rem;
-  }
-}
-
-article {
-  background-color: var(--card-bg);
-  padding: 2rem;
-  margin-bottom: 16px;
-  border-radius: 0.5rem;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
-
-  svg {
-    color: var(--primary-light);
-    background: rgba(0, 153, 255, .3);
-    width: 64px;
-    height: 64px;
-    border-radius: 100%;
-    padding: 16px;
-  }
-
-  p {
-    color: var(--text-muted);
-  }
-
-  h3 {
-    font-weight: 500;
   }
 }
