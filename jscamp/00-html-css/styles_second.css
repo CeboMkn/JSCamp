@@ -116,10 +116,14 @@ nav {
         color: var(--text-secondary);
         transition: color 0.2s;
         font-weight: 500;
+        padding: 5px;
 
         &:hover,
         &:focus {
-            color: var(--primary);
+
+            background: radial-gradient(circle at center,
+                    var(--card-bg) 10%,
+                    var(--background) 100%);
             outline: none;
         }
     }
@@ -155,8 +159,17 @@ header div img {
 }
 
 main {
-    margin: 0 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+main>div {
+    max-width: 1200px;
+    padding: 0 5rem;
+    width: 100%;
+}
+
 
 
 .sec_main {
@@ -230,31 +243,65 @@ form input[type="text"]::placeholder {
 
 
 /* Features Section */
-main>section:nth-child(3) {
+main>div>section:nth-child(3) {
     display: flex;
     flex-direction: row;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
 }
 
-main>section:nth-child(3) select {
-    padding: 8px;
+main>div>section:nth-child(3) select {
+    padding: 10px 8px;
     color: #d3d3d3;
+    cursor: pointer;
     border: none;
+    font-weight: 700;
     border-radius: 5px;
     background-color: var(--border);
+    transition: background-color 0.2s ease;
 }
 
-main>section:nth-child(3) select option {
+main>div>section:nth-child(3) select:hover {
+    background-color: var(--input-bg);
+}
+
+main>div>section:nth-child(3) select option {
     background-color: var(--background);
     color: var(--text-primary);
 }
 
+main>div>section:nth-child(4) h2 {
+    margin-bottom: 2rem;
+}
+
 .res_busqueda {
-    border: 2px solid var(--border);
     padding: 1rem;
     display: flex;
     justify-content: space-between;
+    transition: background 0.2s ease;
+}
+
+.res_busqueda:hover {
+    background-color: #061627;
+}
+
+.res_bor {
+    border-bottom: 1px solid var(--border);
+}
+
+.env_result {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 10px 15px -3px var(--shadow);
+}
+
+.res_first {
+    border-radius: 9px 9px 0 0;
+}
+
+.res_last {
+    border-radius: 0 0 9px 9px;
 }
 
 .res_busqueda button {
@@ -289,4 +336,46 @@ main>section:nth-child(3) select option {
 
 .second_p {
     color: #cad4e2;
+}
+
+.paginacion ul {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    list-style: none;
+}
+
+.paginacion ul li {
+    display: flex;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.paginacion ul li:hover {
+    background-color: var(--primary-hover);
+
+    a {
+        color: #fff;
+    }
+
+    a svg {
+        stroke: #fff;
+    }
+}
+
+.paginacion ul li a {
+    color: var(--text-muted);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    align-items: center;
 }
