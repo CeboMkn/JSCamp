@@ -120,10 +120,7 @@ nav {
 
         &:hover,
         &:focus {
-
-            background: radial-gradient(circle at center,
-                    var(--card-bg) 10%,
-                    var(--background) 100%);
+            color: var(--primary);
             outline: none;
         }
     }
