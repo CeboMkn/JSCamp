@@ -54,34 +54,38 @@
                     <input type="text" placeholder="Buscar trabajos, empresas o habilidades">
                 </div>
             </form>
-            <section class="section_filter">
-                <select name="tecnologia" id="tecnologia">
+            <section class="section_filter" id="filters">
+                <select name="tecnologia" id="filter-tecnologia">
                     <option value="" disabled selected hidden>Tecnología</option>
                     <option value="javascript">JavaScript</option>
+                    <option value="react">React</option>
+                    <option value="nodejs">Node.js</option>
                     <option value="python">Python</option>
-                    <option value="csharp">C#</option>
-                    <option value="ruby">Ruby</option>
-                    <option value="php">PHP</option>
-                    <option value="typescript">TypeScript</option>
+                    <option value="sql">SQL</option>
+                    <option value="r">R</option>
+                    <option value="swift">Swift</option>
+                    <option value="kotlin">Kotlin</option>
+                    <option value="aws">AWS</option>
+                    <option value="azure">Azure</option>
+                    <option value="gcp">GCP</option>
                 </select>
-                <select name="ubicacion" id="ubicacion">
+
+                <select name="ubicacion" id="filter-ubicacion">
                     <option value="" disabled selected hidden>Ubicación</option>
-                    <option value="espania">España</option>
-                    <option value="eeuu">Estados Unidos</option>
-                    <option value="mexico">México</option>
-                    <option value="colombia">Colombia</option>
-                    <option value="argentina">Argentina</option>
-                    <option value="chile">Chile</option>
+                    <option value="remoto">Remoto</option>
+                    <option value="mexico">Ciudad de México</option>
+                    <option value="guadalajara">Guadalajara</option>
                 </select>
-                <select name="tipo_contrato" id="tipo_contrato">
+
+                <select name="tipo_contrato" id="filter-tipo_contrato">
                     <option value="" disabled selected hidden>Tipo de contrato</option>
                     <option value="tiempo_completo">Tiempo completo</option>
-                    <option value="medio_tiempo">Medio tiempo</option>
                     <option value="freelance">Freelance</option>
                     <option value="temporal">Temporal</option>
                     <option value="practicas">Prácticas</option>
                 </select>
-                <select name="nivel_experiencia" id="nivel_experiencia">
+
+                <select name="nivel_experiencia" id="filter-nivel_experiencia">
                     <option value="" disabled selected hidden>Nivel de experiencia</option>
                     <option value="junior">Junior</option>
                     <option value="semi_senior">Semi-Senior</option>
@@ -91,8 +95,9 @@
             </section>
             <section class="sect_res_busqueda">
                 <h2>Resultados de búsqueda</h2>
-                <div class="env_result">
-                    <div class="res_busqueda res_first">
+                <div id="result_busqueda" class="env_result">
+                    <div class="res_busqueda res_first" data-tecnologia="javascript react nodejs"
+                        data-ubicacion="remoto" data-tipo_contrato="temporal" data-nivel_experiencia="junior">
                         <div>
                             <h3>Ingeniero de Software</h3>
                             <p class="first_p">Tech Solutions Inc. | Remoto</p>
@@ -108,7 +113,8 @@
                         </div>
                     </div>
 
-                    <div class="res_busqueda">
+                    <div class="res_busqueda" data-tecnologia="sql python r" data-ubicacion="mexico"
+                        data-tipo_contrato="freelance" data-nivel_experiencia="lead">
                         <div>
                             <h3>Analista de Datos</h3>
                             <p class="first_p">Data Driven Co. | Ciudad de México</p>
@@ -121,7 +127,8 @@
                             <button class="btn_info btn_active" type="submit">Aplicar</button>
                         </div>
                     </div>
-                    <div class="res_busqueda">
+                    <div class="res_busqueda" data-tecnologia="swift kotlin" data-ubicacion="guadalajara"
+                        data-tipo_contrato="temporal" data-nivel_experiencia="lead">
                         <div>
                             <h3>Desarrollador de Aplicaciones Móviles</h3>
                             <p class="first_p">Mobile Apps Ltd. | Guadalajara</p>
@@ -135,7 +142,8 @@
                             <button class="btn_info btn_active" type="submit">Aplicar</button>
                         </div>
                     </div>
-                    <div class="res_busqueda res_last">
+                    <div class="res_busqueda res_last" data-tecnologia="aws azure gcp" data-ubicacion="remoto"
+                        data-tipo_contrato="tiempo_completo" data-nivel_experiencia="senior">
                         <div>
                             <h3>Ingeniero de DevOps</h3>
                             <p class="first_p">Cloud Services SA | Remoto</p>
