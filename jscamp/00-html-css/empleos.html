@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encuentra tu próxion trabajo</title>
-    <link rel="stylesheet" href="./styles_second.css">
+    <link rel="stylesheet" href="./style.css">
     <script type="module" src="../01-javascript/js_empleos.js"></script>
 </head>
 
 <body>
-    <header>
+
+    <header class="header">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
                 x="0px" y="0px" width="25" height="25" viewBox="0 0 16.479 16.479"
@@ -22,7 +23,7 @@
             </svg>
             <h2>DevJobs</h2>
         </div>
-        <nav>
+        <nav class="nav">
             <a href="./index.html">Inicio</a> <!-- target:_blank: nueva pestaña self: misma pestaña -->
             <a href="./empleos.html">Empleos</a>
             <!-- rel: noopener(que la ueva pagina no tenga acceso a la antigua noreferrer: no envia informacion de referencia sobre donde viene el usuario) -->
@@ -30,17 +31,18 @@
             <a href="Salarios">Salarios</a>
         </nav>
         <div>
-            <a href="">Subir CV</a>
+            <a class="a_head" type="button" href="">Subir CV</a>
             <img src="./luffy_profile.jpg" alt="">
         </div>
     </header>
+
     <main class="main_second_vista">
         <div>
             <section class="sec_main">
                 <h1>Encuentra tu próximo trabajo</h1>
                 <p>Explora miles de oportunidades en el sector tecnológico</p>
             </section>
-            <form class="form_second_vista" action="" role="search">
+            <form class="form_princi w-100" action="" role="search">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -52,7 +54,7 @@
                     <input type="text" placeholder="Buscar trabajos, empresas o habilidades">
                 </div>
             </form>
-            <section>
+            <section class="section_filter">
                 <select name="tecnologia" id="tecnologia">
                     <option value="" disabled selected hidden>Tecnología</option>
                     <option value="javascript">JavaScript</option>
@@ -87,7 +89,7 @@
                     <option value="lead">Tech Lead</option>
                 </select>
             </section>
-            <section id="sect_aplicar">
+            <section class="sect_res_busqueda">
                 <h2>Resultados de búsqueda</h2>
                 <div class="env_result">
                     <div class="res_busqueda res_first">
@@ -102,7 +104,7 @@
                                 de comunicación.</p>
                         </div>
                         <div>
-                            <button class="btn_active" type="submit">Aplicar</button>
+                            <button class="btn_info btn_active" type="submit">Aplicar</button>
                         </div>
                     </div>
 
@@ -116,7 +118,7 @@
                                 y herramientas de visualización. Se requiere conocimiento en SQL, Python y R.</p>
                         </div>
                         <div>
-                            <button class="btn_active" type="submit">Aplicar</button>
+                            <button class="btn_info btn_active" type="submit">Aplicar</button>
                         </div>
                     </div>
                     <div class="res_busqueda">
@@ -130,7 +132,7 @@
                                 debe tener conocimientos en Swift, Kotlin y el desarrollo de interfaces de usuario.</p>
                         </div>
                         <div>
-                            <button class="btn_active" type="submit">Aplicar</button>
+                            <button class="btn_info btn_active" type="submit">Aplicar</button>
                         </div>
                     </div>
                     <div class="res_busqueda res_last">
@@ -147,7 +149,7 @@
                                 Azure y GCP.</p>
                         </div>
                         <div>
-                            <button class="btn_active" type="submit">Aplicar</button>
+                            <button class="btn_info btn_active" type="submit">Aplicar</button>
                         </div>
                     </div>
                 </div>
