@@ -9,7 +9,7 @@ sec_result?.addEventListener('click', (e) => {
     }
 })
 
-
+/* Filtros que se van a aplicar */
 let filters = {
     tecnologia: '',
     ubicacion: '',
@@ -17,30 +17,52 @@ let filters = {
     nivel_experiencia: ''
 }
 
+/* Seleccionamos el contenedor de los select y los contenedores de resultados de la busqueda */
 const filters_contain = document.getElementById('filters')
 const resultados = document.querySelectorAll('.res_busqueda')
 
+/* Cada vez que un select cambia se activa el listener con delegacion de eventos */
 filters_contain.addEventListener('change', (e) => {
 
+    /* Creamos dos variables (id y value) cogeran el id del select donde ocurrio el evento y su value */
     const { id, value } = e.target
 
+    /* Si el id empieza por (filter-)  */
     if (id.startsWith('filter-')) {
+        /* Coge la parte que va despues de filter */
         const key = id.replace("filter-", "")
+        /* En filters asignamos el value segun la key */
         filters[key] = value.toLowerCase()
-        console.log(filters)
+        /* Ahora aplicamos la visivilidad segun lo que vale filters */
         aplicar_filtros()
     }
 })
 
 function aplicar_filtros() {
-    resultados.forEach((res) => {
-        const matchtec = !filters.tecnologia || res.dataset.tecnologia.includes(filters.tecnologia)
-        const matchubi = !filters.ubicacion || res.dataset.ubicacion.includes(filters.ubicacion)
-        const matchtipo = !filters.tipo_contrato || res.dataset.tipo_contrato.includes(filters.tipo_contrato)
-        const matchnivel = !filters.nivel_experiencia || res.dataset.nivel_experiencia.includes(filters.nivel_experiencia)
 
-        res.style.display = matchtec && matchubi && matchtipo && matchnivel ? "flex" : "none"
-    })
+    /* Array con los filtros */
+    const campos = ['tecnologia', 'ubicacion', 'tipo_contrato', 'nivel_experiencia'];
+
+    /* Recorremos cada .res_busqueda en busca de coincidencias en sus dataset */
+    resultados.forEach(res => {
+        /* Variable con los dataset de cada select */
+        const datos = res.dataset;
+
+        /* Con el metodo every comprobamos si alguno de esos dataset contiene el filtro aplicado en los select 
+           con que uno de los filtros sea false, osea que no contiene el filtro aplicado no va a seguir recorriendo
+           los data y sisible sera false */
+        const visible = campos.every(campo => {
+            /* Filtro es igual a lo asignado en filters de uno en uno */
+            const filtro = filters[campo];
+            /* Si no hay filtro aplicado o si alguno de los dataset coincide con el filtro aplicado visible = true
+               Si hay filtro aplicado y no coincide con el dataset visible = false */
+            return !filtro || datos[campo].includes(filtro);
+        });
+
+        /* Si visible el true ese contenedor de res_busqueda tiene display:"flex" (se muestra)
+           Si visible es false ese contenedor de res_busqueda tiene display:"none" (se oculta)*/
+        res.style.display = visible ? 'flex' : 'none';
+    });
 }
 
 
