@@ -1,6 +1,6 @@
-const sec_result = document.getElementById('result_busqueda')
+const contain_btn = document.querySelector('.btn_active_contain')
 
-sec_result?.addEventListener('click', (e) => {
+contain_btn?.addEventListener('click', (e) => {
     const element = e.target
     if (element.classList.contains('btn_active')) {
         element.textContent = '¡Aplicado!'
@@ -24,8 +24,9 @@ const resultados = document.querySelectorAll('.res_busqueda')
 /* Cada vez que un select cambia se activa el listener con delegacion de eventos */
 filters_contain.addEventListener('change', (e) => {
 
+    const target = e.target
     /* Creamos dos variables (id y value) cogeran el id del select donde ocurrio el evento y su value */
-    const { id, value } = e.target
+    const { id, value } = target
 
     /* Si el id empieza por (filter-)  */
     if (id.startsWith('filter-')) {
@@ -34,6 +35,23 @@ filters_contain.addEventListener('change', (e) => {
         /* En filters asignamos el value segun la key */
         filters[key] = value.toLowerCase()
         /* Ahora aplicamos la visivilidad segun lo que vale filters */
+        aplicar_filtros()
+    }
+
+})
+
+/* Aqui vamos a resetear los filtros */
+filters_contain.addEventListener('click', (e) => {
+    const target = e.target
+    const btn_del = target.closest('#btn_del_filters')
+
+    if (btn_del) {
+        document.querySelectorAll('#filters select').forEach(sel => {
+            sel.selectedIndex = 0
+        })
+        Object.keys(filters).forEach(key => {
+            filters[key] = ''
+        })
         aplicar_filtros()
     }
 })

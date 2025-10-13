@@ -36,7 +36,7 @@
         </div>
     </header>
 
-    <main class="main_estrecho">
+    <main class="main_estrecho btn_active_contain">
         <div>
             <section class="sec_main">
                 <h1>Encuentra tu próximo trabajo</h1>
@@ -55,43 +55,55 @@
                 </div>
             </form>
             <section class="section_filter" id="filters">
-                <select name="tecnologia" id="filter-tecnologia">
-                    <option value="" disabled selected hidden>Tecnología</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="react">React</option>
-                    <option value="nodejs">Node.js</option>
-                    <option value="python">Python</option>
-                    <option value="sql">SQL</option>
-                    <option value="r">R</option>
-                    <option value="swift">Swift</option>
-                    <option value="kotlin">Kotlin</option>
-                    <option value="aws">AWS</option>
-                    <option value="azure">Azure</option>
-                    <option value="gcp">GCP</option>
-                </select>
+                <div>
+                    <select name="tecnologia" id="filter-tecnologia">
+                        <option value="" disabled selected hidden>Tecnología</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="react">React</option>
+                        <option value="nodejs">Node.js</option>
+                        <option value="python">Python</option>
+                        <option value="sql">SQL</option>
+                        <option value="r">R</option>
+                        <option value="swift">Swift</option>
+                        <option value="kotlin">Kotlin</option>
+                        <option value="aws">AWS</option>
+                        <option value="azure">Azure</option>
+                        <option value="gcp">GCP</option>
+                    </select>
 
-                <select name="ubicacion" id="filter-ubicacion">
-                    <option value="" disabled selected hidden>Ubicación</option>
-                    <option value="remoto">Remoto</option>
-                    <option value="mexico">Ciudad de México</option>
-                    <option value="guadalajara">Guadalajara</option>
-                </select>
+                    <select name="ubicacion" id="filter-ubicacion">
+                        <option value="" disabled selected hidden>Ubicación</option>
+                        <option value="remoto">Remoto</option>
+                        <option value="mexico">Ciudad de México</option>
+                        <option value="guadalajara">Guadalajara</option>
+                    </select>
 
-                <select name="tipo_contrato" id="filter-tipo_contrato">
-                    <option value="" disabled selected hidden>Tipo de contrato</option>
-                    <option value="tiempo_completo">Tiempo completo</option>
-                    <option value="freelance">Freelance</option>
-                    <option value="temporal">Temporal</option>
-                    <option value="practicas">Prácticas</option>
-                </select>
+                    <select name="tipo_contrato" id="filter-tipo_contrato">
+                        <option value="" disabled selected hidden>Tipo de contrato</option>
+                        <option value="tiempo_completo">Tiempo completo</option>
+                        <option value="freelance">Freelance</option>
+                        <option value="temporal">Temporal</option>
+                        <option value="practicas">Prácticas</option>
+                    </select>
 
-                <select name="nivel_experiencia" id="filter-nivel_experiencia">
-                    <option value="" disabled selected hidden>Nivel de experiencia</option>
-                    <option value="junior">Junior</option>
-                    <option value="semi_senior">Semi-Senior</option>
-                    <option value="senior">Senior</option>
-                    <option value="lead">Tech Lead</option>
-                </select>
+                    <select name="nivel_experiencia" id="filter-nivel_experiencia">
+                        <option value="" disabled selected hidden>Nivel de experiencia</option>
+                        <option value="junior">Junior</option>
+                        <option value="semi_senior">Semi-Senior</option>
+                        <option value="senior">Senior</option>
+                        <option value="lead">Tech Lead</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="button" id="btn_del_filters" class="btn_del_filters"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M18 6l-12 12" />
+                            <path d="M6 6l12 12" />
+                        </svg></button>
+                </div>
             </section>
             <section class="sect_res_busqueda">
                 <h2>Resultados de búsqueda</h2>
@@ -99,7 +111,9 @@
                     <div class="res_busqueda res_first" data-tecnologia="javascript react nodejs"
                         data-ubicacion="remoto" data-tipo_contrato="temporal" data-nivel_experiencia="junior">
                         <div>
-                            <h3>Ingeniero de Software</h3>
+                            <a href="./detalles_oferta.html">
+                                <h3>Ingeniero de Software</h3>
+                            </a>
                             <p class="first_p">Tech Solutions Inc. | Remoto</p>
                             <p class="second_p">Buscamos un ingeniero de software con experiencia en desarrollo web y
                                 conocimientos en
