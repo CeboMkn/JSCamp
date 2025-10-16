@@ -633,6 +633,10 @@ h1+p {
     padding: 3rem 5rem;
 }
 
+.is-hidden {
+    display: none;
+}
+
 @media (max-width: 768px) {
     body {
         align-items: center;
@@ -691,3 +695,4 @@ h1+p {
         padding: 1rem 0 2rem 0;
     }
 }
+
