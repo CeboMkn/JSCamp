@@ -142,24 +142,6 @@ async function get_jobs() {
 /* listener click, blur(se dispara cuando el campo puerde el foco), input, change, keydown */
 
 
-// const filter = document.getElementById('filter-tecnologia')
-// const mensaje = document.getElementById('selected_value')
-
-
-// filter.addEventListener('change', () => {
-//     const jobs = document.querySelectorAll('.res_busqueda')
-//     const selected_value = filter.value;
-
-//     jobs.forEach(job => {
-//         const tecnologia = job.dataset.tecnologia;
-//         const semuestra = selected_value === '' || tecnologia.includes(selected_value)
-
-//         job.classList.toggle('is-hidden', semuestra === false)
-//     });
-// });
-
-
-
 
 
 
