@@ -14,6 +14,8 @@ get_jobs()
 activar_filtros()
 search_job()
 
+const RESULT_PAGES = 4
+
 function activar_filtros() {
     /* Filtros que se van a aplicar */
     let filters = {
@@ -60,7 +62,7 @@ function activar_filtros() {
             aplicar_filtros()
         }
     })
-    
+
     function aplicar_filtros() {
 
         /* Array con los filtros */
@@ -105,7 +107,7 @@ function search_job() {
 
 async function get_jobs() {
 
-    await fetch("../01-javascript/data.json")
+    await fetch("../01-javascript/data/data.json")
         .then(res => res.json())
         .then(jobs => {
             const container = document.getElementById('result_busqueda');
@@ -136,7 +138,6 @@ async function get_jobs() {
             });
         });
     resultados = document.querySelectorAll('.res_busqueda')
-    console.log('Console del fetch' + resultados)
 }
 
 /* listener click, blur(se dispara cuando el campo puerde el foco), input, change, keydown */

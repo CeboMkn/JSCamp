@@ -129,6 +129,8 @@ h1+p {
     font-weight: 700;
     text-decoration: none;
     transition: background-color 0.2s ease, color 0.2s ease;
+    align-items: center;
+    display: flex;
 
     &:hover {
         background-color: var(--color-primary-dark);

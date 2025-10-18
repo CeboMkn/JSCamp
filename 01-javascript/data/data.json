@@ -7,7 +7,11 @@
         "descripcion": "Buscamos un ingeniero de software con experiencia en desarrollo web y conocimientos en JavaScript, React y Node.js. El candidato ideal debe ser capaz de trabajar en equipo y tener buenas habilidades de comunicación.",
         "enlace": "./detalles_oferta.html",
         "data": {
-            "tecnologia": "javascript react nodejs",
+            "tecnologia": [
+                "javascript",
+                "react",
+                "nodejs"
+            ],
             "ubicacion": "remoto",
             "nivel": "junior",
             "tipo": "temporal"
@@ -21,7 +25,10 @@
         "descripcion": "Se busca desarrollador backend con experiencia en Node.js, Express y bases de datos SQL. Valoramos el conocimiento de APIs REST y buenas prácticas de arquitectura.",
         "enlace": "",
         "data": {
-            "tecnologia": "nodejs sql",
+            "tecnologia": [
+                "nodejs",
+                "sql"
+            ],
             "ubicacion": "guadalajara",
             "nivel": "semi_senior",
             "tipo": "tiempo_completo"
@@ -35,7 +42,10 @@
         "descripcion": "Estamos contratando un frontend developer con dominio de React y conocimientos de diseño responsivo. Se valorará experiencia con frameworks modernos y control de versiones.",
         "enlace": "",
         "data": {
-            "tecnologia": "react javascript",
+            "tecnologia": [
+                "react",
+                "javascript"
+            ],
             "ubicacion": "mexico",
             "nivel": "senior",
             "tipo": "tiempo_completo"
@@ -49,7 +59,10 @@
         "descripcion": "Analista de datos con experiencia en SQL y R para interpretar grandes volúmenes de información y generar reportes de negocio. Se requiere atención al detalle y capacidad analítica.",
         "enlace": "",
         "data": {
-            "tecnologia": "sql erre",
+            "tecnologia": [
+                "sql",
+                "erre"
+            ],
             "ubicacion": "remoto",
             "nivel": "semi_senior",
             "tipo": "freelance"
@@ -77,7 +90,11 @@
         "descripcion": "Buscamos ingeniero cloud con experiencia en AWS, Azure o GCP. Se requiere conocimiento de automatización y CI/CD.",
         "enlace": "",
         "data": {
-            "tecnologia": "aws azure gcp",
+            "tecnologia": [
+                "aws",
+                "azure",
+                "gcp"
+            ],
             "ubicacion": "remoto",
             "nivel": "senior",
             "tipo": "tiempo_completo"
@@ -91,7 +108,11 @@
         "descripcion": "Se requiere un desarrollador fullstack con experiencia en React, Node.js y bases de datos SQL. Trabajo híbrido con equipo internacional.",
         "enlace": "",
         "data": {
-            "tecnologia": "react nodejs sql",
+            "tecnologia": [
+                "react",
+                "nodejs",
+                "sql"
+            ],
             "ubicacion": "mexico",
             "nivel": "lead",
             "tipo": "tiempo_completo"
@@ -105,7 +126,11 @@
         "descripcion": "Ingeniero especializado en machine learning con experiencia en Python, R y despliegue de modelos en la nube. Imprescindible dominio de librerías modernas.",
         "enlace": "",
         "data": {
-            "tecnologia": "python erre gcp",
+            "tecnologia": [
+                "python",
+                "erre",
+                "gcp"
+            ],
             "ubicacion": "remoto",
             "nivel": "senior",
             "tipo": "freelance"
@@ -119,7 +144,10 @@
         "descripcion": "Se busca backend developer con dominio de Node.js y PostgreSQL. Experiencia en integración de APIs y microservicios será un plus.",
         "enlace": "",
         "data": {
-            "tecnologia": "nodejs sql",
+            "tecnologia": [
+                "nodejs",
+                "sql"
+            ],
             "ubicacion": "guadalajara",
             "nivel": "semi_senior",
             "tipo": "tiempo_completo"
