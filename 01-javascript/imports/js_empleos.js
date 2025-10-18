@@ -1,3 +1,5 @@
+
+/* activar el botón aplicar */
 const contain_btn = document.querySelector('.btn_active_contain')
 
 contain_btn?.addEventListener('click', (e) => {
@@ -9,9 +11,16 @@ contain_btn?.addEventListener('click', (e) => {
     }
 })
 
-let resultados
+/* variable que almacena los divs de cada resultado */
+let containers_resultados
+/* variable que almacena el Json con todos los trabajos */
+let allJobs = {}
+
+/* pedir datos al json */
 get_jobs()
+/* activar los filtros del select */
 activar_filtros()
+/* activar buscar por texto en el input */
 search_job()
 
 const RESULT_PAGES = 4
@@ -47,41 +56,47 @@ function activar_filtros() {
 
     })
 
-    /* Aqui vamos a resetear los filtros */
+    /* Aqui vamos a resetear los filtros, delegación de eventos en el botón de reset */
     filters_contain.addEventListener('click', (e) => {
         const target = e.target
         const btn_del = target.closest('#btn_del_filters')
 
         if (btn_del) {
+            /* Seleccionamos todos los select dentro del contenedor con id filters
+            Los recorremos y ponemos el index a 0 */
             document.querySelectorAll('#filters select').forEach(sel => {
                 sel.selectedIndex = 0
             })
+            /* Reseteamos filters, dejando todos sus elementos en '' */
             Object.keys(filters).forEach(key => {
                 filters[key] = ''
             })
+            /* Despues llamamos a aplicar filtros para aplicarlos con todo en '', entonces mostrara todos los resultados */
             aplicar_filtros()
         }
     })
 
+    /* Aplicar los filtros ya puestos en la variable filters y con los containers de cada uno seleccionados */
     function aplicar_filtros() {
 
         /* Array con los filtros */
         const campos = ['tecnologia', 'ubicacion', 'tipo_contrato', 'nivel_experiencia'];
-        console.log('Console de aplicar filtros' + resultados)
 
         /* Recorremos cada .res_busqueda en busca de coincidencias en sus dataset */
-        resultados.forEach(res => {
-            /* Variable con los dataset de cada select */
+        containers_resultados.forEach(res => {
+            /* Variable con los dataset de cada trabajo traido del data */
             const datos = res.dataset;
 
-            /* Con el metodo every comprobamos si alguno de esos dataset contiene el filtro aplicado en los select 
-               con que uno de los filtros sea false, osea que no contiene el filtro aplicado no va a seguir recorriendo
-               los data y sisible sera false */
+            /* Con el metodo every comprobamos si alguno de esos dataset contiene el filtro aplicado en los select, 
+               con que uno de los filtros sea false, osea que no contiene el filtro aplicado, no va a seguir recorriendo
+               los data y visible sera false */
             const visible = campos.every(campo => {
                 /* Filtro es igual a lo asignado en filters de uno en uno */
                 const filtro = filters[campo];
-                /* Si no hay filtro aplicado o si alguno de los dataset coincide con el filtro aplicado visible = true
-                   Si hay filtro aplicado y no coincide con el dataset visible = false */
+                /* Si no hay filtro aplicado (!filtro) o si alguno de los dataset coincide con el filtro aplicado (datos[campo].includes(filtro))
+                   visible = true
+                   Si hay filtro aplicado y no coincide con el dataset 
+                   visible = false */
                 return !filtro || datos[campo].includes(filtro);
             });
 
@@ -92,13 +107,20 @@ function activar_filtros() {
     }
 }
 
+/* Buscar resultados con el input */
 function search_job() {
     const input = document.getElementById('search_input')
+    /* Cada vez que escribimos en el input */
     input.addEventListener('input', () => {
-        resultados.forEach(res => {
+        /* Recorremos los divs con los resultados */
+        containers_resultados.forEach(res => {
+            /* text_h es el titulo del trabajo */
             const text_h = res.querySelector('.title_job').textContent.toLowerCase()
+            /* text_input es lo que escribimos en el buscador */
             const text_input = input.value.toLowerCase()
+            /* con includes comprobamos si lo que escribimos coincide en algo con el titulo del trabajo */
             text_h.includes(text_input)
+                /* si coincide se muestra, si no se oculta */
                 ? res.style.display = 'flex'
                 : res.style.display = 'none'
         })
@@ -110,19 +132,33 @@ async function get_jobs() {
     await fetch("../01-javascript/data/data.json")
         .then(res => res.json())
         .then(jobs => {
-            const container = document.getElementById('result_busqueda');
-            container.innerHTML = "";
+            /* Almacenar los trabajos en allJobs */
+            allJobs = jobs
+            /* Llamar a la funcion que renderiza los trabajos en la vista */
+            renderJobs()
+        });
+    /* Almacenar los divs de los resultados en containers_results una vez que ya estan en el DOM */
+    containers_resultados = document.querySelectorAll('.res_busqueda')
+}
 
-            jobs.forEach(job => {
-                const div = document.createElement('div');
-                div.className = 'res_busqueda';
+/* Renderizar los trabajos en la vista */
+function renderJobs() {
+    /* Seleccionamos el contendor donde se van a renderizar los trabajos */
+    const container = document.getElementById('result_busqueda');
+    container.innerHTML = "";
 
-                div.dataset.tecnologia = job.data.tecnologia;
-                div.dataset.ubicacion = job.data.ubicacion;
-                div.dataset.tipo_contrato = job.data.tipo;
-                div.dataset.nivel_experiencia = job.data.nivel;
+    /* Recorremos la variable allJobs que contiene todos los trabajos
+       Y uno a uno los vamos creando en el DOM */
+    allJobs.forEach(job => {
+        const div = document.createElement('div');
+        div.className = 'res_busqueda';
 
-                div.innerHTML = `
+        div.dataset.tecnologia = job.data.tecnologia;
+        div.dataset.ubicacion = job.data.ubicacion;
+        div.dataset.tipo_contrato = job.data.tipo;
+        div.dataset.nivel_experiencia = job.data.nivel;
+
+        div.innerHTML = `
           <div>
             <a href="${job.enlace}">
               <h3 class="title_job">${job.titulo}</h3>
@@ -134,10 +170,8 @@ async function get_jobs() {
             <button class="btn_info btn_active" type="submit">Aplicar</button>
           </div>`;
 
-                container.appendChild(div);
-            });
-        });
-    resultados = document.querySelectorAll('.res_busqueda')
+        container.appendChild(div);
+    });
 }
 
 /* listener click, blur(se dispara cuando el campo puerde el foco), input, change, keydown */
