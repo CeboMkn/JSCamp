@@ -11,19 +11,22 @@ contain_btn?.addEventListener('click', (e) => {
     }
 })
 
-/* variable que almacena los divs de cada resultado */
+/* Variable que almacena los divs de cada resultado */
 let containers_resultados
-/* variable que almacena el Json con todos los trabajos */
+/* Variable que almacena el Json con todos los trabajos */
 let allJobs = {}
 
-/* pedir datos al json */
-get_jobs()
-/* activar los filtros del select */
-activar_filtros()
-/* activar buscar por texto en el input */
-search_job()
+let pageActual = 1
+const RESULTS_PAGES = 4
+let numbersNav = 0
+const container_nav = document.querySelector('.paginacion ul')
 
-const RESULT_PAGES = 4
+/* Pedir datos al json */
+get_jobs()
+/* Activar los filtros del select */
+activar_filtros()
+/* Activar buscar por texto en el input */
+search_job()
 
 function activar_filtros() {
     /* Filtros que se van a aplicar */
@@ -134,6 +137,7 @@ async function get_jobs() {
         .then(jobs => {
             /* Almacenar los trabajos en allJobs */
             allJobs = jobs
+            console.log(allJobs)
             /* Llamar a la funcion que renderiza los trabajos en la vista */
             renderJobs()
         });
@@ -147,9 +151,30 @@ function renderJobs() {
     const container = document.getElementById('result_busqueda');
     container.innerHTML = "";
 
+    /* Estas variables dicen desde que indice, hasta cual mostrar de la respuesta des JSON 
+       como el json empieza en 0, empezamos desde 
+       pageActual = 1 (1 - 1) * 4 = 0 
+       pageActual = 2 (2 - 1) * 4 = 4 */
+    const empezarAmostrar = (pageActual - 1) * RESULTS_PAGES
+    console.log(empezarAmostrar)
+
+    /* empezarAmostrar = 0 + 4 (muestra del JSON 0, 1, 2, 3) 
+       empezarAmostrar = 4 + 4 (muestra del JSON 4, 5, 6, 7) */
+    const hastaDondeMostrar = empezarAmostrar + RESULTS_PAGES
+    console.log(hastaDondeMostrar)
+
+    /* Esta variable contiene el numero de paginas que hay en la vista */
+    numbersNav = Math.ceil(allJobs.length / 4)
+
+    console.log('Paginas ' + numbersNav)
+    /* El metodo slice corta un array, pasandole dos parametros, slice(dondemoiezoacortar, dondetermino) */
+    const indicesQueSeMuestran = allJobs.slice(empezarAmostrar, hastaDondeMostrar)
+    console.log(indicesQueSeMuestran)
+
+
     /* Recorremos la variable allJobs que contiene todos los trabajos
        Y uno a uno los vamos creando en el DOM */
-    allJobs.forEach(job => {
+    indicesQueSeMuestran.forEach(job => {
         const div = document.createElement('div');
         div.className = 'res_busqueda';
 
@@ -172,10 +197,85 @@ function renderJobs() {
 
         container.appendChild(div);
     });
+    generateNav()
 }
 
-/* listener click, blur(se dispara cuando el campo puerde el foco), input, change, keydown */
+function generateNav() {
 
+    if (!container_nav) return;
+
+    const prevLi = container_nav.firstElementChild;
+    const nextLi = container_nav.lastElementChild;
+
+    container_nav.innerHTML = ''
+    container_nav.appendChild(prevLi)
+
+    for (let i = 1; i <= numbersNav; i++) {
+        const li = document.createElement('li')
+        li.innerHTML = `<a href="#" data-page="${i}">${i}</a>`;
+        if (i === 1) li.classList.add('pag_active')
+        container_nav.appendChild(li)
+    }
+
+    container_nav.appendChild(nextLi)
+}
+
+navResultados()
+
+function navResultados() {
+    if (!container_nav) return
+    container_nav.addEventListener('click', (e) => {
+        e.preventDefault()
+        const target = e.target
+        const link = target.closest('a')
+        if (!link) return
+        const numberPage = link.dataset.page;
+
+        /* Si es un numero de página */
+        if (numberPage) {
+            pageActual = parseInt(numberPage)
+            renderJobs()
+            paginaActiva()
+        }
+
+        /* Si es una flecha */
+        const li = link.closest('li')
+        const prev = li.querySelector('.icon-tabler-chevron-left')
+        const next = li.querySelector('.icon-tabler-chevron-right')
+
+
+
+        if (prev && pageActual > 1) {
+            pageActual--
+            renderJobs()
+            paginaActiva()
+        }
+
+        if (next && pageActual < numbersNav) {
+            pageActual++
+            renderJobs()
+            paginaActiva()
+        }
+
+    })
+}
+
+function paginaActiva() {
+    const lis = container_nav.querySelectorAll('li')
+    lis.forEach(li => li.classList.remove('pag_active'))
+
+    const activeli = Array.from(lis).find(li => {
+        const a = li.querySelector('a');
+        return a && parseInt(a.dataset.page) === pageActual;
+    })
+
+    if (activeli) activeli.classList.add('pag_active')
+        
+    const prevLi = container_nav.querySelector('li .icon-tabler-chevron-left')?.closest('li');
+    const nextLi = container_nav.querySelector('li .icon-tabler-chevron-right')?.closest('li');
+    if (prevLi) prevLi.classList.toggle('nav_disabled', pageActual === 1);
+    if (nextLi) nextLi.classList.toggle('nav_disabled', pageActual === numbersNav);
+}
 
 
 
