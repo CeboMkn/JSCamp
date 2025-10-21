@@ -39,7 +39,6 @@ class DevJobsAvatar extends HTMLElement {
             />
         `
     }
-
     // Indicarle cuando llamar a esta clase 
     // connectedCallback (cunado se llame a este elemento)
     connectedCallback() {

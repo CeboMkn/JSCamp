@@ -588,7 +588,6 @@ h1+p {
     }
 }
 
-
 .pag_active {
     background-color: var(--color-primary-hover);
     pointer-events: none;

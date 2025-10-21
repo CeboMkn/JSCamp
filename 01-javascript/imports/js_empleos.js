@@ -280,12 +280,3 @@ function paginaActiva() {
     if (prevLi) prevLi.classList.toggle('nav_disabled', pageActual === 1);
     if (nextLi) nextLi.classList.toggle('nav_disabled', pageActual === numbersNav);
 }
-
-
-
-
-
-
-
-
-
