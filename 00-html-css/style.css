@@ -554,7 +554,6 @@ h1+p {
                 align-items: center;
             }
 
-            /* ✅ Página activa */
             &.pag_active {
                 background-color: var(--color-primary-hover);
                 pointer-events: none;
@@ -568,7 +567,6 @@ h1+p {
                 }
             }
 
-            /* ✅ Estado deshabilitado */
             &.nav_disabled {
                 pointer-events: none;
                 opacity: 0.5;

@@ -213,7 +213,11 @@ function generateNav() {
     for (let i = 1; i <= numbersNav; i++) {
         const li = document.createElement('li')
         li.innerHTML = `<a href="#" data-page="${i}">${i}</a>`;
-        if (i === 1) li.classList.add('pag_active')
+        if (i === 1) {
+            li.classList.add('pag_active')
+            prevLi.classList.add('nav_disabled')
+        }
+
         container_nav.appendChild(li)
     }
 
@@ -270,7 +274,7 @@ function paginaActiva() {
     })
 
     if (activeli) activeli.classList.add('pag_active')
-        
+
     const prevLi = container_nav.querySelector('li .icon-tabler-chevron-left')?.closest('li');
     const nextLi = container_nav.querySelector('li .icon-tabler-chevron-right')?.closest('li');
     if (prevLi) prevLi.classList.toggle('nav_disabled', pageActual === 1);
