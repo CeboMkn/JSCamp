@@ -11,15 +11,23 @@ contain_btn?.addEventListener('click', (e) => {
     }
 })
 
+// GLOBALES
+
 /* Variable que almacena los divs de cada resultado */
 let containers_resultados
 /* Variable que almacena el Json con todos los trabajos */
 let allJobs = {}
 
+/* Variable que va a amacenar la página en la que estamos, por defecto en la primera */
 let pageActual = 1
+/* Constante que guarda el número de resultados por página */
 const RESULTS_PAGES = 4
+/* Variable que almacena el número de páginas una vez calculadas segun los datos obtenidos */
 let numbersNav = 0
+/* Constante que almacena el contenedor del nav de paginación */
 const container_nav = document.querySelector('.paginacion ul')
+
+/* FUNCIONES QUE SE LLAMAN ENCUANTO ENTRAS A LA PÁGINA DE EMPLEOS */
 
 /* Pedir datos al json */
 get_jobs()
@@ -37,21 +45,22 @@ function activar_filtros() {
         nivel_experiencia: ''
     }
 
-    /* Seleccionamos el contenedor de los select y los contenedores de resultados de la busqueda */
+    /* Seleccionamos el contenedor de los select */
     const filters_contain = document.getElementById('filters')
 
-    /* Cada vez que un select cambia se activa el listener con delegacion de eventos */
+    /* Cada vez que un select cambia se activa el listener (change) con delegacion de eventos */
     filters_contain.addEventListener('change', (e) => {
 
+        /* Evento */
         const target = e.target
         /* Creamos dos variables (id y value) cogeran el id del select donde ocurrio el evento y su value */
         const { id, value } = target
 
         /* Si el id empieza por (filter-)  */
         if (id.startsWith('filter-')) {
-            /* Coge la parte que va despues de filter */
+            /* Coge la parte que va despues de filter- */
             const key = id.replace("filter-", "")
-            /* En filters asignamos el value segun la key */
+            /* En filters asignamos el value segun la key (filtro obtenido por el id) */
             filters[key] = value.toLowerCase()
             /* Ahora aplicamos la visivilidad segun lo que vale filters */
             aplicar_filtros()
@@ -59,18 +68,21 @@ function activar_filtros() {
 
     })
 
-    /* Aqui vamos a resetear los filtros, delegación de eventos en el botón de reset */
+    /* Aqui activamos el botón resetear filtros con delegación de enventos (clcik) en él */
     filters_contain.addEventListener('click', (e) => {
+        /* Evento */
         const target = e.target
+        /* Botón de reset */
         const btn_del = target.closest('#btn_del_filters')
 
+        /* Si el botón existe */
         if (btn_del) {
             /* Seleccionamos todos los select dentro del contenedor con id filters
             Los recorremos y ponemos el index a 0 */
             document.querySelectorAll('#filters select').forEach(sel => {
                 sel.selectedIndex = 0
             })
-            /* Reseteamos filters, dejando todos sus elementos en '' */
+            /* Cogemos las keys del objeto filters y cambiamos su valor por '' uno a uno*/
             Object.keys(filters).forEach(key => {
                 filters[key] = ''
             })
@@ -79,14 +91,16 @@ function activar_filtros() {
         }
     })
 
-    /* Aplicar los filtros ya puestos en la variable filters y con los containers de cada uno seleccionados */
+    /* Aplicar los filtros ya puestos en la variable filters y con los containers de cada uno seleccionados previamente en la petición a data */
     function aplicar_filtros() {
 
-        /* Array con los filtros */
-        const campos = ['tecnologia', 'ubicacion', 'tipo_contrato', 'nivel_experiencia'];
+        /* Creamos un array con las keys de filters, que seran los filtros que se pueden aplicar
+           para en un futuro si se tienen que añadir mas filtros solo se modifica la variable filters */
+        const campos = Object.keys(filters);
 
-        /* Recorremos cada .res_busqueda en busca de coincidencias en sus dataset */
+        /* Recorremos cada .res_busqueda (contenedores con los resultados) en busca de coincidencias en sus dataset */
         containers_resultados.forEach(res => {
+
             /* Variable con los dataset de cada trabajo traido del data */
             const datos = res.dataset;
 
@@ -94,16 +108,18 @@ function activar_filtros() {
                con que uno de los filtros sea false, osea que no contiene el filtro aplicado, no va a seguir recorriendo
                los data y visible sera false */
             const visible = campos.every(campo => {
+
                 /* Filtro es igual a lo asignado en filters de uno en uno */
+                /* filters = tecnologia: '' filters = ubicacion: 'remoto' asi de uno en uno en cada recorrido */
                 const filtro = filters[campo];
-                /* Si no hay filtro aplicado (!filtro) o si alguno de los dataset coincide con el filtro aplicado (datos[campo].includes(filtro))
+                /* Si no hay filtro aplicado '' (!filtro) o si en el filtro en que estamos, va incluido el filtro aplicado (datos[campo].includes(filtro))
                    visible = true
                    Si hay filtro aplicado y no coincide con el dataset 
                    visible = false */
                 return !filtro || datos[campo].includes(filtro);
             });
 
-            /* Si visible el true ese contenedor de res_busqueda tiene display:"flex" (se muestra)
+            /* Si visible es true ese contenedor de res_busqueda tiene display:"flex" (se muestra)
                Si visible es false ese contenedor de res_busqueda tiene display:"none" (se oculta)*/
             res.style.display = visible ? 'flex' : 'none';
         });
@@ -112,12 +128,13 @@ function activar_filtros() {
 
 /* Buscar resultados con el input */
 function search_job() {
+    /* Seleccionamos el input en el cual introduciremos la búsqueda */
     const input = document.getElementById('search_input')
-    /* Cada vez que escribimos en el input */
+    /* Cada vez que escribimos en el input (listener en input)*/
     input.addEventListener('input', () => {
         /* Recorremos los divs con los resultados */
         containers_resultados.forEach(res => {
-            /* text_h es el titulo del trabajo */
+            /* text_h es el titulo del trabajo en cada div */
             const text_h = res.querySelector('.title_job').textContent.toLowerCase()
             /* text_input es lo que escribimos en el buscador */
             const text_input = input.value.toLowerCase()
@@ -130,18 +147,22 @@ function search_job() {
     })
 }
 
+/* Función para hacer petición para traer los datos de los empleos */
 async function get_jobs() {
 
+    /* Peticion mas ruta */
     await fetch("../01-javascript/data/data.json")
+        /* Cuando tengas respuesta, la respuesta es un JSON */
         .then(res => res.json())
+        /* Con la respuesta guardada en jobs*/
         .then(jobs => {
-            /* Almacenar los trabajos en allJobs */
+            /* Almacenar los trabajos en variable allJobs */
             allJobs = jobs
-            console.log(allJobs)
             /* Llamar a la funcion que renderiza los trabajos en la vista */
             renderJobs()
         });
     /* Almacenar los divs de los resultados en containers_results una vez que ya estan en el DOM */
+    /* Despues de renderizarlos con renderJobs, antes no están creados */
     containers_resultados = document.querySelectorAll('.res_busqueda')
 }
 
@@ -149,30 +170,30 @@ async function get_jobs() {
 function renderJobs() {
     /* Seleccionamos el contendor donde se van a renderizar los trabajos */
     const container = document.getElementById('result_busqueda');
+    /* Primero lo vaciamos para poder crear los hijos desde el principio */
     container.innerHTML = "";
 
+    /* Esto es para rendereizar solo los que se ven en la primera pagina del nav, no más */
     /* Estas variables dicen desde que indice, hasta cual mostrar de la respuesta des JSON 
        como el json empieza en 0, empezamos desde 
-       pageActual = 1 (1 - 1) * 4 = 0 
-       pageActual = 2 (2 - 1) * 4 = 4 */
+       pageActual = 1 (1 - 1) * 4 = 0 Empezar desde el 0
+       pageActual = 2 (2 - 1) * 4 = 4 Empezar desde el 4 */
     const empezarAmostrar = (pageActual - 1) * RESULTS_PAGES
-    console.log(empezarAmostrar)
 
-    /* empezarAmostrar = 0 + 4 (muestra del JSON 0, 1, 2, 3) 
-       empezarAmostrar = 4 + 4 (muestra del JSON 4, 5, 6, 7) */
+    /* empezarAmostrar = 0 + 4 (4 = resultados por página) (muestra del JSON 0, 1, 2, 3) 
+       empezarAmostrar = 4 + 4 (4 = resultados por página) (muestra del JSON 4, 5, 6, 7) */
     const hastaDondeMostrar = empezarAmostrar + RESULTS_PAGES
-    console.log(hastaDondeMostrar)
 
     /* Esta variable contiene el numero de paginas que hay en la vista */
+    /* se dividen allJobs (por ejemplo 10 resultados) entre los resultados por página (4)
+       con Math.ceil rendodeamos hacia arriba con que el resultado sea 3.1 asi tenemos 4 paginas
+       con 4 resutlados en cada pagina menos la ultima que tendrá 1 */
     numbersNav = Math.ceil(allJobs.length / 4)
 
-    console.log('Paginas ' + numbersNav)
-    /* El metodo slice corta un array, pasandole dos parametros, slice(dondemoiezoacortar, dondetermino) */
+    /* El metodo slice corta un array, pasandole dos parametros, slice(dondeEmpiezoAcortar, dondeTermino) */
     const indicesQueSeMuestran = allJobs.slice(empezarAmostrar, hastaDondeMostrar)
-    console.log(indicesQueSeMuestran)
 
-
-    /* Recorremos la variable allJobs que contiene todos los trabajos
+    /* Recorremos la variable allJobs que contiene todos los trabajos ya recortados
        Y uno a uno los vamos creando en el DOM */
     indicesQueSeMuestran.forEach(job => {
         const div = document.createElement('div');
@@ -197,30 +218,43 @@ function renderJobs() {
 
         container.appendChild(div);
     });
+
+    /* Llamamos a la función que crea las páginas segun cuantos resultados obtengamos de la petición */
     generateNav()
 }
 
 function generateNav() {
 
+    /* Si el contenedor donde van los número de paginacion no existe paramos la función */
     if (!container_nav) return;
 
+    /* Guardamos en dos variable prevLi y nextLi las flechas de paginacion (svgs) */
     const prevLi = container_nav.firstElementChild;
     const nextLi = container_nav.lastElementChild;
 
+    /* Vaciamos el contenedor, tampoco estarán las flechas por eso las guardamos previamente */
     container_nav.innerHTML = ''
+    /* Primero insertamos la flecha de previo */
     container_nav.appendChild(prevLi)
 
+    /* Hacemos un bucle for creando los números de paginas dimicamente teniendo en cuenta
+       la operacion que hizimos antes para calcular cuantas paginas hay que crear */
     for (let i = 1; i <= numbersNav; i++) {
+        /* Creamos un elemento li */
         const li = document.createElement('li')
+        /* En el li insertamos el a con el número de pagina */
         li.innerHTML = `<a href="#" data-page="${i}">${i}</a>`;
+        /* Si es la primera página */
         if (i === 1) {
+            /* Le añadimos la clase pag_active para que salga seleccionada */
             li.classList.add('pag_active')
+            /* A la flecha de previo le añadimos nav_disabled para que salga desactivada */
             prevLi.classList.add('nav_disabled')
         }
-
+        /* Añadimos el elemento creado al contenedor */
         container_nav.appendChild(li)
     }
-
+    /* una vez creadas todos los numeros de página insertamos la flecha de next */
     container_nav.appendChild(nextLi)
 }
 
