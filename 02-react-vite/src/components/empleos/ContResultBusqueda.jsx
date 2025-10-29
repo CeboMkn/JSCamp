@@ -1,4 +1,4 @@
-function ResultadosBusqueda() {
+export function ResultadosBusqueda() {
     return (
         <section className="sect_res_busqueda btn_active_contain">
             <h2>Resultados de búsqueda</h2>
@@ -6,5 +6,3 @@ function ResultadosBusqueda() {
         </section>
     )
 }
-
-export default ResultadosBusqueda;

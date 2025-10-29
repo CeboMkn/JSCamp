@@ -1,11 +1,11 @@
-import Header from './components/globales/Header'
-import MainEstrecho from './components/empleos/MainEstrecho';
-import Hero from './components/empleos/Hero'
-import FormGrande from './components/empleos/FormGrande';
-import Filters from './components/empleos/FiltersJob'
-import ResultadosBusqueda from './components/empleos/ContResultBusqueda'
-import Paginacion from './components/globales/Paginacion';
-import Footer from './components/globales/Footer'
+import Header from './components/globales/Header.jsx'
+import MainEstrecho from './components/empleos/MainEstrecho.jsx';
+import Hero from './components/empleos/Hero.jsx'
+import { FormGrande } from './components/empleos/FormGrande.jsx';
+import Filters from './components/empleos/FiltersJob.jsx'
+import { ResultadosBusqueda } from './components/empleos/ContResultBusqueda.jsx'
+import Paginacion from './components/globales/Paginacion.jsx';
+import Footer from './components/globales/Footer.jsx'
 
 function App() {
   return (

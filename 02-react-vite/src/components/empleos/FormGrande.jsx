@@ -1,4 +1,4 @@
-function FormGrande() {
+export function FormGrande() {
     return (
         <form className="form_princi w-100" action="#" role="search">
             <div>
@@ -27,5 +27,3 @@ function FormGrande() {
         </form>
     )
 }
-
-export default FormGrande;
