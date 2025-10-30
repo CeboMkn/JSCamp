@@ -1,4 +1,7 @@
-function Paginacion() {
+export function Paginacion({ currentPage, totalPages }) {
+
+    const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
+
     return (
         <nav className="paginacion">
             <ul>
@@ -21,10 +24,14 @@ function Paginacion() {
                         </svg>
                     </a>
                 </li>
-
-                <li id="pages_nav" className="pag_active">
-                    <a href="#">1</a>
-                </li>
+                {pages.map(page => (
+                    <li id="pages_nav" className={currentPage === page ? 'pag_active' : ''}>
+                        <a
+                            href="#">
+                            {page}
+                        </a>
+                    </li>
+                ))}
 
                 <li>
                     <a href="#">
@@ -49,5 +56,3 @@ function Paginacion() {
         </nav>
     )
 }
-
-export default Paginacion;

@@ -1,4 +1,4 @@
-function Hero() {
+export function Hero() {
     return (
         <section className="sec_main">
             <h1>Encuentra tu próximo trabajo</h1>
@@ -6,5 +6,3 @@ function Hero() {
         </section>
     )
 }
-
-export default Hero;

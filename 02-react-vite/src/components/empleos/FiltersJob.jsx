@@ -1,4 +1,4 @@
-function Filters() {
+export function Filters() {
     return (
         <section className="section_filter" id="filters">
             <div>
@@ -74,5 +74,3 @@ function Filters() {
         </section>
     )
 }
-
-export default Filters;

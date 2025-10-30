@@ -1,4 +1,4 @@
-function MainEstrecho({ children }) {
+export function MainEstrecho({ children }) {
     return (
         <main className="main_estrecho">
             <div>{children}
@@ -6,5 +6,3 @@ function MainEstrecho({ children }) {
         </main>
     )
 }
-
-export default MainEstrecho;
