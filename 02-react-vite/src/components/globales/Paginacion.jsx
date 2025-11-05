@@ -1,3 +1,5 @@
+import styles from '../modulecss/pagination.module.css'
+
 export function Paginacion({ currentPage = 1, totalPages = 1, onPageChange }) {
 
     const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -5,8 +7,8 @@ export function Paginacion({ currentPage = 1, totalPages = 1, onPageChange }) {
     const isFirstPage = currentPage === 1
     const isLastPage = currentPage === totalPages
 
-    const stylePrevButton = isFirstPage ? 'arrowInactive' : ''
-    const styleNextButton = isLastPage ? 'arrowInactive' : ''
+    const stylePrevButton = isFirstPage ? styles.arrowInactive : ''
+    const styleNextButton = isLastPage ? styles.arrowInactive : ''
 
     const pageAnterior = (e) => {
         e.preventDefault()
@@ -31,7 +33,7 @@ export function Paginacion({ currentPage = 1, totalPages = 1, onPageChange }) {
     }
 
     return (
-        <nav className="paginacion">
+        <nav className={styles.paginacion}>
             <ul>
                 <li className={stylePrevButton}>
                     <a href="#" onClick={pageAnterior}>
@@ -53,7 +55,7 @@ export function Paginacion({ currentPage = 1, totalPages = 1, onPageChange }) {
                     </a>
                 </li>
                 {pages.map(page => (
-                    <li key={page} className={currentPage === page ? 'pag_active' : ''}>
+                    <li key={page} className={currentPage === page ? styles.pagActive : ''}>
                         <a href="#" data-page={page} onClick={cambiarPagina}>{page}</a>
                     </li>
                 ))}
