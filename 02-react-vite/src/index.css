@@ -593,6 +593,17 @@ h1+p {
   pointer-events: none;
 }
 
+.arrowInactive {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: default;
+
+  &:hover {
+    background: none;
+    color: inherit;
+  }
+}
+
 
 /* Detalles Oferta */
 

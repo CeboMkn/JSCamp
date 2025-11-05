@@ -1,12 +1,40 @@
-export function Paginacion({ currentPage, totalPages }) {
+export function Paginacion({ currentPage = 1, totalPages = 1, onPageChange }) {
 
     const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
+
+    const isFirstPage = currentPage === 1
+    const isLastPage = currentPage === totalPages
+
+    const stylePrevButton = isFirstPage ? 'arrowInactive' : ''
+    const styleNextButton = isLastPage ? 'arrowInactive' : ''
+
+    const pageAnterior = (e) => {
+        e.preventDefault()
+        if (!isFirstPage) {
+            onPageChange(currentPage - 1)
+        }
+    }
+
+    const pageSiguiente = (e) => {
+        e.preventDefault()
+        if (!isLastPage) {
+            onPageChange(currentPage + 1)
+        }
+    }
+
+    const cambiarPagina = (e) => {
+        e.preventDefault()
+        const page = Number(e.target.dataset.page)
+        if (page !== currentPage) {
+            onPageChange(page)
+        }
+    }
 
     return (
         <nav className="paginacion">
             <ul>
-                <li>
-                    <a href="#">
+                <li className={stylePrevButton}>
+                    <a href="#" onClick={pageAnterior}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="18"
@@ -25,16 +53,13 @@ export function Paginacion({ currentPage, totalPages }) {
                     </a>
                 </li>
                 {pages.map(page => (
-                    <li id="pages_nav" className={currentPage === page ? 'pag_active' : ''}>
-                        <a
-                            href="#">
-                            {page}
-                        </a>
+                    <li key={page} className={currentPage === page ? 'pag_active' : ''}>
+                        <a href="#" data-page={page} onClick={cambiarPagina}>{page}</a>
                     </li>
                 ))}
 
-                <li>
-                    <a href="#">
+                <li className={styleNextButton}>
+                    <a href="#" onClick={pageSiguiente}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="18"
