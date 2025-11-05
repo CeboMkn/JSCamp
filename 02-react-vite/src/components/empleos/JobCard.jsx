@@ -1,5 +1,16 @@
+import { useState } from 'react';
 
 export function JobCard({ job }) {
+    const [isApplied, setIsApplied] = useState(false)
+
+    const cambiarAaplicado = () => {
+        setIsApplied(true)
+    }
+
+    const buttonClass = isApplied ? 'btn_info btn_is_applied' : 'btn_info'
+    const buttonText = isApplied ? 'Aplicado' : 'Aplicar'
+    const disabled = isApplied ? true : false
+
     return (
         <article className="res_busqueda"
             data-modalidad={job.data.modalidad}
@@ -15,7 +26,7 @@ export function JobCard({ job }) {
                 <p className="second_p">{job.descripcion}</p>
             </div>
             <div>
-                <button className="btn_info" type="submit">Aplicar</button>
+                <button className={buttonClass} onClick={cambiarAaplicado} type="submit" disabled={disabled}>{buttonText}</button>
             </div>
         </article>
     )

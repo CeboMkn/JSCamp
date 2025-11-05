@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import jobsData from './data/data.json'
 
 import { Header } from './components/globales/Header.jsx'
 import { MainEstrecho } from './components/empleos/MainEstrecho.jsx';
@@ -15,12 +16,18 @@ function App() {
   // currentPage es el valor actual (inicia en 1, que es el valor de useState(1))
   // setCurrentPage es la función que actualiza ese valor
   const [currentPage, setCurrentPage] = useState(1)
-  const totalPages = 5
+  // const totalPages = 5
 
   // Funcion que recibe la pagina a la que hay que cambiar, y llama a la funcion que cambia el estado de currentPage pasandole (page)
   const onPageChange = (page) => {
     setCurrentPage(page)
   }
+
+  const RESULTS_PER_PAGE = 4
+  const empzMostrar = (currentPage - 1) * RESULTS_PER_PAGE
+  const termMostrar = currentPage * RESULTS_PER_PAGE
+  const totalPages = Math.ceil(jobsData.length / RESULTS_PER_PAGE)
+  const resultsView = jobsData.slice(empzMostrar, termMostrar)
 
   return (
     <>
@@ -30,7 +37,7 @@ function App() {
         <Hero />
         <FormGrande />
         <Filters />
-        <ResultadosBusqueda />
+        <ResultadosBusqueda jobs={resultsView} />
         <Paginacion currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
       </MainEstrecho>
 

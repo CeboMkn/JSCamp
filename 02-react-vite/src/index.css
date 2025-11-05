@@ -588,6 +588,10 @@ h1+p {
   }
 }
 
+.btn_is_applied {
+  background-color: green;
+}
+
 .pag_active {
   background-color: var(--color-primary-hover);
   pointer-events: none;
