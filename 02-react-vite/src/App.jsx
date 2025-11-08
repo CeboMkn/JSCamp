@@ -22,11 +22,27 @@ function App() {
     setCurrentPage(page)
   }
 
+  const handleSearch = () => {
+
+  }
+
+  const [textToFilter, setTextToFilter] = useState('')
+  const jobsWhithTextFilter = textToFilter === ''
+    ? jobsData
+    : jobsData.filter(job => {
+      return job.titulo.toLowerCase().includes(textToFilter.toLowerCase())
+    })
+
+  const onTextfilter = (text) => {
+    setTextToFilter(text)
+    setCurrentPage(1)
+  }
+
   const RESULTS_PER_PAGE = 4
   const empzMostrar = (currentPage - 1) * RESULTS_PER_PAGE
   const termMostrar = currentPage * RESULTS_PER_PAGE
-  const totalPages = Math.ceil(jobsData.length / RESULTS_PER_PAGE)
-  const resultsView = jobsData.slice(empzMostrar, termMostrar)
+  const totalPages = Math.ceil(jobsWhithTextFilter.length / RESULTS_PER_PAGE)
+  const resultsView = jobsWhithTextFilter.slice(empzMostrar, termMostrar)
 
   return (
     <>
@@ -34,7 +50,7 @@ function App() {
 
       <MainEstrecho>
         <Hero />
-        <FormGrande />
+        <FormGrande onSearh={handleSearch} textFilter={onTextfilter} />
         <ResultadosBusqueda jobs={resultsView} />
         <Paginacion currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
       </MainEstrecho>

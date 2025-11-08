@@ -1,8 +1,31 @@
-export function FormGrande() {
+import { useId } from "react"
+
+export function FormGrande({ onSearh, textFilter }) {
+    const idText = useId()
+    const idTecnology = useId()
+    const idUbi = useId()
+    const idTipo = useId()
+    const idNivel = useId()
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('submit')
+
+        const formData = new FormData(e.target)
+
+        const filters = {
+            search: formData.get(idText),
+            tecnology: formData.get(idTecnology),
+            ubicacion: formData.get(idUbi),
+            tipo: formData.get(idTipo),
+            nivel: formData.get(idNivel)
+        }
+
+        onSearh(filters)
+    }
+
+    const textChange = (e) => {
+        const text = e.target.value
+        textFilter(text)
     }
 
     return (
@@ -26,13 +49,16 @@ export function FormGrande() {
                 </svg>
                 <input
                     id="search_input"
+                    name={idText}
+                    onChange={textChange}
                     type="text"
                     placeholder="Buscar trabajos, empresas o habilidades"
                 />
+                <button type="submit" className="btn_info">Buscar</button>
             </div>
             <div className="section_filter" id="filters">
                 <div>
-                    <select name="tecnologia" id="filter-tecnologia" defaultValue="">
+                    <select name={idTecnology} id="filter-tecnologia" defaultValue="">
                         <option value="" disabled hidden>
                             Tecnología
                         </option>
@@ -49,7 +75,7 @@ export function FormGrande() {
                         <option value="gcp">GCP</option>
                     </select>
 
-                    <select name="ubicacion" id="filter-ubicacion" defaultValue="">
+                    <select name={idUbi} id="filter-ubicacion" defaultValue="">
                         <option value="" disabled hidden>
                             Ubicación
                         </option>
@@ -58,7 +84,7 @@ export function FormGrande() {
                         <option value="guadalajara">Guadalajara</option>
                     </select>
 
-                    <select name="tipo_contrato" id="filter-tipo_contrato" defaultValue="">
+                    <select name={idTipo} id="filter-tipo_contrato" defaultValue="">
                         <option value="" disabled hidden>
                             Tipo de contrato
                         </option>
@@ -68,7 +94,7 @@ export function FormGrande() {
                         <option value="practicas">Prácticas</option>
                     </select>
 
-                    <select name="nivel_experiencia" id="filter-nivel_experiencia" defaultValue="">
+                    <select name={idNivel} id="filter-nivel_experiencia" defaultValue="">
                         <option value="" disabled hidden>
                             Nivel de experiencia
                         </option>

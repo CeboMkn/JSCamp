@@ -13,7 +13,7 @@ export function JobCard({ job }) {
 
     return (
         <article className="res_busqueda"
-            data-modalidad={job.data.modalidad}
+            data-tecnologia={job.data.tecnologia}
             data-ubicaion={job.data.ubicacion}
             data-tipo_contrato={job.data.tipo}
             data-nivel_experiencia={job.data.nivel}
