@@ -30,7 +30,6 @@ function App() {
     tipo: '',
     nivel: ''
   })
-  console.log(filters)
 
   const jobsFiltrados = jobsData.filter(job => {
     const { search, tecnologia, ubicacion, tipo, nivel } = filters;

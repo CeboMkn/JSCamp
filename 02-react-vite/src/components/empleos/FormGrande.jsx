@@ -8,7 +8,7 @@ export function FormGrande({ applyFilters }) {
     const idNivel = useId()
     const idBtnReset = useId()
 
-    const handleSubmit = (e) => {
+    const handleFilters = (e) => {
         e.preventDefault()
 
         const form = e.target.closest("form")
@@ -40,7 +40,7 @@ export function FormGrande({ applyFilters }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="form_princi w-100" action="#" role="search">
+        <form className="form_princi w-100" action="#" role="search">
             <div>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -61,15 +61,14 @@ export function FormGrande({ applyFilters }) {
                 <input
                     id="search_input"
                     name={idText}
-                    onChange={handleSubmit}
+                    onChange={handleFilters}
                     type="text"
                     placeholder="Buscar trabajos, empresas o habilidades"
                 />
-                <button type="submit" className="btn_info">Buscar</button>
             </div>
             <div className="section_filter" id="filters">
                 <div>
-                    <select name={idTecnology} onChange={handleSubmit} id="filter-tecnologia" defaultValue="">
+                    <select name={idTecnology} onChange={handleFilters} id="filter-tecnologia" defaultValue="">
                         <option value="" disabled hidden>
                             Tecnología
                         </option>
@@ -86,7 +85,7 @@ export function FormGrande({ applyFilters }) {
                         <option value="gcp">GCP</option>
                     </select>
 
-                    <select name={idUbi} onChange={handleSubmit} id="filter-ubicacion" defaultValue="">
+                    <select name={idUbi} onChange={handleFilters} id="filter-ubicacion" defaultValue="">
                         <option value="" disabled hidden>
                             Ubicación
                         </option>
@@ -95,7 +94,7 @@ export function FormGrande({ applyFilters }) {
                         <option value="guadalajara">Guadalajara</option>
                     </select>
 
-                    <select name={idTipo} onChange={handleSubmit} id="filter-tipo_contrato" defaultValue="">
+                    <select name={idTipo} onChange={handleFilters} id="filter-tipo_contrato" defaultValue="">
                         <option value="" disabled hidden>
                             Tipo de contrato
                         </option>
@@ -105,7 +104,7 @@ export function FormGrande({ applyFilters }) {
                         <option value="practicas">Prácticas</option>
                     </select>
 
-                    <select name={idNivel} onChange={handleSubmit} id="filter-nivel_experiencia" defaultValue="">
+                    <select name={idNivel} onChange={handleFilters} id="filter-nivel_experiencia" defaultValue="">
                         <option value="" disabled hidden>
                             Nivel de experiencia
                         </option>
