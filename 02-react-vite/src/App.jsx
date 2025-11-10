@@ -22,27 +22,50 @@ function App() {
     setCurrentPage(page)
   }
 
-  const handleSearch = () => {
 
-  }
+  const [filters, setFilter] = useState({
+    search: '',
+    tecnologia: '',
+    ubicacion: '',
+    tipo: '',
+    nivel: ''
+  })
+  console.log(filters)
 
-  const [textToFilter, setTextToFilter] = useState('')
-  const jobsWhithTextFilter = textToFilter === ''
-    ? jobsData
-    : jobsData.filter(job => {
-      return job.titulo.toLowerCase().includes(textToFilter.toLowerCase())
-    })
+  const jobsFiltrados = jobsData.filter(job => {
+    const { search, tecnologia, ubicacion, tipo, nivel } = filters;
 
-  const onTextfilter = (text) => {
-    setTextToFilter(text)
+    // si no hay ningún filtro activo, devuelve todos directamente
+    if (![search, tecnologia, ubicacion, tipo, nivel].some(Boolean)) return true;
+
+    const data = job.data;
+
+    // Utilidad para comparar texto ignorando mayúsculas
+    const equals = (a, b) => a?.toLowerCase() === b?.toLowerCase();
+    const includes = (a, b) => a?.toLowerCase().includes(b?.toLowerCase());
+
+    return (
+      (!search || includes(job.titulo, search)) &&
+      (!tecnologia ||
+        (Array.isArray(data.tecnologia)
+          ? data.tecnologia.some(t => equals(t, tecnologia))
+          : equals(data.tecnologia, tecnologia))) &&
+      (!ubicacion || equals(data.ubicacion, ubicacion)) &&
+      (!tipo || equals(data.tipo, tipo)) &&
+      (!nivel || equals(data.nivel, nivel))
+    );
+  });
+
+  const applyFilters = (newFilters) => {
+    setFilter(newFilters)
     setCurrentPage(1)
   }
 
   const RESULTS_PER_PAGE = 4
   const empzMostrar = (currentPage - 1) * RESULTS_PER_PAGE
   const termMostrar = currentPage * RESULTS_PER_PAGE
-  const totalPages = Math.ceil(jobsWhithTextFilter.length / RESULTS_PER_PAGE)
-  const resultsView = jobsWhithTextFilter.slice(empzMostrar, termMostrar)
+  const totalPages = Math.ceil(jobsFiltrados.length / RESULTS_PER_PAGE)
+  const resultsView = jobsFiltrados.slice(empzMostrar, termMostrar)
 
   return (
     <>
@@ -50,7 +73,7 @@ function App() {
 
       <MainEstrecho>
         <Hero />
-        <FormGrande onSearh={handleSearch} textFilter={onTextfilter} />
+        <FormGrande applyFilters={applyFilters} />
         <ResultadosBusqueda jobs={resultsView} />
         <Paginacion currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
       </MainEstrecho>

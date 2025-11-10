@@ -1,31 +1,42 @@
 import { useId } from "react"
 
-export function FormGrande({ onSearh, textFilter }) {
+export function FormGrande({ applyFilters }) {
     const idText = useId()
     const idTecnology = useId()
     const idUbi = useId()
     const idTipo = useId()
     const idNivel = useId()
+    const idBtnReset = useId()
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const formData = new FormData(e.target)
+        const form = e.target.closest("form")
+        const formData = new FormData(form)
 
         const filters = {
             search: formData.get(idText),
-            tecnology: formData.get(idTecnology),
+            tecnologia: formData.get(idTecnology),
             ubicacion: formData.get(idUbi),
             tipo: formData.get(idTipo),
             nivel: formData.get(idNivel)
         }
 
-        onSearh(filters)
+        applyFilters(filters)
     }
 
-    const textChange = (e) => {
-        const text = e.target.value
-        textFilter(text)
+    const resetFilters = (e) => {
+        const form = e.target.closest("form")
+        form.reset()
+        const filters = {
+            search: '',
+            tecnologia: '',
+            ubicacion: '',
+            tipo: '',
+            nivel: ''
+        }
+
+        applyFilters(filters)
     }
 
     return (
@@ -50,7 +61,7 @@ export function FormGrande({ onSearh, textFilter }) {
                 <input
                     id="search_input"
                     name={idText}
-                    onChange={textChange}
+                    onChange={handleSubmit}
                     type="text"
                     placeholder="Buscar trabajos, empresas o habilidades"
                 />
@@ -58,7 +69,7 @@ export function FormGrande({ onSearh, textFilter }) {
             </div>
             <div className="section_filter" id="filters">
                 <div>
-                    <select name={idTecnology} id="filter-tecnologia" defaultValue="">
+                    <select name={idTecnology} onChange={handleSubmit} id="filter-tecnologia" defaultValue="">
                         <option value="" disabled hidden>
                             Tecnología
                         </option>
@@ -75,7 +86,7 @@ export function FormGrande({ onSearh, textFilter }) {
                         <option value="gcp">GCP</option>
                     </select>
 
-                    <select name={idUbi} id="filter-ubicacion" defaultValue="">
+                    <select name={idUbi} onChange={handleSubmit} id="filter-ubicacion" defaultValue="">
                         <option value="" disabled hidden>
                             Ubicación
                         </option>
@@ -84,7 +95,7 @@ export function FormGrande({ onSearh, textFilter }) {
                         <option value="guadalajara">Guadalajara</option>
                     </select>
 
-                    <select name={idTipo} id="filter-tipo_contrato" defaultValue="">
+                    <select name={idTipo} onChange={handleSubmit} id="filter-tipo_contrato" defaultValue="">
                         <option value="" disabled hidden>
                             Tipo de contrato
                         </option>
@@ -94,7 +105,7 @@ export function FormGrande({ onSearh, textFilter }) {
                         <option value="practicas">Prácticas</option>
                     </select>
 
-                    <select name={idNivel} id="filter-nivel_experiencia" defaultValue="">
+                    <select name={idNivel} onChange={handleSubmit} id="filter-nivel_experiencia" defaultValue="">
                         <option value="" disabled hidden>
                             Nivel de experiencia
                         </option>
@@ -106,7 +117,7 @@ export function FormGrande({ onSearh, textFilter }) {
                 </div>
 
                 <div>
-                    <button type="button" id="btn_del_filters" className="btn_del_filters">
+                    <button type="button" onClick={resetFilters} name={idBtnReset} id="btn_del_filters" className="btn_del_filters">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="15"
@@ -117,8 +128,7 @@ export function FormGrande({ onSearh, textFilter }) {
                             strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            className="icon icon-tabler icons-tabler-outline icon-tabler-x"
-                        >
+                            className="icon icon-tabler icons-tabler-outline icon-tabler-x">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M18 6l-12 12" />
                             <path d="M6 6l12 12" />
