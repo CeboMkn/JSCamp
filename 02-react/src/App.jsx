@@ -1,35 +1,183 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import JobCard from '../components/JobCard';
+import jobs from './assets/data.json'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <Header />
 
-export default App
+      <main className="main_estrecho">
+        <div>
+          <section className="sec_main">
+            <h1>Encuentra tu próximo trabajo</h1>
+            <p>Explora miles de oportunidades en el sector tecnológico</p>
+
+            <form className="form_princi w-100" action="" role="search">
+              <div>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#94a3b8"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="icon icon-tabler icons-tabler-outline icon-tabler-search"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                  <path d="M21 21l-6 -6" />
+                </svg>
+
+                <input
+                  id="search_input"
+                  type="text"
+                  placeholder="Buscar trabajos, empresas o habilidades"
+                />
+              </div>
+
+              <div className="section_filter" id="filters">
+                <div>
+                  <select name="tecnologia" id="filter-tecnologia" defaultValue="">
+                    <option value="" disabled hidden>
+                      Tecnología
+                    </option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="react">React</option>
+                    <option value="nodejs">Node.js</option>
+                    <option value="python">Python</option>
+                    <option value="sql">SQL</option>
+                    <option value="erre">R</option>
+                    <option value="swift">Swift</option>
+                    <option value="kotlin">Kotlin</option>
+                    <option value="aws">AWS</option>
+                    <option value="azure">Azure</option>
+                    <option value="gcp">GCP</option>
+                  </select>
+
+                  <select name="ubicacion" id="filter-ubicacion" defaultValue="">
+                    <option value="" disabled hidden>
+                      Ubicación
+                    </option>
+                    <option value="remoto">Remoto</option>
+                    <option value="mexico">Ciudad de México</option>
+                    <option value="guadalajara">Guadalajara</option>
+                  </select>
+
+                  <select name="tipo" id="filter-tipo" defaultValue="">
+                    <option value="" disabled hidden>
+                      Tipo de contrato
+                    </option>
+                    <option value="tiempo_completo">Tiempo completo</option>
+                    <option value="freelance">Freelance</option>
+                    <option value="temporal">Temporal</option>
+                    <option value="practicas">Prácticas</option>
+                  </select>
+
+                  <select name="nivel" id="filter-nivel" defaultValue="">
+                    <option value="" disabled hidden>
+                      Nivel de experiencia
+                    </option>
+                    <option value="junior">Junior</option>
+                    <option value="semi_senior">Semi-Senior</option>
+                    <option value="senior">Senior</option>
+                    <option value="lead">Tech Lead</option>
+                  </select>
+                </div>
+
+                <div>
+                  <button type="button" id="btn_del_filters" className="btn_del_filters">
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="icon icon-tabler icons-tabler-outline icon-tabler-x"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M18 6l-12 12" />
+                      <path d="M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                <span id="selected_value"></span>
+              </div>
+            </form>
+          </section>
+
+          <section className="sect_res_busqueda btn_active_contain">
+            <h2>Resultados de búsqueda</h2>
+
+            <div className="select_person">
+              <label className="label_num_result" htmlFor="num_result">
+                Número de resultados
+              </label>
+              <select name="num_result" id="num_result"></select>
+            </div>
+
+            <div id="jobs-listings" className="env_result">
+            <JobCard jobs={jobs}/>
+            </div>
+          </section>
+
+          <nav className="paginacion">
+            <ul>
+              <li>
+                <a href="#">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#fff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M15 6l-6 6l6 6" />
+                  </svg>
+                </a>
+              </li>
+
+              <li id="pages_nav" className="pag_active">
+                <a href="#">1</a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#fff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M9 6l6 6l-6 6" />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </main>
+
+      <Footer />
+    </>
+  );
+}
