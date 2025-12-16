@@ -1,9 +1,9 @@
-export default function JobCard({ jobs }) {
+export function Jobcard({jobs}) {
     return (
         <>
             {jobs.map(job => (
-                <div className="res_busqueda">
-                    <li key={job.id}>
+                <div className="res_busqueda" key={job.id}>
+                    <li>
                         <article>
                             <div>
                                 <a href={job.enlace || "#"}>
@@ -27,5 +27,6 @@ export default function JobCard({ jobs }) {
                 </div>
             ))}
         </>
-    );
+
+    )
 }
