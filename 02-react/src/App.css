@@ -518,6 +518,7 @@ h1+p {
     display: flex;
     justify-content: space-between;
     transition: background 0.2s ease;
+    border-top: 1px solid var(--color-border);
 
     &:hover {
         background-color: #061627;
