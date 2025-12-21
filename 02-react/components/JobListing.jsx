@@ -1,7 +1,6 @@
 import { JobCard } from "./JobCard";
-import jobsData from '../src/assets/data.json'
 
-export function JobListing() {
+export function JobListing({ jobsData }) {
     return (
         <section className="sect_res_busqueda btn_active_contain">
             <h2>Resultados de búsqueda</h2>
