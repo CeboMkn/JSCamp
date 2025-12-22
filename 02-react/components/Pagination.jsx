@@ -1,3 +1,5 @@
+import styles from '../css_module/Pagination.module.css'
+
 export function Pagination({ currentPage = 1, totalPages = 1, onPageChange }) {
 
     const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -30,7 +32,7 @@ export function Pagination({ currentPage = 1, totalPages = 1, onPageChange }) {
     }
 
     return (
-        <nav className="paginacion">
+        <nav className={styles.paginacion}>
             <ul>
                 <li style={stylePrevButton}>
                     <a href="#" onClick={handlePrevClick}>
@@ -54,7 +56,7 @@ export function Pagination({ currentPage = 1, totalPages = 1, onPageChange }) {
                 {pages.map(page => (
                     <li
                         key={page}
-                        className={currentPage === page ? 'pag_active' : ''}>
+                        className={currentPage === page ? styles.pagActive : ''}>
                         <a href="#"
                             data-page={page}
                             onClick={handleChangePage}>{page}
