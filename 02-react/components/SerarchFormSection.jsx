@@ -1,4 +1,15 @@
-export function SerarchFormSection () {
+import { useId } from "react"
+
+
+
+export function SerarchFormSection() {
+
+    const idText = useId()
+    const idTecno = useId()
+    const idUbi = useId()
+    const idTipo = useId()
+    const idNivel = useId()
+    
     return (
         <section className="sec_main">
             <h1>Encuentra tu próximo trabajo</h1>
@@ -23,15 +34,15 @@ export function SerarchFormSection () {
                     </svg>
 
                     <input
-                        id="search_input"
+                        name={idText}
                         type="text"
                         placeholder="Buscar trabajos, empresas o habilidades"
                     />
                 </div>
 
-                <div className="section_filter" id="filters">
+                <div className="section_filter">
                     <div>
-                        <select name="tecnologia" id="filter-tecnologia" defaultValue="">
+                        <select name={idTecno} defaultValue="">
                             <option value="" disabled hidden>
                                 Tecnología
                             </option>
@@ -48,7 +59,7 @@ export function SerarchFormSection () {
                             <option value="gcp">GCP</option>
                         </select>
 
-                        <select name="ubicacion" id="filter-ubicacion" defaultValue="">
+                        <select name={idUbi} defaultValue="">
                             <option value="" disabled hidden>
                                 Ubicación
                             </option>
@@ -57,7 +68,7 @@ export function SerarchFormSection () {
                             <option value="guadalajara">Guadalajara</option>
                         </select>
 
-                        <select name="tipo" id="filter-tipo" defaultValue="">
+                        <select name={idTipo} defaultValue="">
                             <option value="" disabled hidden>
                                 Tipo de contrato
                             </option>
@@ -67,7 +78,7 @@ export function SerarchFormSection () {
                             <option value="practicas">Prácticas</option>
                         </select>
 
-                        <select name="nivel" id="filter-nivel" defaultValue="">
+                        <select name={idNivel} defaultValue="">
                             <option value="" disabled hidden>
                                 Nivel de experiencia
                             </option>
@@ -79,7 +90,7 @@ export function SerarchFormSection () {
                     </div>
 
                     <div>
-                        <button type="button" id="btn_del_filters" className="btn_del_filters">
+                        <button type="button" className="btn_del_filters">
                             <svg
                                 width="15"
                                 height="15"
