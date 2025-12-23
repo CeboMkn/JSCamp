@@ -16,33 +16,43 @@ export function App() {
 
   const RESULTS_PER_PAGE = 4
 
-  /* const [textToFilter, setTextToFilter] = useState('') */
-  const [filters, setToFilters] = useState({})
+  const [filters, setToFilters] = useState({
+    search: '',
+    tecnologia: '',
+    ubicacion: '',
+    tipo: '',
+    nivel: ''
+  })
   const [currentPage, setCurrentPage] = useState(1)
 
+  const jobsFilter = jobsData.filter(job => {
+    return Object.entries(filters).every(([key, value]) => {
+      if (!value) return true
+      if (key === 'search') {
+        return job.titulo.toLowerCase().includes(value.toLowerCase()) ||
+          job.empresa.toLowerCase().includes(value.toLowerCase()) ||
+          job.descripcion.toLowerCase().includes(value.toLowerCase())
+      }
+      if (key === 'tecnologia') {
+        return job.data.tecnologia.includes(value)
+      }
+      if (key === 'ubicacion') {
+        return job.data.ubicacion.toLowerCase().includes(value.toLowerCase())
+      }
+      if (key === 'nivel') {
+        return job.data.nivel.toLowerCase().includes(value.toLowerCase())
+      }
+      if (key === 'tipo') {
+        return job.data.tipo.toLowerCase().includes(value.toLowerCase())
+      }
+    })
+  })
 
-  /* const jobsFilter = textToFilter === ''
-    ? jobsData
-    : jobsData.filter(job => {
-      return job.titulo.toLowerCase().includes(textToFilter.toLowerCase())
-    }) */
-
-  const totalPages = Math.ceil(jobsData.length / RESULTS_PER_PAGE)
-  const pagedResults = jobsData.slice((currentPage - 1) * RESULTS_PER_PAGE, currentPage * RESULTS_PER_PAGE)
-
-  /* const handleSearch = () => {
-
-  }
-
-  const handleTextFilter = (text) => {
-    setTextToFilter(text)
-    setCurrentPage(1)
-    console.log(textToFilter)
-  } */
+  const totalPages = Math.ceil(jobsFilter.length / RESULTS_PER_PAGE)
+  const pagedResults = jobsFilter.slice((currentPage - 1) * RESULTS_PER_PAGE, currentPage * RESULTS_PER_PAGE)
 
   const handleFilters = (filtersAdd) => {
     setToFilters(filtersAdd)
-    console.log(filters)
   }
 
   return (
@@ -53,12 +63,12 @@ export function App() {
       <main className="main_estrecho">
         <div>
 
-          <SerarchFormSection /* onSearch={handleSearch} onTextFilter={handleTextFilter} */ onFilters={handleFilters} />
+          <SerarchFormSection onFilters={handleFilters} filters={filters} />
 
           <JobListing jobsData={pagedResults} />
 
           <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-          <MostrandoNumRresults currentPage={currentPage} results={RESULTS_PER_PAGE} jobs={jobsData} />
+          <MostrandoNumRresults currentPage={currentPage} results={RESULTS_PER_PAGE} jobs={jobsFilter} />
 
         </div>
       </main>

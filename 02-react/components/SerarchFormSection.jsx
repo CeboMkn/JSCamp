@@ -2,7 +2,7 @@ import { useId } from "react"
 
 
 
-export function SerarchFormSection({ /* onSearch, onTextFilter */ onFilters }) {
+export function SerarchFormSection({ onFilters, filters }) {
 
     const idText = useId()
     const idTecno = useId()
@@ -10,49 +10,40 @@ export function SerarchFormSection({ /* onSearch, onTextFilter */ onFilters }) {
     const idTipo = useId()
     const idNivel = useId()
 
-    /* const handleSubmit = (e) => {
-        e.preventDefault()
-
-        const formData = new FormData(e.target)
-
-        const filters = {
-            search: formData.get(idText),
-            tecnologia: formData.get(idTecno),
-            ubicacion: formData.get(idUbi),
-            tipo: formData.get(idTipo),
-            nivel: formData.get(idNivel)
-
-        }
-
-        onSearch(filters)
-    }
-
-    const handleTextChange = (e) => {
-        const text = e.target.value
-        onTextFilter(text)
-    } */
-
     const handleFilters = (e) => {
         const form = e.currentTarget.form || e.currentTarget
         const formData = new FormData(form)
 
         const filtersAdd = {
-            search: formData.get("search"),
-            tecnologia: formData.get("tecnologia"),
-            ubicacion: formData.get("ubicacion"),
-            tipo: formData.get("tipo"),
-            nivel: formData.get("nivel"),
+            search: formData.get(idText),
+            tecnologia: formData.get(idTecno),
+            ubicacion: formData.get(idUbi),
+            tipo: formData.get(idTipo),
+            nivel: formData.get(idNivel)
         }
 
         onFilters(filtersAdd)
     }
+
+    const handleDellFilters = () => {
+        const filtersAdd = {
+            search: '',
+            tecnologia: '',
+            ubicacion: '',
+            tipo: '',
+            nivel: ''
+        }
+        onFilters(filtersAdd)
+    }
+
+
 
     return (
         <section className="sec_main">
             <h1>Encuentra tu próximo trabajo</h1>
             <p>Explora miles de oportunidades en el sector tecnológico</p>
 
-            <form /* onSubmit={handleSubmit} */ className="form_princi w-100" action="" role="search">
+            <form className="form_princi w-100" action="" role="search">
                 <div>
                     <svg
                         width="24"
@@ -71,6 +62,7 @@ export function SerarchFormSection({ /* onSearch, onTextFilter */ onFilters }) {
                     </svg>
 
                     <input
+                        value={filters.search || ''}
                         onChange={handleFilters}
                         name={idText}
                         type="text"
@@ -80,7 +72,7 @@ export function SerarchFormSection({ /* onSearch, onTextFilter */ onFilters }) {
 
                 <div className="section_filter">
                     <div>
-                        <select onChange={handleFilters} name={idTecno} defaultValue="">
+                        <select onChange={handleFilters} name={idTecno} value={filters.tecnologia || ''}>
                             <option value="" disabled hidden>
                                 Tecnología
                             </option>
@@ -97,7 +89,7 @@ export function SerarchFormSection({ /* onSearch, onTextFilter */ onFilters }) {
                             <option value="gcp">GCP</option>
                         </select>
 
-                        <select onChange={handleFilters} name={idUbi} defaultValue="">
+                        <select onChange={handleFilters} name={idUbi} value={filters.ubicacion || ''}>
                             <option value="" disabled hidden>
                                 Ubicación
                             </option>
@@ -106,7 +98,7 @@ export function SerarchFormSection({ /* onSearch, onTextFilter */ onFilters }) {
                             <option value="guadalajara">Guadalajara</option>
                         </select>
 
-                        <select onChange={handleFilters} name={idTipo} defaultValue="">
+                        <select onChange={handleFilters} name={idTipo} value={filters.tipo || ''}>
                             <option value="" disabled hidden>
                                 Tipo de contrato
                             </option>
@@ -116,7 +108,7 @@ export function SerarchFormSection({ /* onSearch, onTextFilter */ onFilters }) {
                             <option value="practicas">Prácticas</option>
                         </select>
 
-                        <select onChange={handleFilters} name={idNivel} defaultValue="">
+                        <select onChange={handleFilters} name={idNivel} value={filters.nivel || ''}>
                             <option value="" disabled hidden>
                                 Nivel de experiencia
                             </option>
@@ -128,7 +120,7 @@ export function SerarchFormSection({ /* onSearch, onTextFilter */ onFilters }) {
                     </div>
 
                     <div>
-                        <button type="button" className="btn_del_filters">
+                        <button type="button" onClick={handleDellFilters} className="btn_del_filters">
                             <svg
                                 width="15"
                                 height="15"
@@ -146,8 +138,6 @@ export function SerarchFormSection({ /* onSearch, onTextFilter */ onFilters }) {
                             </svg>
                         </button>
                     </div>
-
-                    <span id="selected_value"></span>
                 </div>
             </form>
         </section>
