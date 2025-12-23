@@ -16,10 +16,34 @@ export function App() {
 
   const RESULTS_PER_PAGE = 4
 
+  /* const [textToFilter, setTextToFilter] = useState('') */
+  const [filters, setToFilters] = useState({})
   const [currentPage, setCurrentPage] = useState(1)
-  const totalPages = Math.ceil(jobsData.length / RESULTS_PER_PAGE)
 
-  const pagedResults = jobsData.slice((currentPage -1) * RESULTS_PER_PAGE, currentPage * RESULTS_PER_PAGE)
+
+  /* const jobsFilter = textToFilter === ''
+    ? jobsData
+    : jobsData.filter(job => {
+      return job.titulo.toLowerCase().includes(textToFilter.toLowerCase())
+    }) */
+
+  const totalPages = Math.ceil(jobsData.length / RESULTS_PER_PAGE)
+  const pagedResults = jobsData.slice((currentPage - 1) * RESULTS_PER_PAGE, currentPage * RESULTS_PER_PAGE)
+
+  /* const handleSearch = () => {
+
+  }
+
+  const handleTextFilter = (text) => {
+    setTextToFilter(text)
+    setCurrentPage(1)
+    console.log(textToFilter)
+  } */
+
+  const handleFilters = (filtersAdd) => {
+    setToFilters(filtersAdd)
+    console.log(filters)
+  }
 
   return (
     <>
@@ -29,12 +53,12 @@ export function App() {
       <main className="main_estrecho">
         <div>
 
-          <SerarchFormSection />
+          <SerarchFormSection /* onSearch={handleSearch} onTextFilter={handleTextFilter} */ onFilters={handleFilters} />
 
-          <JobListing jobsData={pagedResults}/>
+          <JobListing jobsData={pagedResults} />
 
           <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-          <MostrandoNumRresults currentPage={currentPage} results={RESULTS_PER_PAGE} jobs={jobsData}/>
+          <MostrandoNumRresults currentPage={currentPage} results={RESULTS_PER_PAGE} jobs={jobsData} />
 
         </div>
       </main>

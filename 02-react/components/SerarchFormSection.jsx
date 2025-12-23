@@ -2,20 +2,57 @@ import { useId } from "react"
 
 
 
-export function SerarchFormSection() {
+export function SerarchFormSection({ /* onSearch, onTextFilter */ onFilters }) {
 
     const idText = useId()
     const idTecno = useId()
     const idUbi = useId()
     const idTipo = useId()
     const idNivel = useId()
-    
+
+    /* const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const formData = new FormData(e.target)
+
+        const filters = {
+            search: formData.get(idText),
+            tecnologia: formData.get(idTecno),
+            ubicacion: formData.get(idUbi),
+            tipo: formData.get(idTipo),
+            nivel: formData.get(idNivel)
+
+        }
+
+        onSearch(filters)
+    }
+
+    const handleTextChange = (e) => {
+        const text = e.target.value
+        onTextFilter(text)
+    } */
+
+    const handleFilters = (e) => {
+        const form = e.currentTarget.form || e.currentTarget
+        const formData = new FormData(form)
+
+        const filtersAdd = {
+            search: formData.get("search"),
+            tecnologia: formData.get("tecnologia"),
+            ubicacion: formData.get("ubicacion"),
+            tipo: formData.get("tipo"),
+            nivel: formData.get("nivel"),
+        }
+
+        onFilters(filtersAdd)
+    }
+
     return (
         <section className="sec_main">
             <h1>Encuentra tu próximo trabajo</h1>
             <p>Explora miles de oportunidades en el sector tecnológico</p>
 
-            <form className="form_princi w-100" action="" role="search">
+            <form /* onSubmit={handleSubmit} */ className="form_princi w-100" action="" role="search">
                 <div>
                     <svg
                         width="24"
@@ -34,6 +71,7 @@ export function SerarchFormSection() {
                     </svg>
 
                     <input
+                        onChange={handleFilters}
                         name={idText}
                         type="text"
                         placeholder="Buscar trabajos, empresas o habilidades"
@@ -42,7 +80,7 @@ export function SerarchFormSection() {
 
                 <div className="section_filter">
                     <div>
-                        <select name={idTecno} defaultValue="">
+                        <select onChange={handleFilters} name={idTecno} defaultValue="">
                             <option value="" disabled hidden>
                                 Tecnología
                             </option>
@@ -59,7 +97,7 @@ export function SerarchFormSection() {
                             <option value="gcp">GCP</option>
                         </select>
 
-                        <select name={idUbi} defaultValue="">
+                        <select onChange={handleFilters} name={idUbi} defaultValue="">
                             <option value="" disabled hidden>
                                 Ubicación
                             </option>
@@ -68,7 +106,7 @@ export function SerarchFormSection() {
                             <option value="guadalajara">Guadalajara</option>
                         </select>
 
-                        <select name={idTipo} defaultValue="">
+                        <select onChange={handleFilters} name={idTipo} defaultValue="">
                             <option value="" disabled hidden>
                                 Tipo de contrato
                             </option>
@@ -78,7 +116,7 @@ export function SerarchFormSection() {
                             <option value="practicas">Prácticas</option>
                         </select>
 
-                        <select name={idNivel} defaultValue="">
+                        <select onChange={handleFilters} name={idNivel} defaultValue="">
                             <option value="" disabled hidden>
                                 Nivel de experiencia
                             </option>
