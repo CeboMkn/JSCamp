@@ -11,8 +11,8 @@ export function SerarchFormSection({ onFilters, filters }) {
     const idNivel = useId()
 
     const handleFilters = (e) => {
-        const form = e.currentTarget.form || e.currentTarget
-        const formData = new FormData(form)
+        
+        const formData = new FormData(e.currentTarget)
 
         const filtersAdd = {
             search: formData.get(idText),
@@ -43,7 +43,7 @@ export function SerarchFormSection({ onFilters, filters }) {
             <h1>Encuentra tu próximo trabajo</h1>
             <p>Explora miles de oportunidades en el sector tecnológico</p>
 
-            <form className="form_princi w-100" action="" role="search">
+            <form onChange={handleFilters} className="form_princi w-100" action="" role="search">
                 <div>
                     <svg
                         width="24"
@@ -72,7 +72,7 @@ export function SerarchFormSection({ onFilters, filters }) {
 
                 <div className="section_filter">
                     <div>
-                        <select onChange={handleFilters} name={idTecno} value={filters.tecnologia || ''}>
+                        <select name={idTecno} value={filters.tecnologia || ''}>
                             <option value="" disabled hidden>
                                 Tecnología
                             </option>
@@ -89,7 +89,7 @@ export function SerarchFormSection({ onFilters, filters }) {
                             <option value="gcp">GCP</option>
                         </select>
 
-                        <select onChange={handleFilters} name={idUbi} value={filters.ubicacion || ''}>
+                        <select name={idUbi} value={filters.ubicacion || ''}>
                             <option value="" disabled hidden>
                                 Ubicación
                             </option>
@@ -98,7 +98,7 @@ export function SerarchFormSection({ onFilters, filters }) {
                             <option value="guadalajara">Guadalajara</option>
                         </select>
 
-                        <select onChange={handleFilters} name={idTipo} value={filters.tipo || ''}>
+                        <select name={idTipo} value={filters.tipo || ''}>
                             <option value="" disabled hidden>
                                 Tipo de contrato
                             </option>
@@ -108,7 +108,7 @@ export function SerarchFormSection({ onFilters, filters }) {
                             <option value="practicas">Prácticas</option>
                         </select>
 
-                        <select onChange={handleFilters} name={idNivel} value={filters.nivel || ''}>
+                        <select name={idNivel} value={filters.nivel || ''}>
                             <option value="" disabled hidden>
                                 Nivel de experiencia
                             </option>
