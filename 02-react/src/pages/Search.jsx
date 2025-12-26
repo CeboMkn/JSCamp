@@ -3,10 +3,10 @@ import { useState } from 'react';
 import jobsData from '../assets/data.json'
 
 import '../App.css'
-import { JobListing } from '../../components/JobListing.jsx';
-import { Pagination } from '../../components/Pagination.jsx';
-import { SerarchFormSection } from '../../components/SerarchFormSection.jsx';
-import { MostrandoNumRresults } from '../../components/MostrandoNumResults.jsx';
+import { JobListing } from '../components/JobListing.jsx';
+import { Pagination } from '../components/Pagination.jsx';
+import { SerarchFormSection } from '../components/SerarchFormSection.jsx';
+import { MostrandoNumRresults } from '../components/MostrandoNumResults.jsx';
 
 
 export function SearchPage() {
