@@ -1,6 +1,22 @@
+import { useRouter } from '../hooks/useRouter'
+
 import background from '../assets/img/background.webp'
 
 export function HomePage() {
+    const { navigateTo } = useRouter()
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const searchText = formData.get('search')
+
+        const url = searchText
+            ? `search?text=${encodeURIComponent(searchText)}`
+            : `/search`
+
+        navigateTo(url)
+    }
+
     return (
         <main>
             <section className="sec1_index">
@@ -17,7 +33,7 @@ export function HomePage() {
                     próxima oportunidad.
                 </p>
 
-                <form className="form_princi form_index w-100" role="search">
+                <form onSubmit={handleSearch} className="form_princi form_index w-100" role="search">
                     <div>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +53,7 @@ export function HomePage() {
                         </svg>
 
                         <input
-                            required
+                            name='search'
                             type="text"
                             placeholder="Buscar empleos por título, habilidad o empresa"
                         />
