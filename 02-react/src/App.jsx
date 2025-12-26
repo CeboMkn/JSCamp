@@ -1,80 +1,31 @@
-import { useState } from 'react';
+import { useRouter } from './hooks/useRouter.jsx';
 
-import jobsData from './assets/data.json'
+import { Header } from './components/Header.jsx';
+import { Footer } from './components/Footer.jsx';
 
-import './App.css'
-
-import { Header } from '../components/Header.jsx';
-import { Footer } from '../components/Footer.jsx';
-import { JobListing } from '../components/JobListing.jsx';
-import { Pagination } from '../components/Pagination.jsx';
-import { SerarchFormSection } from '../components/SerarchFormSection.jsx';
-import { MostrandoNumRresults } from '../components/MostrandoNumResults.jsx';
-
+import { HomePage } from './pages/Home.jsx';
+import { SearchPage } from './pages/Search.jsx';
+import { NotFoundPage } from './pages/404.jsx';
 
 export function App() {
 
-  const RESULTS_PER_PAGE = 4
+  const { currentPath } = useRouter()
 
-  const [filters, setToFilters] = useState({
-    search: '',
-    tecnologia: '',
-    ubicacion: '',
-    tipo: '',
-    nivel: ''
-  })
-  const [currentPage, setCurrentPage] = useState(1)
+  let page
 
-  const jobsFilter = jobsData.filter(job => {
-    return Object.entries(filters).every(([key, value]) => {
-      if (!value) return true
-      if (key === 'search') {
-        return job.titulo.toLowerCase().includes(value.toLowerCase()) ||
-          job.empresa.toLowerCase().includes(value.toLowerCase()) ||
-          job.descripcion.toLowerCase().includes(value.toLowerCase())
-      }
-      if (key === 'tecnologia') {
-        return job.data.tecnologia.includes(value)
-      }
-      if (key === 'ubicacion') {
-        return job.data.ubicacion.toLowerCase().includes(value.toLowerCase())
-      }
-      if (key === 'nivel') {
-        return job.data.nivel.toLowerCase().includes(value.toLowerCase())
-      }
-      if (key === 'tipo') {
-        return job.data.tipo.toLowerCase().includes(value.toLowerCase())
-      }
-    })
-  })
-
-  const totalPages = Math.ceil(jobsFilter.length / RESULTS_PER_PAGE)
-  const pagedResults = jobsFilter.slice((currentPage - 1) * RESULTS_PER_PAGE, currentPage * RESULTS_PER_PAGE)
-
-  const handleFilters = (filtersAdd) => {
-    setToFilters(filtersAdd)
+  if (currentPath === '/') {
+    page = <HomePage />
+  } else if (currentPath === '/search') {
+    page = <SearchPage />
+  } else {
+    page = <NotFoundPage />
   }
 
   return (
     <>
-
       <Header />
-
-      <main className="main_estrecho">
-        <div>
-
-          <SerarchFormSection onFilters={handleFilters} filters={filters} />
-
-          <JobListing jobsData={pagedResults} />
-
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-          <MostrandoNumRresults currentPage={currentPage} results={RESULTS_PER_PAGE} jobs={jobsFilter} />
-
-        </div>
-      </main>
-
+      {page}
       <Footer />
-
     </>
-  );
+  )
 }
