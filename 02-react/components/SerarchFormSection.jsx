@@ -1,4 +1,4 @@
-import { useId } from "react"
+import { useEffect, useId } from "react"
 
 
 
@@ -11,7 +11,7 @@ export function SerarchFormSection({ onFilters, filters }) {
     const idNivel = useId()
 
     const handleFilters = (e) => {
-        
+
         const formData = new FormData(e.currentTarget)
 
         const filtersAdd = {
@@ -35,8 +35,6 @@ export function SerarchFormSection({ onFilters, filters }) {
         }
         onFilters(filtersAdd)
     }
-
-
 
     return (
         <section className="sec_main">

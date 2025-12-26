@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { Header } from '../components/Header.jsx';
 import { Footer } from '../components/Footer.jsx';
 
@@ -8,17 +10,33 @@ import { NotFoundPage } from './pages/404.jsx';
 
 export function App() {
 
-  const { pathname } = window.location
+  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+  /* const { pathname } = window.location */
 
   let page
 
-  if (pathname === '/') {
+  if (currentPath === '/') {
     page = <HomePage />
-  } else if (pathname === '/search') {
+  } else if (currentPath === '/search') {
     page = <SearchPage />
-  }else {
-    page = <NotFoundPage/>
+  } else {
+    page = <NotFoundPage />
   }
+
+  const handleLocationChange = () => {
+    setCurrentPath(window.location.pathname)
+  }
+
+  useEffect(() => {
+    window.addEventListener('popstate', () => {
+      handleLocationChange()
+    })
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange)
+    }
+  }, [])
+
   return (
     <>
       <Header />
