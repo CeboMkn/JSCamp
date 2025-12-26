@@ -1,6 +1,4 @@
-import { useEffect, useId } from "react"
-
-
+import { useId } from "react"
 
 export function SerarchFormSection({ onFilters, filters }) {
 
