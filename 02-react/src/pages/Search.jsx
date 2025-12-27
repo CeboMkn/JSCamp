@@ -50,20 +50,21 @@ export function SearchPage() {
 
   const handleFilters = (filtersAdd) => {
     setToFilters(filtersAdd)
+    setCurrentPage(1)
   }
 
   return (
-      <main className="main_estrecho">
-        <div>
+    <main className="main_estrecho">
+      <div>
 
-          <SerarchFormSection onFilters={handleFilters} filters={filters} />
+        <SerarchFormSection onFilters={handleFilters} filters={filters} />
 
-          <JobListing jobsData={pagedResults} />
+        <JobListing jobsData={pagedResults} />
 
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-          <MostrandoNumRresults currentPage={currentPage} results={RESULTS_PER_PAGE} jobs={jobsFilter} />
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+        <MostrandoNumRresults currentPage={currentPage} results={RESULTS_PER_PAGE} jobs={jobsFilter} />
 
-        </div>
-      </main>
+      </div>
+    </main>
   );
 }

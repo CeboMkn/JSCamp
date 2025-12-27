@@ -5,15 +5,19 @@ import { Footer } from './components/Footer.jsx';
 
 import { HomePage } from './pages/Home.jsx';
 import { SearchPage } from './pages/Search.jsx';
+import { ContactPage } from './pages/Contact.jsx';
 
 export function App() {
 
   return (
     <>
-      <Header />
-      <Route path="/" component={HomePage} />
-      <Route path="/search" component={SearchPage} />
-      <Footer />
+      <div className='organized'>
+        <Header />
+        <Route path="/" component={HomePage} />
+        <Route path="/search" component={SearchPage} />
+        <Route path="/contact" component={ContactPage} />
+        <Footer />
+      </div>
     </>
   )
 }
