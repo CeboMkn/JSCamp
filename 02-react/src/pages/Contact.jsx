@@ -1,34 +1,49 @@
+/* import { useState } from "react" */
 import styles from "../css_module/Contact.module.css"
 
 export function ContactPage() {
 
     const handleSendForm = (e) => {
+
         e.preventDefault()
-        const formData = new FormData(e.target)
-        const dataForm = {
-            name: formData.get("name"),
-            subname: formData.get("subName"),
-            email: formData.get("email"),
-            text: formData.get("textArea")
+        const form = e.target
+        const elements = form.elements
+
+        const data = {}
+
+        for (const d of elements) {
+            if (!d.name) continue
+
+            data[d.name] = {
+                value: d.value,
+                type: d.type,
+                required: d.required
+            }
         }
-        const test = testData(dataForm.email)
-        test ? onSendForm(dataForm) : errorData(dataForm)
+        console.log(data)
+
     }
 
-    const testData = (dataEmail) => {
-        console.log('Testeo de datos', dataEmail)
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dataEmail.trim())
+    /* const testMail = (email) => {
+        const text = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+        const validate = text ? true : false
+        return validate
+    }
+
+    const testText = (name, subname, text) => {
+
     }
 
     const onSendForm = (data) => {
-        console.log('Los datos se envían', data)
-        /* Petición para mandar datos */
+
     }
 
-    const errorData = (data) => {
-        console.log('Error en los datos', data)
-        /* Logica de error en datos */
-    }
+    const errorData = () => {
+
+    } */
+
+
+
 
     return (
         <main className="main_estrecho">
@@ -48,7 +63,7 @@ export function ContactPage() {
                                 <input required name="subName" placeholder="Apellidos" type="text" />
                             </div>
                             <div className={styles.inputFormContact}>
-                                <input required name="email" placeholder="Correo electrónico" type="text" />
+                                <input required name="email" placeholder="Correo electrónico" type="email" />
                             </div>
 
                         </section>
@@ -56,6 +71,9 @@ export function ContactPage() {
                             <div className={`${styles.inputFormContact} ${styles.textAreaFormContact}`}>
                                 <textarea required name="textArea" placeholder="Cuentanos tus dudas" type="text" />
                             </div>
+                        </section>
+                        <section>
+                            <p>{ }</p>
                         </section>
                         <section>
                             <div className={styles.btnEnviar}>
