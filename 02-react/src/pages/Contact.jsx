@@ -1,4 +1,3 @@
-/* import { useState } from "react" */
 import styles from "../css_module/Contact.module.css"
 
 export function ContactPage() {
@@ -17,32 +16,93 @@ export function ContactPage() {
             data[d.name] = {
                 value: d.value,
                 type: d.type,
-                required: d.required
+                required: d.dataset.validar === 'true',
+                validate: null,
+                error: null
             }
         }
-        console.log(data)
-
+        const [esValido, dataValidada] = validateData(data)
+        esValido
+            ? onSendForm(dataValidada)
+            : errorData(form, dataValidada)
     }
 
-    /* const testMail = (email) => {
-        const text = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
-        const validate = text ? true : false
-        return validate
-    }
+    function validateData(data) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-    const testText = (name, subname, text) => {
+        for (const key in data) {
+            const campo = data[key]
+            campo.error = null
 
+            if (!campo.required) {
+                campo.validate = true
+                continue
+            }
+
+            if (campo.value.trim() === '') {
+                campo.validate = false
+                campo.error = 'required'
+                continue
+            }
+
+            if (campo.type === 'email') {
+                if (!emailRegex.test(campo.value.trim())) {
+                    campo.validate = false
+                    campo.error = 'email'
+                    continue
+                }
+            }
+
+            campo.validate = true
+        }
+
+        const esValido = Object.values(data).every(campo => campo.validate === true)
+        return [esValido, data]
     }
 
     const onSendForm = (data) => {
-
+        console.log('Datos Enviados = ', data)
     }
 
-    const errorData = () => {
+    const errorData = (form, data) => {
 
-    } */
+        form.querySelectorAll('.errorText').forEach(e => e.remove())
+        form.querySelectorAll('input, textarea').forEach(el => {
+            el.classList.remove('inputError', 'inputSuccess')
+        })
+
+        for (const key in data) {
+            const campo = data[key]
+            const input = form.elements[key]
+            if (!input) continue
+
+            const container = input.parentElement
 
 
+            if (campo.validate) {
+                container.classList.add('inputSuccess')
+                continue
+            }
+
+            container.classList.add('inputError')
+
+            const error = document.createElement('span')
+            error.className = 'errorText'
+            error.textContent = getErrorMessage(campo)
+
+            container.appendChild(error)
+        }
+    }
+    const getErrorMessage = (campo) => {
+        switch (campo.error) {
+            case 'required':
+                return 'Este campo es obligatorio'
+            case 'email':
+                return 'El correo electrónico no es válido'
+            default:
+                return ''
+        }
+    }
 
 
     return (
@@ -57,19 +117,19 @@ export function ContactPage() {
 
                         <section className={styles.formLabels}>
                             <div className={styles.inputFormContact}>
-                                <input required name="name" placeholder="Nombre" type="text" />
+                                <input name="name" placeholder="Nombre" type="text" data-validar="true" />
                             </div>
                             <div className={styles.inputFormContact}>
-                                <input required name="subName" placeholder="Apellidos" type="text" />
+                                <input name="subname" placeholder="Apellidos" type="text" data-validar="true" />
                             </div>
                             <div className={styles.inputFormContact}>
-                                <input required name="email" placeholder="Correo electrónico" type="email" />
+                                <input name="email" placeholder="Correo electrónico" type="email" data-validar="true" />
                             </div>
 
                         </section>
                         <section>
                             <div className={`${styles.inputFormContact} ${styles.textAreaFormContact}`}>
-                                <textarea required name="textArea" placeholder="Cuentanos tus dudas" type="text" />
+                                <textarea name="dudas" placeholder="Cuentanos tus dudas" data-validar="true" />
                             </div>
                         </section>
                         <section>

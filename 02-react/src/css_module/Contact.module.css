@@ -89,3 +89,17 @@
         width: 40%;
     }
 }
+
+.inputError {
+    border-color: #dc3545;
+}
+
+.inputSuccess {
+    border-color: #28a745;
+}
+
+.errorText {
+    color: #dc3545;
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
