@@ -1,109 +1,63 @@
+import { useState } from "react"
 import styles from "../css_module/Contact.module.css"
 
 export function ContactPage() {
 
-    const handleSendForm = (e) => {
+    const emailRegexp = new RegExp(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/);
 
+    const [values, setValues] = useState({
+        email: '',
+        name: '',
+        subname: '',
+        dudas: ''
+    })
+
+    const [errors, setError] = useState({
+        email: false,
+        name: false,
+        subname: false,
+        dudas: false
+    })
+
+    const [submitted, setSubmitted] = useState(false)
+
+    const handleSubmit = (e) => {
         e.preventDefault()
-        const form = e.target
-        const elements = form.elements
+        setSubmitted(true)
 
-        const data = {}
-
-        for (const d of elements) {
-            if (!d.name) continue
-
-            data[d.name] = {
-                value: d.value,
-                type: d.type,
-                required: d.dataset.validar === 'true',
-                validate: null,
-                error: null
-            }
-        }
-        const [esValido, dataValidada] = validateData(data)
-        esValido
-            ? onSendForm(dataValidada)
-            : errorData(form, dataValidada)
-    }
-
-    function validateData(data) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-        for (const key in data) {
-            const campo = data[key]
-            campo.error = null
-
-            if (!campo.required) {
-                campo.validate = true
-                continue
-            }
-
-            if (campo.value.trim() === '') {
-                campo.validate = false
-                campo.error = 'required'
-                continue
-            }
-
-            if (campo.type === 'email') {
-                if (!emailRegex.test(campo.value.trim())) {
-                    campo.validate = false
-                    campo.error = 'email'
-                    continue
-                }
-            }
-
-            campo.validate = true
+        const newErrors = {
+            name: values.name.trim() === '',
+            subname: values.subname.trim() === '',
+            dudas: values.dudas.trim() === '',
+            email:
+                values.email.trim() === '' ||
+                !emailRegexp.test(values.email)
         }
 
-        const esValido = Object.values(data).every(campo => campo.validate === true)
-        return [esValido, data]
+        setError(newErrors)
+
+        const hasErrors = Object.values(newErrors).some(Boolean)
+        if (hasErrors) return
     }
 
-    const onSendForm = (data) => {
-        console.log('Datos Enviados = ', data)
+    const handleChange = (e) => {
+        const { name, value } = e.target
+
+        setValues(prev => ({
+            ...prev,
+            [name]: value
+        }))
+
+        if (!submitted) return
+
+        setError(prev => ({
+            ...prev,
+            [name]:
+                name === 'email'
+                    ? value.trim() === '' || !emailRegexp.test(value)
+                    : value.trim() === ''
+        }))
     }
-
-    const errorData = (form, data) => {
-
-        form.querySelectorAll('.errorText').forEach(e => e.remove())
-        form.querySelectorAll('input, textarea').forEach(el => {
-            el.classList.remove('inputError', 'inputSuccess')
-        })
-
-        for (const key in data) {
-            const campo = data[key]
-            const input = form.elements[key]
-            if (!input) continue
-
-            const container = input.parentElement
-
-
-            if (campo.validate) {
-                container.classList.add('inputSuccess')
-                continue
-            }
-
-            container.classList.add('inputError')
-
-            const error = document.createElement('span')
-            error.className = 'errorText'
-            error.textContent = getErrorMessage(campo)
-
-            container.appendChild(error)
-        }
-    }
-    const getErrorMessage = (campo) => {
-        switch (campo.error) {
-            case 'required':
-                return 'Este campo es obligatorio'
-            case 'email':
-                return 'El correo electrónico no es válido'
-            default:
-                return ''
-        }
-    }
-
 
     return (
         <main className="main_estrecho">
@@ -113,35 +67,117 @@ export function ContactPage() {
                     <h3>Ponte en contacto con nosotros</h3>
                 </div>
                 <section className={styles.formContact}>
-                    <form onSubmit={handleSendForm}>
+                    <form onSubmit={handleSubmit}>
 
                         <section className={styles.formLabels}>
-                            <div className={styles.inputFormContact}>
-                                <input name="name" placeholder="Nombre" type="text" data-validar="true" />
+                            <div>
+                                <div
+                                    className={`
+                        ${styles.inputFormContact}
+                        ${submitted && errors.name ? styles.errorContainer : ''}
+                        ${submitted && !errors.name && values.name.trim() !== '' ? styles.successContainer : ''}
+                    `}
+                                >
+                                    <input
+                                        name="name"
+                                        placeholder="Nombre"
+                                        type="text"
+                                        value={values.name}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
+                                {submitted && errors.name && (
+                                    <div className={styles.errorMessage}>
+                                        <p>Campo obligatorio</p>
+                                    </div>
+                                )}
                             </div>
-                            <div className={styles.inputFormContact}>
-                                <input name="subname" placeholder="Apellidos" type="text" data-validar="true" />
+                            <div>
+                                <div
+                                    className={`
+                        ${styles.inputFormContact}
+                        ${submitted && errors.subname ? styles.errorContainer : ''}
+                        ${submitted && !errors.subname && values.subname.trim() !== '' ? styles.successContainer : ''}
+                    `}
+                                >
+                                    <input
+                                        name="subname"
+                                        placeholder="Apellidos"
+                                        type="text"
+                                        value={values.subname}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
+                                {submitted && errors.subname && (
+                                    <div className={styles.errorMessage}>
+                                        <p>Campo obligatorio</p>
+                                    </div>
+                                )}
                             </div>
-                            <div className={styles.inputFormContact}>
-                                <input name="email" placeholder="Correo electrónico" type="email" data-validar="true" />
+                            <div>
+                                <div
+                                    className={`
+                        ${styles.inputFormContact}
+                        ${submitted && errors.email ? styles.errorContainer : ''}
+                        ${submitted && !errors.email && values.email.trim() !== '' ? styles.successContainer : ''}
+                    `}
+                                >
+                                    <input
+                                        name="email"
+                                        placeholder="Correo electrónico"
+                                        type="email"
+                                        value={values.email}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
+                                {submitted && errors.email && (
+                                    <div className={styles.errorMessage}>
+                                        <p>Campo vacío o email inválido</p>
+                                    </div>
+                                )}
                             </div>
 
                         </section>
                         <section>
-                            <div className={`${styles.inputFormContact} ${styles.textAreaFormContact}`}>
-                                <textarea name="dudas" placeholder="Cuentanos tus dudas" data-validar="true" />
+                            <div className={styles.sectionTextArea}>
+                                <div
+                                    className={`
+                        ${styles.inputFormContact}
+                        ${styles.textAreaFormContact}
+                        ${submitted && errors.dudas ? styles.errorContainer : ''}
+                        ${submitted && !errors.dudas && values.dudas.trim() !== '' ? styles.successContainer : ''}
+                    `}
+                                >
+                                    <textarea
+                                        name="dudas"
+                                        placeholder="Cuéntanos tus dudas"
+                                        value={values.dudas}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
+                                {submitted && errors.dudas && (
+                                    <div className={styles.errorMessage}>
+                                        <p>Campo obligatorio</p>
+                                    </div>
+                                )}
                             </div>
                         </section>
-                        <section>
-                            <p>{ }</p>
-                        </section>
+
                         <section>
                             <div className={styles.btnEnviar}>
-                                <button className="btn_info">Enviar</button>
+                                <button type="submit" className="btn_info">
+                                    Enviar
+                                </button>
                             </div>
                         </section>
+
                     </form>
                 </section>
+
             </div>
         </main>
     )

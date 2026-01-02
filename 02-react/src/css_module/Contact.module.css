@@ -25,7 +25,7 @@
         height: 100%;
         display: grid;
         grid-template-rows: auto 1fr auto;
-        gap: 3rem;
+        gap: 2rem;
     }
 }
 
@@ -45,6 +45,7 @@
     padding: 0.5rem;
     gap: 0.5rem;
     transition: border-color 0.2s ease;
+    height: 3rem;
 
     &:focus-within {
         border-color: var(--color-primary-hover);
@@ -80,6 +81,10 @@
     }
 }
 
+.sectionTextArea {
+    height: 100%;
+}
+
 .btnEnviar {
     display: flex;
     justify-content: center;
@@ -90,16 +95,19 @@
     }
 }
 
-.inputError {
-    border-color: #dc3545;
+.errorContainer {
+    border-color: #d40505
 }
 
-.inputSuccess {
-    border-color: #28a745;
+.successContainer {
+    border-color: #00cc00
 }
 
-.errorText {
-    color: #dc3545;
-    font-size: 0.8rem;
-    margin-top: 4px;
+.errorMessage {
+    margin-top: 10px;
+
+    &>p {
+        margin-left: 0.8rem;
+        color: #d40505;
+    }
 }
