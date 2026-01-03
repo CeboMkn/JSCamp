@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 export function useContactForm() {
-    const emailRegexp = new RegExp(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/);
+
+    const emailRegexp = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
 
     /* ESTADOS **********************************************************************/
 
@@ -14,7 +15,7 @@ export function useContactForm() {
     })
 
     /* ERRORES EN EL FORMULARIO */
-    const [errors, setError] = useState({
+    const [errors, setErrors] = useState({
         email: false,
         name: false,
         subname: false,
@@ -27,7 +28,7 @@ export function useContactForm() {
     /* ESTADO DEL ENVIO (ENVIAR, ENVIANDO O ENVIADO) */
     const [sendStatus, setSendStatus] = useState('enviar')
 
-    /* EL FORMULARIO HA HECHO SUBMIT Y SE HA ENVIADO CON ÉXITO */
+    /* MOSTRAR VALIDACIÓN SOLO SI HUBO SUBMIT Y AÚN NO SE ENVIÓ CORRECTAMENTE */
     const showValidation = submitted && sendStatus !== 'enviado'
 
     /* *****************************************************************************/
@@ -49,7 +50,7 @@ export function useContactForm() {
         const hasErrors = Object.values(newErrors).some(Boolean)
         if (hasErrors) {
             setSubmitted(true)
-            setError(newErrors)
+            setErrors(newErrors)
             return
         }
         sendData(values)
@@ -67,7 +68,7 @@ export function useContactForm() {
 
         if (!submitted) return
 
-        setError(prev => ({
+        setErrors(prev => ({
             ...prev,
             [name]:
                 name === 'email'
