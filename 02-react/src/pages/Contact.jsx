@@ -1,63 +1,16 @@
-import { useState } from "react"
+import { useContactForm } from "../hooks/useContactForm.jsx"
 import styles from "../css_module/Contact.module.css"
 
 export function ContactPage() {
 
-    const emailRegexp = new RegExp(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/);
-
-    const [values, setValues] = useState({
-        email: '',
-        name: '',
-        subname: '',
-        dudas: ''
-    })
-
-    const [errors, setError] = useState({
-        email: false,
-        name: false,
-        subname: false,
-        dudas: false
-    })
-
-    const [submitted, setSubmitted] = useState(false)
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        setSubmitted(true)
-
-        const newErrors = {
-            name: values.name.trim() === '',
-            subname: values.subname.trim() === '',
-            dudas: values.dudas.trim() === '',
-            email:
-                values.email.trim() === '' ||
-                !emailRegexp.test(values.email)
-        }
-
-        setError(newErrors)
-
-        const hasErrors = Object.values(newErrors).some(Boolean)
-        if (hasErrors) return
-    }
-
-    const handleChange = (e) => {
-        const { name, value } = e.target
-
-        setValues(prev => ({
-            ...prev,
-            [name]: value
-        }))
-
-        if (!submitted) return
-
-        setError(prev => ({
-            ...prev,
-            [name]:
-                name === 'email'
-                    ? value.trim() === '' || !emailRegexp.test(value)
-                    : value.trim() === ''
-        }))
-    }
+    const {
+        values,
+        errors,
+        sendStatus,
+        showValidation,
+        handleChange,
+        handleSubmit
+    } = useContactForm()
 
     return (
         <main className="main_estrecho">
@@ -73,11 +26,9 @@ export function ContactPage() {
                             <div>
                                 <div
                                     className={`
-                        ${styles.inputFormContact}
-                        ${submitted && errors.name ? styles.errorContainer : ''}
-                        ${submitted && !errors.name && values.name.trim() !== '' ? styles.successContainer : ''}
-                    `}
-                                >
+                                    ${styles.inputFormContact}
+                                    ${showValidation && errors.name ? styles.errorContainer : ''}
+                                    ${showValidation && !errors.name && values.name.trim() !== '' ? styles.successContainer : ''}`}>
                                     <input
                                         name="name"
                                         placeholder="Nombre"
@@ -87,7 +38,7 @@ export function ContactPage() {
                                     />
                                 </div>
 
-                                {submitted && errors.name && (
+                                {showValidation && errors.name && (
                                     <div className={styles.errorMessage}>
                                         <p>Campo obligatorio</p>
                                     </div>
@@ -96,11 +47,9 @@ export function ContactPage() {
                             <div>
                                 <div
                                     className={`
-                        ${styles.inputFormContact}
-                        ${submitted && errors.subname ? styles.errorContainer : ''}
-                        ${submitted && !errors.subname && values.subname.trim() !== '' ? styles.successContainer : ''}
-                    `}
-                                >
+                                    ${styles.inputFormContact}
+                                    ${showValidation && errors.subname ? styles.errorContainer : ''}
+                                    ${showValidation && !errors.subname && values.subname.trim() !== '' ? styles.successContainer : ''}`}>
                                     <input
                                         name="subname"
                                         placeholder="Apellidos"
@@ -110,7 +59,7 @@ export function ContactPage() {
                                     />
                                 </div>
 
-                                {submitted && errors.subname && (
+                                {showValidation && errors.subname && (
                                     <div className={styles.errorMessage}>
                                         <p>Campo obligatorio</p>
                                     </div>
@@ -119,11 +68,9 @@ export function ContactPage() {
                             <div>
                                 <div
                                     className={`
-                        ${styles.inputFormContact}
-                        ${submitted && errors.email ? styles.errorContainer : ''}
-                        ${submitted && !errors.email && values.email.trim() !== '' ? styles.successContainer : ''}
-                    `}
-                                >
+                                    ${styles.inputFormContact}
+                                    ${showValidation && errors.email ? styles.errorContainer : ''}
+                                    ${showValidation && !errors.email && values.email.trim() !== '' ? styles.successContainer : ''}`}>
                                     <input
                                         name="email"
                                         placeholder="Correo electrónico"
@@ -133,7 +80,7 @@ export function ContactPage() {
                                     />
                                 </div>
 
-                                {submitted && errors.email && (
+                                {showValidation && errors.email && (
                                     <div className={styles.errorMessage}>
                                         <p>Campo vacío o email inválido</p>
                                     </div>
@@ -145,12 +92,10 @@ export function ContactPage() {
                             <div className={styles.sectionTextArea}>
                                 <div
                                     className={`
-                        ${styles.inputFormContact}
-                        ${styles.textAreaFormContact}
-                        ${submitted && errors.dudas ? styles.errorContainer : ''}
-                        ${submitted && !errors.dudas && values.dudas.trim() !== '' ? styles.successContainer : ''}
-                    `}
-                                >
+                                    ${styles.inputFormContact}
+                                    ${styles.textAreaFormContact}
+                                    ${showValidation && errors.dudas ? styles.errorContainer : ''}
+                                    ${showValidation && !errors.dudas && values.dudas.trim() !== '' ? styles.successContainer : ''}`}>
                                     <textarea
                                         name="dudas"
                                         placeholder="Cuéntanos tus dudas"
@@ -159,7 +104,7 @@ export function ContactPage() {
                                     />
                                 </div>
 
-                                {submitted && errors.dudas && (
+                                {showValidation && errors.dudas && (
                                     <div className={styles.errorMessage}>
                                         <p>Campo obligatorio</p>
                                     </div>
@@ -169,8 +114,11 @@ export function ContactPage() {
 
                         <section>
                             <div className={styles.btnEnviar}>
-                                <button type="submit" className="btn_info">
-                                    Enviar
+                                <button type="submit" className="btn_info" disabled={sendStatus === 'enviando' || sendStatus === 'enviado'} >
+                                    {sendStatus === 'enviar' && 'Enviar'}
+                                    {sendStatus === 'enviando' && 'Enviando...'}
+                                    {sendStatus === 'error' && 'Error al enviar, pruebe más tarde'}
+                                    {sendStatus === 'enviado' && 'Enviado :)'}
                                 </button>
                             </div>
                         </section>
