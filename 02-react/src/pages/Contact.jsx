@@ -1,4 +1,4 @@
-import { useContactForm } from "../hooks/useContactForm.jsx"
+import { useContactForm } from "../hooks/contact/useContactForm.jsx"
 import styles from "../css_module/Contact.module.css"
 
 export function ContactPage() {

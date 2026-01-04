@@ -1,6 +1,6 @@
 import { JobCard } from "./JobCard";
 
-export function JobListing({ jobsData }) {
+export function JobListing({ jobsData, total }) {
     return (
         <section className="sect_res_busqueda btn_active_contain">
             <h2>Resultados de búsqueda</h2>
@@ -11,8 +11,8 @@ export function JobListing({ jobsData }) {
                 <select name="num_result" id="num_result"></select>
             </div> */}
             <div id="jobs-listings" className="env_result">
-                {jobsData.length === 0 ? (
-                    <p>No hay trabajos por el momento</p>
+                {total === 0 ? (
+                    <p className="notResults">No se han encontrado empleos que coincidan con los criterios de búsqueda</p>
                 ) : (
                     jobsData.map(job => (
                         <JobCard key={job.id} job={job} />

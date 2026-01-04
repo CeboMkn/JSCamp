@@ -1,4 +1,4 @@
-import { useRouter } from '../hooks/useRouter'
+import { useRouter } from '../hooks/router/useRouter'
 
 import background from '../assets/img/background.webp'
 

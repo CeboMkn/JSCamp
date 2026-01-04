@@ -1,7 +1,7 @@
 import { useId } from "react"
-import { useSearchForm } from "../hooks/useSearchForm"
+import { useSearchForm } from "../hooks/search/useSearchForm"
 
-export function SerarchFormSection({ onFilters, filters }) {
+export function SearchFormSection({ onFilters, filters }) {
 
     const idText = useId()
     const idTecno = useId()

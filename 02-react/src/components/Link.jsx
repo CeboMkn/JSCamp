@@ -1,4 +1,4 @@
-import { useRouter } from "../hooks/useRouter"
+import { useRouter } from "../hooks/router/useRouter"
 
 export function Link({ href, children, ...restProps }) {
 

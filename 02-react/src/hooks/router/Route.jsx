@@ -1,5 +1,5 @@
 import { useRouter } from "./useRouter.jsx";
-import {NotFoundPage} from "../pages/404.jsx"
+import { NotFoundPage } from "../../pages/404.jsx"
 
 export function Route({ path, component: Component }) {
     const { currentPath } = useRouter()
