@@ -1,5 +1,5 @@
 import { useId } from "react"
-import { useSearchForm } from "../hooks/search/useSearchForm"
+import { useInfoFilters } from "../hooks/search/useInfoFilters.jsx"
 
 export function SearchFormSection({ onFilters, filters }) {
 
@@ -9,14 +9,14 @@ export function SearchFormSection({ onFilters, filters }) {
     const idTipo = useId()
     const idNivel = useId()
 
-    const { handleFilters, handleDellFilters } = useSearchForm({ idText, idTecno, idUbi, idTipo, idNivel, onFilters })
+    const { handleInfoForm, handleDellFilters } = useInfoFilters({ idText, idTecno, idUbi, idTipo, idNivel, onFilters })
 
     return (
         <section className="sec_main">
             <h1>Encuentra tu próximo trabajo</h1>
             <p>Explora miles de oportunidades en el sector tecnológico</p>
 
-            <form onChange={handleFilters} className="form_princi w-100" action="" role="search">
+            <form onChange={handleInfoForm} className="form_princi w-100" action="" role="search">
                 <div>
                     <svg
                         width="24"
@@ -36,7 +36,7 @@ export function SearchFormSection({ onFilters, filters }) {
 
                     <input
                         value={filters.search || ''}
-                        onChange={handleFilters}
+                        onChange={handleInfoForm}
                         name={idText}
                         type="text"
                         placeholder="Buscar trabajos, empresas o habilidades"

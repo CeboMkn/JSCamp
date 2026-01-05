@@ -15,7 +15,7 @@ export function SearchPage() {
     currentPage,
     setCurrentPage,
     jobs,
-    total,
+    totalJobs,
     totalPages,
     handleFilters
   } = useFilters(RESULTS_PER_PAGE)
@@ -26,7 +26,7 @@ export function SearchPage() {
 
         <SearchFormSection onFilters={handleFilters} filters={filters} />
 
-        {loading ? <p>Cargando Empleos...</p> : <JobListing jobsData={jobs} total={total} />}
+        {loading ? <p>Cargando Empleos...</p> : <JobListing jobsData={jobs} totalJobs={totalJobs} />}
 
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
 

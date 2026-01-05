@@ -1,5 +1,5 @@
-export const useSearchForm = ({ idText, idTecno, idUbi, idTipo, idNivel, onFilters }) => {
-    const handleFilters = (e) => {
+export const useInfoFilters = ({ idText, idTecno, idUbi, idTipo, idNivel, onFilters }) => {
+    const handleInfoForm = (e) => {
 
         const formData = new FormData(e.currentTarget)
 
@@ -25,5 +25,5 @@ export const useSearchForm = ({ idText, idTecno, idUbi, idTipo, idNivel, onFilte
         onFilters(filtersAdd)
     }
 
-    return { handleFilters, handleDellFilters }
+    return { handleInfoForm, handleDellFilters }
 }
