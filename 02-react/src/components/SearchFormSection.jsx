@@ -11,6 +11,10 @@ export function SearchFormSection({ onFilters, filters }) {
 
     const { handleInfoForm, handleDellFilters } = useInfoFilters({ idText, idTecno, idUbi, idTipo, idNivel, onFilters })
 
+    const filtersEmpty = Object.values(filters).every(filter =>
+        filter === '' || filter === null || filter === undefined
+    )
+
     return (
         <section className="sec_main">
             <h1>Encuentra tu próximo trabajo</h1>
@@ -91,26 +95,27 @@ export function SearchFormSection({ onFilters, filters }) {
                             <option value="lead">Tech Lead</option>
                         </select>
                     </div>
-
-                    <div>
-                        <button type="button" onClick={handleDellFilters} className="btn_del_filters">
-                            <svg
-                                width="15"
-                                height="15"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="icon icon-tabler icons-tabler-outline icon-tabler-x"
-                            >
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M18 6l-12 12" />
-                                <path d="M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
+                    {!filtersEmpty && (
+                        <div>
+                            <button type="button" onClick={handleDellFilters} className="btn_del_filters">
+                                <svg
+                                    width="15"
+                                    height="15"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="icon icon-tabler icons-tabler-outline icon-tabler-x"
+                                >
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M18 6l-12 12" />
+                                    <path d="M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    )}
                 </div>
             </form>
         </section>
