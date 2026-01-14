@@ -3,8 +3,11 @@ import { useEffect } from "react"
 export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters, RESULTS_PER_PAGE) {
     useEffect(() => {
         async function fetchJobs() {
-            try {
+            /* const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)) */
 
+            try {
+                setLoading(true)
+                /* await sleep(5000) */
                 const params = new URLSearchParams()
                 if (filters.search) params.append('text', filters.search)
                 if (filters.tecnologia) params.append('technology', filters.tecnologia)
@@ -17,7 +20,7 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
 
                 const queryParams = params.toString()
 
-                setLoading(true)
+
                 const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`)
                 const json = await response.json()
 

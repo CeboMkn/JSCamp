@@ -3,7 +3,6 @@ import { JobCard } from "./JobCard";
 export function JobListing({ jobsData, totalJobs }) {
     return (
         <section className="sect_res_busqueda btn_active_contain">
-            <h2>Resultados de búsqueda</h2>
             {/* <div className="select_person">
                 <label className="label_num_result" htmlFor="num_result">
                     Número de resultados

@@ -4,10 +4,11 @@ import { Pagination } from '../components/Pagination.jsx';
 import { SearchFormSection } from '../components/SearchFormSection.jsx';
 import { MostrandoNumRresults } from '../components/MostrandoNumResults.jsx';
 import { useFilters } from '../hooks/search/useFilters.jsx';
+import { Spinner } from '../components/Spinner.jsx';
 
 export function SearchPage() {
 
-  const RESULTS_PER_PAGE = 4
+  const RESULTS_PER_PAGE = 3
 
   const {
     loading,
@@ -25,8 +26,9 @@ export function SearchPage() {
       <div>
 
         <SearchFormSection onFilters={handleFilters} filters={filters} />
+        <h2>Resultados de búsqueda</h2>
 
-        {loading ? <p>Cargando Empleos...</p> : <JobListing jobsData={jobs} totalJobs={totalJobs} />}
+        {loading ? <Spinner /> : <JobListing jobsData={jobs} totalJobs={totalJobs} />}
 
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
 
