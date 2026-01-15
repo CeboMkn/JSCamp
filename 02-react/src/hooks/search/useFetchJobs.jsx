@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { saveFilters } from "./saveFiltersLocalStorage"
 
 export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters, RESULTS_PER_PAGE) {
     useEffect(() => {
@@ -7,7 +8,7 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
 
             try {
                 setLoading(true)
-                /* await sleep(5000) */
+                /* await sleep(500) */
                 const params = new URLSearchParams()
                 if (filters.search) params.append('text', filters.search)
                 if (filters.tecnologia) params.append('technology', filters.tecnologia)
@@ -19,7 +20,8 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
                 params.append('offset', offset)
 
                 const queryParams = params.toString()
-
+                const name = 'jobsFilters'
+                saveFilters(name, queryParams)
 
                 const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`)
                 const json = await response.json()

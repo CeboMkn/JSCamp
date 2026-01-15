@@ -522,6 +522,10 @@ h1+p {
     margin-bottom: 1rem;
 }
 
+.loadJobsSection {
+    position: relative;
+}
+
 .env_result {
     border: 1px solid var(--color-border);
     border-radius: 10px;
