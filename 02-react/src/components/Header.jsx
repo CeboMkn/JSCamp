@@ -21,7 +21,7 @@ export function Header() {
         <nav className="nav">
           <Link href="/">Inicio</Link>
           <Link href="/search">Empleos</Link>
-          <Link href="/empresas">Empresas</Link>
+          {/* <Link href="/empresas">Empresas</Link> */}
           <Link href="/contact">Contacto</Link>
         </nav>
       </div>
