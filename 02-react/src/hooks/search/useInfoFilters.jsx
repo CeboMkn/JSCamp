@@ -1,17 +1,12 @@
-export const useInfoFilters = ({ idText, idTecno, idUbi, idTipo, idNivel, onFilters }) => {
+export const useInfoFilters = ({ onFilters }) => {
     const handleInfoForm = (e) => {
 
-        const formData = new FormData(e.currentTarget)
+        const { name, value } = e.target
 
-        const filtersAdd = {
-            search: formData.get(idText),
-            tecnologia: formData.get(idTecno),
-            ubicacion: formData.get(idUbi),
-            tipo: formData.get(idTipo),
-            nivel: formData.get(idNivel)
-        }
-
-        onFilters(filtersAdd)
+        onFilters(prev => ({
+            ...prev,
+            [name]: value
+        }))
     }
 
     const handleDellFilters = () => {

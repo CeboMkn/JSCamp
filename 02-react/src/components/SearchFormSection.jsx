@@ -1,15 +1,8 @@
-import { useId } from "react"
 import { useInfoFilters } from "../hooks/search/useInfoFilters.jsx"
 
 export function SearchFormSection({ onFilters, filters }) {
 
-    const idText = useId()
-    const idTecno = useId()
-    const idUbi = useId()
-    const idTipo = useId()
-    const idNivel = useId()
-
-    const { handleInfoForm, handleDellFilters } = useInfoFilters({ idText, idTecno, idUbi, idTipo, idNivel, onFilters })
+    const { handleInfoForm, handleDellFilters } = useInfoFilters({ onFilters })
 
     const filtersEmpty = Object.values(filters).every(filter =>
         filter === '' || filter === null || filter === undefined
@@ -20,7 +13,7 @@ export function SearchFormSection({ onFilters, filters }) {
             <h1>Encuentra tu próximo trabajo</h1>
             <p>Explora miles de oportunidades en el sector tecnológico</p>
 
-            <form onChange={handleInfoForm} className="form_princi w-100" action="" role="search">
+            <form className="form_princi w-100" action="" role="search">
                 <div>
                     <svg
                         width="24"
@@ -41,7 +34,7 @@ export function SearchFormSection({ onFilters, filters }) {
                     <input
                         value={filters.search || ''}
                         onChange={handleInfoForm}
-                        name={idText}
+                        name="search"
                         type="text"
                         placeholder="Buscar trabajos, empresas o habilidades"
                     />
@@ -49,7 +42,7 @@ export function SearchFormSection({ onFilters, filters }) {
 
                 <div className="section_filter">
                     <div>
-                        <select name={idTecno} value={filters.tecnologia || ''}>
+                        <select name="tecnologia" onChange={handleInfoForm} value={filters.tecnologia || ''}>
                             <option value="" disabled hidden>
                                 Tecnología
                             </option>
@@ -66,7 +59,7 @@ export function SearchFormSection({ onFilters, filters }) {
                             <option value="gcp">GCP</option>
                         </select>
 
-                        <select name={idUbi} value={filters.ubicacion || ''}>
+                        <select name="ubicacion" onChange={handleInfoForm} value={filters.ubicacion || ''}>
                             <option value="" disabled hidden>
                                 Ubicación
                             </option>
@@ -75,7 +68,7 @@ export function SearchFormSection({ onFilters, filters }) {
                             <option value="guadalajara">Guadalajara</option>
                         </select>
 
-                        <select name={idTipo} value={filters.tipo || ''}>
+                        <select name="tipo" onChange={handleInfoForm} value={filters.tipo || ''}>
                             <option value="" disabled hidden>
                                 Tipo de contrato
                             </option>
@@ -85,7 +78,7 @@ export function SearchFormSection({ onFilters, filters }) {
                             <option value="practicas">Prácticas</option>
                         </select>
 
-                        <select name={idNivel} value={filters.nivel || ''}>
+                        <select name="nivel" onChange={handleInfoForm} value={filters.nivel || ''}>
                             <option value="" disabled hidden>
                                 Nivel de experiencia
                             </option>
