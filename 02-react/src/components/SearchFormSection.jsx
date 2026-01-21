@@ -2,7 +2,7 @@ import { useInfoFilters } from "../hooks/search/useInfoFilters.jsx"
 
 export function SearchFormSection({ onFilters, filters }) {
 
-    const { handleInfoForm, handleDellFilters } = useInfoFilters({ onFilters })
+    const { handleInfoForm, handleDellFilters, searchUI } = useInfoFilters({ onFilters, filters })
 
     const filtersEmpty = Object.values(filters).every(filter =>
         filter === '' || filter === null || filter === undefined
@@ -32,7 +32,7 @@ export function SearchFormSection({ onFilters, filters }) {
                     </svg>
 
                     <input
-                        value={filters.search || ''}
+                        value={searchUI}
                         onChange={handleInfoForm}
                         name="search"
                         type="text"
