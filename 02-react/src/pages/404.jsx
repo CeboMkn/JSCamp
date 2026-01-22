@@ -1,6 +1,6 @@
 import { errors } from "../helper/errorMesagesPage.js"
 
-export function NotFoundPage({ codeError }) {
+export function errorPage({ codeError }) {
     const { message, description } = errors[codeError]
     return (
         <main>

@@ -1,5 +1,4 @@
 import { useRouter } from "./useRouter.jsx"
-import { NotFoundPage } from '../../pages/404.jsx'
 
 const routes = [
     "/",
@@ -12,7 +11,7 @@ export function Route({ path, component: Component, codeError }) {
     const isValidRoute = routes.includes(currentPath)
 
     if (path === "*" && !isValidRoute) {
-        return <NotFoundPage codeError={codeError} />
+        return <Component codeError={codeError} />
     }
 
     if (currentPath !== path) return null
