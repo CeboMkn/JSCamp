@@ -18,8 +18,18 @@ export const useFilters = (RESULTS_PER_PAGE) => {
                 nivel: ''
             }
         }
-        const params = new URLSearchParams(saved)
 
+        const readUrl = new URLSearchParams(window.location.search)
+        if (readUrl.size > 2) {
+            return {
+                search: readUrl.get('text') || '',
+                tecnologia: readUrl.get('technology') || '',
+                ubicacion: readUrl.get('type') || '',
+                nivel: readUrl.get('level') || ''
+            }
+        }
+
+        const params = new URLSearchParams(saved)
         return {
             search: params.get('text') || '',
             tecnologia: params.get('technology') || '',

@@ -19,8 +19,11 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
                 params.append('limit', RESULTS_PER_PAGE)
                 params.append('offset', offset)
 
+
+
                 const queryParams = params.toString()
                 const name = 'jobsFilters'
+                window.history.pushState({}, '', `${window.location.pathname}?${queryParams}`)
                 saveFilters(name, queryParams)
 
                 const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`)
