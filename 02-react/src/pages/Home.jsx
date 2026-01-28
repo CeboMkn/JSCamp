@@ -1,5 +1,4 @@
 import { useRouter } from '../hooks/router/useRouter'
-
 import background from '../assets/img/background.webp'
 
 export function HomePage() {
@@ -9,9 +8,10 @@ export function HomePage() {
         e.preventDefault()
         const formData = new FormData(e.target)
         const searchText = formData.get('search')
+        localStorage.removeItem('jobsFilters')
 
         const url = searchText
-            ? `search?text=${encodeURIComponent(searchText)}`
+            ? `/search?text=${searchText}&limit=4&offset=0`
             : `/search`
 
         navigateTo(url)

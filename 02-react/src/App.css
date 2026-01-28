@@ -174,7 +174,12 @@ h1+p {
         border: 2px solid var(--color-border);
         box-shadow: 0 10px 15px -3px var(--color-shadow);
         padding: 0.5rem;
+        transition: border-color 0.2s ease;
         gap: 0.5rem;
+
+        &:focus-within {
+            border-color: var(--color-primary-hover);
+        }
 
     }
 

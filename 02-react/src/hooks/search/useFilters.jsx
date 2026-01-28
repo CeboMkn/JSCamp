@@ -9,16 +9,7 @@ export const useFilters = (RESULTS_PER_PAGE) => {
     const [loading, setLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
     const [filters, setToFilters] = useState(() => {
-        const saved = localStorage.getItem('jobsFilters')
-        if (!saved) {
-            return {
-                search: '',
-                tecnologia: '',
-                ubicacion: '',
-                nivel: ''
-            }
-        }
-
+        
         const readUrl = new URLSearchParams(window.location.search)
         if (readUrl.size > 2) {
             return {
@@ -26,6 +17,16 @@ export const useFilters = (RESULTS_PER_PAGE) => {
                 tecnologia: readUrl.get('technology') || '',
                 ubicacion: readUrl.get('type') || '',
                 nivel: readUrl.get('level') || ''
+            }
+        }
+
+        const saved = localStorage.getItem('jobsFilters')
+        if (!saved) {
+            return {
+                search: '',
+                tecnologia: '',
+                ubicacion: '',
+                nivel: ''
             }
         }
 
