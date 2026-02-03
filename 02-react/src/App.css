@@ -308,6 +308,10 @@ h1+p {
         font-weight: 500;
         padding: 5px;
 
+        &.navActive {
+            color: var(--color-primary-light);
+        }
+
         &:hover,
         &:focus {
             color: var(--color-primary-light);

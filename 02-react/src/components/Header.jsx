@@ -1,6 +1,21 @@
+import { useEffect, useState } from "react";
 import { Link } from "./link";
 
 export function Header() {
+
+  const [urlActual, setUrlActual] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handler = () => setUrlActual(window.location.pathname);
+
+    window.addEventListener('popstate', handler);
+
+    return () => window.removeEventListener('popstate', handler);
+
+  }, []);
+
+
+
   return (
     <header className="header">
 
@@ -19,10 +34,17 @@ export function Header() {
             </svg>DevJobs</h2>
         </Link>
         <nav className="nav">
-          <Link href="/">Inicio</Link>
-          <Link href="/search">Empleos</Link>
-          {/* <Link href="/empresas">Empresas</Link> */}
-          <Link href="/contact">Contacto</Link>
+          <Link href="/" className={urlActual === "/" ? "navActive" : ""}>
+            Inicio
+          </Link>
+
+          <Link href="/search" className={urlActual === "/search" ? "navActive" : ""}>
+            Empleos
+          </Link>
+
+          <Link href="/contact" className={urlActual === "/contact" ? "navActive" : ""}>
+            Contacto
+          </Link>
         </nav>
       </div>
 
@@ -30,7 +52,7 @@ export function Header() {
       <div>
         <Link className="a_head" href="/subir-cv">Subir CV</Link>
         <img
-          src="/luffy_profile.jpg"
+          src="src/assets/img/luffy_profile.jpg"
           alt="Avatar del usuario"
           width="50"
           height="50"
