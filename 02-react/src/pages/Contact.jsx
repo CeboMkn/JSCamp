@@ -1,7 +1,10 @@
 import { useContactForm } from "../hooks/contact/useContactForm.jsx"
 import styles from "../css_module/Contact.module.css"
+import { useDocumentTitle } from "../hooks/global/useDocumentTitle.js"
 
 export function ContactPage() {
+
+    useDocumentTitle('Contacto')
 
     const {
         values,

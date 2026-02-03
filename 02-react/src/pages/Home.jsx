@@ -1,7 +1,9 @@
 import { useRouter } from '../hooks/router/useRouter'
 import background from '../assets/img/background.webp'
+import { useDocumentTitle } from '../hooks/global/useDocumentTitle'
 
 export function HomePage() {
+    useDocumentTitle('Inicio')
     const { navigateTo } = useRouter()
 
     const handleSearch = (e) => {

@@ -1,7 +1,10 @@
 import { errors } from "../helper/errorMesagesPage.js"
+import { useDocumentTitle } from "../hooks/global/useDocumentTitle.js"
 
-export function errorPage({ codeError }) {
-    const { message, description } = errors[codeError]
+export function ErrorPage({ codeError }) {
+
+    const { code, message, description } = errors[codeError]
+    useDocumentTitle(`Error ${code}`)
     return (
         <main>
             <div className="containerNotFound">

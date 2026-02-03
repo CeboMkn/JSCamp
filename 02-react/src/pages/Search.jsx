@@ -4,8 +4,11 @@ import { Pagination } from '../components/Pagination.jsx';
 import { SearchFormSection } from '../components/SearchFormSection.jsx';
 import { MostrandoNumRresults } from '../components/MostrandoNumResults.jsx';
 import { useFilters } from '../hooks/search/useFilters.jsx';
+import { useDocumentTitle } from '../hooks/global/useDocumentTitle.js';
 
 export function SearchPage() {
+
+  useDocumentTitle('Buscador')
 
   const RESULTS_PER_PAGE = 4
 
