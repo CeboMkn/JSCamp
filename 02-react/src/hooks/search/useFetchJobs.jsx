@@ -1,13 +1,14 @@
 import { useEffect } from "react"
-import { saveFilters } from "./saveFiltersLocalStorage"
+import { saveFilters } from "./saveFiltersLocalStorage.jsx"
 
 export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters, RESULTS_PER_PAGE) {
+
     useEffect(() => {
         async function fetchJobs() {
             /* const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)) */
-
             try {
                 setLoading(true)
+
                 /* await sleep(500) */
                 const params = new URLSearchParams()
                 if (filters.search) params.append('text', filters.search)
@@ -27,6 +28,11 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
                 saveFilters(name, queryParams)
 
                 const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`)
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`)
+                }
+
                 const json = await response.json()
 
                 setJobs(json.data)
@@ -34,7 +40,7 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
 
             } catch (error) {
 
-                console.error('Error fetching jobs:', error)
+                console.log('Error al pedir los trabajos')
 
             } finally {
 

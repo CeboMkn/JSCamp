@@ -8,7 +8,6 @@ import { SearchPage } from './pages/Search.jsx';
 import { ContactPage } from './pages/Contact.jsx';
 import { errorPage } from './pages/404.jsx'
 
-
 export function App() {
 
   return (
