@@ -3,7 +3,7 @@ import background from '../assets/img/background.webp'
 import { useDocumentTitle } from '../hooks/global/useDocumentTitle'
 
 export function HomePage() {
-    useDocumentTitle('Inicio')
+    useDocumentTitle('DevJobs | Bienvenido :)')
     const { navigateTo } = useRouter()
 
     const handleSearch = (e) => {

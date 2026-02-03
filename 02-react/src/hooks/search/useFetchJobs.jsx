@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from "react";
 import { saveFilters } from "./saveFiltersLocalStorage.jsx"
 
 export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters, RESULTS_PER_PAGE) {
@@ -19,8 +19,6 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
                 const offset = (currentPage - 1) * RESULTS_PER_PAGE
                 params.append('limit', RESULTS_PER_PAGE)
                 params.append('offset', offset)
-
-
 
                 const queryParams = params.toString()
                 const name = 'jobsFilters'

@@ -18,7 +18,7 @@ export function SearchPage() {
     currentPage,
     setCurrentPage,
     jobs,
-    totalJobs,
+    total,
     totalPages,
     handleFilters
   } = useFilters(RESULTS_PER_PAGE)
@@ -29,11 +29,12 @@ export function SearchPage() {
 
         <SearchFormSection onFilters={handleFilters} filters={filters} />
 
-        <JobListing load={loading} jobsData={jobs} totalJobs={totalJobs} />
+        <JobListing load={loading} jobsData={jobs} totalJobs={total} />
 
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-
-        <MostrandoNumRresults currentPage={currentPage} results={RESULTS_PER_PAGE} jobs={jobs} />
+        {!loading && (
+          <MostrandoNumRresults currentPage={currentPage} results={RESULTS_PER_PAGE} jobs={total} />
+        )}
 
       </div>
     </main>

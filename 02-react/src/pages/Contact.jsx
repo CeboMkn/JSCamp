@@ -4,7 +4,7 @@ import { useDocumentTitle } from "../hooks/global/useDocumentTitle.js"
 
 export function ContactPage() {
 
-    useDocumentTitle('Contacto')
+    useDocumentTitle('Contacta con nosotros')
 
     const {
         values,
