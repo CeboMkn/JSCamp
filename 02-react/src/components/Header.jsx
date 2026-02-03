@@ -1,20 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCurrentPath } from "../hooks/global/useCurrentPath";
 import { Link } from "./link";
 
 export function Header() {
 
-  const [urlActual, setUrlActual] = useState(window.location.pathname);
-
-  useEffect(() => {
-    const handler = () => setUrlActual(window.location.pathname);
-
-    window.addEventListener('popstate', handler);
-
-    return () => window.removeEventListener('popstate', handler);
-
-  }, []);
-
-
+  const pathActual = useCurrentPath()
 
   return (
     <header className="header">
@@ -34,20 +23,19 @@ export function Header() {
             </svg>DevJobs</h2>
         </Link>
         <nav className="nav">
-          <Link href="/" className={urlActual === "/" ? "navActive" : ""}>
+          <Link href="/" className={pathActual === "/" ? "navActive" : ""}>
             Inicio
           </Link>
 
-          <Link href="/search" className={urlActual === "/search" ? "navActive" : ""}>
+          <Link href="/search" className={pathActual === "/search" ? "navActive" : ""}>
             Empleos
           </Link>
 
-          <Link href="/contact" className={urlActual === "/contact" ? "navActive" : ""}>
+          <Link href="/contact" className={pathActual === "/contact" ? "navActive" : ""}>
             Contacto
           </Link>
         </nav>
       </div>
-
 
       <div>
         <Link className="a_head" href="/subir-cv">Subir CV</Link>
