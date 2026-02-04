@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDocumentTitle } from "../global/useDocumentTitle.js";
 
 export function useContactForm() {
 
@@ -27,6 +28,15 @@ export function useContactForm() {
 
     /* ESTADO DEL ENVIO (ENVIAR, ENVIANDO O ENVIADO) */
     const [sendStatus, setSendStatus] = useState('enviar')
+
+    /* SEGUN ESTADO CAMBIA EL TITLE */
+    const titleByStatus = {
+        enviando: 'Enviando mensaje…',
+        enviado: 'Gracias por su mensaje :)',
+        error: 'Error al enviar'
+    }
+
+    useDocumentTitle(titleByStatus[sendStatus] ?? 'Contacta con nosotros')
 
     /* MOSTRAR VALIDACIÓN SOLO SI HUBO SUBMIT Y AÚN NO SE ENVIÓ CORRECTAMENTE */
     const showValidation = submitted && sendStatus !== 'enviado'
