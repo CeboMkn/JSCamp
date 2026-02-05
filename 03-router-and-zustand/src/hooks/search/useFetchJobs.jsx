@@ -9,7 +9,7 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
             try {
                 setLoading(true)
 
-                /* await sleep(500) */
+                /* await sleep(5000000) */
                 const params = new URLSearchParams()
                 if (filters.search) params.append('text', filters.search)
                 if (filters.tecnologia) params.append('technology', filters.tecnologia)

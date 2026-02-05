@@ -13,7 +13,7 @@ export function JobListing({ load, jobsData, totalJobs }) {
             </div> */}
             <div className="loadJobsSection">
                 {load && (
-                    <Spinner />
+                    <Spinner position={false}/>
                 )}
                 <div id="jobs-listings" className="env_result">
                     {totalJobs === 0 ? (

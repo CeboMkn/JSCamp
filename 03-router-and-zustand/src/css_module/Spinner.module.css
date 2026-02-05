@@ -1,4 +1,7 @@
 .env_spinner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     width: 100%;
     height: 100%;
     display: flex;
@@ -8,6 +11,19 @@
     backdrop-filter: blur(1px);
     background-color: #0000001a;
 
+}
+
+.env_spinnerP {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(1px);
+    background-color: #0000001a;
 }
 
 .spinner {

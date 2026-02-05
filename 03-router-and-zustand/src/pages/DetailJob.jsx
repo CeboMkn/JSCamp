@@ -16,33 +16,48 @@ export function DetailJob() {
         console.log('haciendo peticion')
         setLoading(true)
 
-        const timeoutId = setTimeout(() => {
-            fetch(`https://jscamp-api.vercel.app/api/jobs/${jobId}`)
-                .then((res) => {
-                    if (!res.ok) throw new Error('Job not found')
-                    return res.json()
-                })
-                .then(json => {
-                    setJob(json)
-                })
-                .catch(err => {
-                    setError(err.message)
-                })
-                .finally(() => {
-                    setLoading(false)
-                })
-        }, 100000) // ⏱️ espera de 2 segundos
+
+        fetch(`https://jscamp-api.vercel.app/api/jobs/${jobId}`)
+            .then((res) => {
+                if (!res.ok) throw new Error('Job not found')
+                return res.json()
+            })
+            .then(json => {
+                setJob(json)
+            })
+            .catch(err => {
+                setError(err.message)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
 
         return () => clearTimeout(timeoutId)
     }, [jobId])
 
     if (loading) {
-        return <Spinner />
+        return <Spinner position />
     }
 
     if (!job) {
-        return <p>No hay trabajo</p>
+        return (
+            <div className="containerNotFound">
+                <h2>No se ha encontrado el trabajo</h2>
+            </div>
+        )
     }
+
+    const responsibilities = job.content.responsibilities
+        .split('\n')
+        .map(item => item.replace(/^- /, '').trim())
+        .filter(Boolean)
+
+    const requirements = job.content.requirements
+        .split('\n')
+        .map(item => item.replace(/^- /, '').trim())
+        .filter(Boolean)
+
+
 
     return (
         <>
@@ -57,8 +72,8 @@ export function DetailJob() {
             <main className="main_estrecho">
                 <div className={styles.contain_title_oferta}>
                     <section>
-                        <h1>Ingeniero de Software Senior</h1>
-                        <p>Tech Solutions Inc. • Remoto</p>
+                        <h1>{job.titulo}</h1>
+                        <p>{job.empresa} • {job.ubicacion}</p>
                     </section>
                     <div>
                         <button type="button" className="btn_info btn_active">
@@ -71,25 +86,15 @@ export function DetailJob() {
                     <article>
                         <h2>Descripción del puesto</h2>
                         <p>
-                            Tech Solutions Inc. está buscando un Ingeniero de Software Senior altamente motivado y experimentado
-                            para unirse a nuestro equipo remoto. El candidato ideal tendrá una sólida formación en desarrollo de
-                            software, con experiencia en el diseño, desarrollo e implementación de soluciones de software
-                            escalables y de alto rendimiento. Como Ingeniero de Software Senior, usted será responsable de
-                            liderar proyectos de desarrollo, mentorizar a ingenieros junior y colaborar con equipos
-                            multifuncionales para entregar productos de software de alta calidad.
+                            {job.descripcion}
                         </p>
                     </article>
 
                     <section>
                         <h2>Responsabilidades</h2>
 
-                        {[
-                            'Diseñar, desarrollar y mantener aplicaciones web utilizando tecnologías modernas.',
-                            'Colaborar con equipos de producto y diseño para definir y entregar nuevas características.',
-                            'Escribir código limpio.',
-                            'Realizar revisiones de código y proporcionar retroalimentación constructiva al equipo.'
-                        ].map((text, index) => (
-                            <div key={index}>
+                        {responsibilities.map((text, index) => (
+                            <div key={index} className="responsibility-item">
                                 <div>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -101,13 +106,13 @@ export function DetailJob() {
                                         strokeWidth="1"
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
-                                        className="icon icon-tabler icons-tabler-outline icon-tabler-circle-check"
                                     >
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                         <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
                                         <path d="M9 12l2 2l4 -4" />
                                     </svg>
                                 </div>
+
                                 <p>{text}</p>
                             </div>
                         ))}
@@ -116,13 +121,8 @@ export function DetailJob() {
                     <section>
                         <h2>Requisitos</h2>
 
-                        {[
-                            'Licenciatura en informática o campo relacionado.',
-                            'Mínimo de 5 años de experiencia en desarrollo de software.',
-                            'Experiencia con frameworks JavaScript (React, Angular, Vue.js).',
-                            'Familiaridad con metodologías ágiles y control de versiones (Git).'
-                        ].map((text, index) => (
-                            <div key={index}>
+                        {requirements.map((text, index) => (
+                            <div key={index} className="responsibility-item">
                                 <div>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -134,13 +134,13 @@ export function DetailJob() {
                                         strokeWidth="1"
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
-                                        className="icon icon-tabler icons-tabler-outline icon-tabler-circle-check"
                                     >
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                         <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
                                         <path d="M9 12l2 2l4 -4" />
                                     </svg>
                                 </div>
+
                                 <p>{text}</p>
                             </div>
                         ))}
@@ -149,10 +149,7 @@ export function DetailJob() {
                     <article className="description_text">
                         <h2>Acerca de la empresa</h2>
                         <p>
-                            Tech Solutions Inc. es una empresa de tecnología innovadora que se centra en la creación de
-                            soluciones de software de vanguardia para diversas industrias. Estamos comprometidos con un
-                            entorno de trabajo colaborativo e inclusivo donde cada empleado pueda prosperar y crecer
-                            profesionalmente.
+                            {job.content.about}
                         </p>
                     </article>
                 </div>
