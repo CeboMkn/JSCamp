@@ -1,0 +1,81 @@
+.route {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &>div {
+        display: flex;
+        margin: 3rem 0 3rem 0;
+        width: 100%;
+        max-width: 1200px;
+        padding-left: 3rem;
+
+        &>a {
+            text-decoration: none;
+            color: var(--color-text-muted);
+        }
+
+        span {
+            margin-left: 8px;
+            color: var(--color-text-primary);
+        }
+    }
+}
+
+.contain_title_oferta {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    &>section {
+
+        &>h1 {
+            margin-bottom: 10px;
+        }
+
+        &>p {
+            color: var(--color-text-muted);
+        }
+    }
+}
+
+.container_des_puesto {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    article {
+        &>h2 {
+            margin-bottom: 15px;
+        }
+
+        &>p {
+            margin-bottom: 15px;
+        }
+    }
+
+    &>section {
+        &>h2 {
+            margin-bottom: 15px;
+        }
+
+        div {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+
+            &>div {
+                width: 24px;
+            }
+        }
+    }
+
+}
+
+.btn_footer {
+    width: 100%;
+    display: flex;
+    max-width: 1200px;
+    justify-content: end;
+    padding: 3rem 5rem;
+}
