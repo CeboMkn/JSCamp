@@ -2,61 +2,20 @@ import { useParams } from "react-router"
 import styles from "../css_module/DetailJob.module.css"
 import { Link } from "../hooks/router/Link"
 import { Spinner } from "../components/Spinner"
-import { useEffect, useState } from "react"
+import { ErrorPage } from "./ErrorPage.jsx"
+import { useFetchDetails } from "../hooks/detailJob/useFetchDetails.jsx"
+import { useParseJob } from "../hooks/detailJob/useParseJob.jsx"
+
 
 export function DetailJob() {
 
     const { jobId } = useParams()
 
-    const [job, setJob] = useState(null)
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
+    const { job, loading, error } = useFetchDetails(jobId)
+    const { responsibilities, requirements } = useParseJob(job)
 
-    useEffect(() => {
-        console.log('haciendo peticion')
-        setLoading(true)
-
-
-        fetch(`https://jscamp-api.vercel.app/api/jobs/${jobId}`)
-            .then((res) => {
-                if (!res.ok) throw new Error('Job not found')
-                return res.json()
-            })
-            .then(json => {
-                setJob(json)
-            })
-            .catch(err => {
-                setError(err.message)
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-
-        return () => clearTimeout(timeoutId)
-    }, [jobId])
-
-    if (loading) {
-        return <Spinner position />
-    }
-
-    if (!job) {
-        return (
-            <div className="containerNotFound">
-                <h2>No se ha encontrado el trabajo</h2>
-            </div>
-        )
-    }
-
-    const responsibilities = job.content.responsibilities
-        .split('\n')
-        .map(item => item.replace(/^- /, '').trim())
-        .filter(Boolean)
-
-    const requirements = job.content.requirements
-        .split('\n')
-        .map(item => item.replace(/^- /, '').trim())
-        .filter(Boolean)
-
+    if (loading) return <Spinner position />
+    if (error) return <ErrorPage codeError="notFoundJob" />
 
 
     return (

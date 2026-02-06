@@ -17,7 +17,7 @@ export function JobListing({ load, jobsData, totalJobs }) {
                 )}
                 <div id="jobs-listings" className="env_result">
                     {totalJobs === 0 ? (
-                        <p className="notResults">No se han encontrado empleos que coincidan con los criterios de búsqueda</p>
+                        <p className="notResults">No se han encontrado empleos</p>
                     ) : (
                         jobsData.map(job => (
                             <JobCard key={job.id} job={job} />
