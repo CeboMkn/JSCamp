@@ -1,5 +1,6 @@
 import { errors } from "../helper/errorMesagesPage.js"
 import { useDocumentTitle } from "../hooks/global/useDocumentTitle.js"
+import { Link } from "../hooks/router/Link.jsx"
 
 export function ErrorPage({ codeError }) {
 
@@ -31,6 +32,9 @@ export function ErrorPage({ codeError }) {
                     <path d="M20 9v.01" />
                     <path d="M20 6a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" />
                 </svg>
+                <Link to={`/`} className='btn_info'>
+                    Volver al inicio
+                </Link>
             </div>
         </main>
     )
