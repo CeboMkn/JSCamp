@@ -7,7 +7,7 @@ import { HomePage } from './pages/Home.jsx';
 import { SearchPage } from './pages/Search.jsx';
 import { ContactPage } from './pages/Contact.jsx';
 import { DetailJob } from './pages/DetailJob.jsx';
-import { ErrorPage } from './pages/404.jsx'
+import { ErrorPage } from './pages/ErrorPage.jsx'
 
 export function App() {
 

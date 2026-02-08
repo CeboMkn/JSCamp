@@ -551,7 +551,11 @@ h1+p {
 }
 
 .notResults {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 1rem;
+    height: 7rem;
     text-align: center;
     text-wrap: balance;
 }
@@ -683,6 +687,13 @@ h1+p {
             align-items: center;
             margin-bottom: 0;
             justify-content: center;
+        }
+    }
+
+    .main_estrecho {
+
+        &>div {
+            padding: 0 2rem;
         }
     }
 

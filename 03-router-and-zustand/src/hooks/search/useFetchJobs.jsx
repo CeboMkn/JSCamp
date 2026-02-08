@@ -38,7 +38,7 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
 
             } catch (error) {
 
-                console.log('Error al pedir los trabajos')
+                console.log('Error al pedir los trabajos', error)
 
             } finally {
 
