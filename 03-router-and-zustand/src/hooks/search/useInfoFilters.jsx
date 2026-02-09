@@ -36,6 +36,7 @@ export const useInfoFilters = ({ onFilters, filters }) => {
     const handleDellFilters = () => {
         clearTimeout(debounceRef.current)
         setSearchUI("")
+        localStorage.removeItem('jobsFilters')
 
         onFilters({
             search: '',

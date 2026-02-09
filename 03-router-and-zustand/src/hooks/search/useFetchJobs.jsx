@@ -8,24 +8,25 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
             /* const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)) */
             try {
                 setLoading(true)
-
                 /* await sleep(5000000) */
                 const params = new URLSearchParams()
+                const pagination = `limit=${RESULTS_PER_PAGE}&offset=${(currentPage - 1) * RESULTS_PER_PAGE}`
+
                 if (filters.search) params.append('text', filters.search)
                 if (filters.tecnologia) params.append('technology', filters.tecnologia)
                 if (filters.ubicacion) params.append('type', filters.ubicacion)
                 if (filters.nivel) params.append('level', filters.nivel)
 
-                const offset = (currentPage - 1) * RESULTS_PER_PAGE
-                params.append('limit', RESULTS_PER_PAGE)
-                params.append('offset', offset)
-
                 const queryParams = params.toString()
-                const name = 'jobsFilters'
-                window.history.pushState({}, '', `${window.location.pathname}?${queryParams}`)
-                saveFilters(name, queryParams)
 
-                const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`)
+                window.history.pushState({}, '', queryParams
+                    ? `${window.location.pathname}?${queryParams}`
+                    : window.location.pathname)
+                queryParams && saveFilters('jobsFilters', queryParams)
+
+                const response = await fetch(
+                    `https://jscamp-api.vercel.app/api/jobs?${pagination}${queryParams ? `&${queryParams}` : ''}`
+                )
 
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}`)
