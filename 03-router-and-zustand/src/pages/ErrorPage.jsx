@@ -2,7 +2,7 @@ import { errors } from "../helper/errorMesagesPage.js"
 import { useDocumentTitle } from "../hooks/global/useDocumentTitle.js"
 import { Link } from "../hooks/router/Link.jsx"
 
-export function ErrorPage({ codeError }) {
+export default function ErrorPage({ codeError }) {
 
     const { code, message, description } = errors[codeError]
     useDocumentTitle(`Error ${code}`)

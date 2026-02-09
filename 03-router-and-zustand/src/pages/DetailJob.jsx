@@ -2,12 +2,12 @@ import { useParams } from "react-router"
 import styles from "../css_module/DetailJob.module.css"
 import { Link } from "../hooks/router/Link"
 import { Spinner } from "../components/Spinner"
-import { ErrorPage } from "./ErrorPage.jsx"
+import ErrorPage from "./ErrorPage.jsx"
 import { useFetchDetails } from "../hooks/detailJob/useFetchDetails.jsx"
 import { useParseJob } from "../hooks/detailJob/useParseJob.jsx"
 
 
-export function DetailJob() {
+export default function DetailJob() {
 
     const { jobId } = useParams()
 

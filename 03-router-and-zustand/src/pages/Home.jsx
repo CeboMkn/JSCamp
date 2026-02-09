@@ -2,7 +2,7 @@ import { useRouter } from '../hooks/router/useRouter'
 import background from '../assets/img/background.webp'
 import { useDocumentTitle } from '../hooks/global/useDocumentTitle'
 
-export function HomePage() {
+export default function HomePage() {
     useDocumentTitle('DevJobs | Bienvenido :)')
     const { navigateTo } = useRouter()
 

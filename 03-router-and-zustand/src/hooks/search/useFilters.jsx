@@ -6,7 +6,7 @@ export const useFilters = (RESULTS_PER_PAGE) => {
 
     const [jobs, setJobs] = useState([])
     const [total, setTotal] = useState(0)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [currentPage, setCurrentPage] = useState(1)
 
     /* COGER PARÁMETROS DE URL O LOCALSTORAGE SEGUN "PARAMS" */
@@ -37,9 +37,9 @@ export const useFilters = (RESULTS_PER_PAGE) => {
         return defaultFilters
     })
 
-    const totalPages = Math.ceil(total / RESULTS_PER_PAGE)
-
     useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters, RESULTS_PER_PAGE)
+
+    const totalPages = Math.ceil(total / RESULTS_PER_PAGE)
 
     const handleFilters = (filtersAdd) => {
         setToFilters(filtersAdd)

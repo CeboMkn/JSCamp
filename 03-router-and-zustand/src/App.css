@@ -325,6 +325,14 @@ h1+p {
 
 /* Inicio */
 
+.env_lazy {
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .sec1_index {
     height: 500px;
     text-align: center;
