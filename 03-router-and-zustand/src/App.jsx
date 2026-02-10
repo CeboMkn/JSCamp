@@ -1,6 +1,6 @@
 import './App.css'
 import { Routes, Route } from 'react-router';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 
 
 import { Header } from './components/Header.jsx';
@@ -18,7 +18,7 @@ export function App() {
   return (
     <>
       <div className='organized'>
-        <Header />
+        <Header/>
         <Suspense fallback={
           <div className="env_lazy">
             <Spinner />

@@ -5,9 +5,12 @@ import { Spinner } from "../components/Spinner"
 import ErrorPage from "./ErrorPage.jsx"
 import { useFetchDetails } from "../hooks/detailJob/useFetchDetails.jsx"
 import { useParseJob } from "../hooks/detailJob/useParseJob.jsx"
+import { useAuth } from "../context/AuthContext.jsx"
 
 
-export default function DetailJob() {
+export default function DetailJob({ }) {
+
+    const { isLoggedIn } = useAuth()
 
     const { jobId } = useParams()
 
@@ -35,8 +38,8 @@ export default function DetailJob() {
                         <p>{job.empresa} • {job.ubicacion}</p>
                     </section>
                     <div>
-                        <button type="button" className="btn_info btn_active">
-                            Aplicar ahora
+                        <button disabled={!isLoggedIn} type="button" className="btn_info btn_active">
+                            {isLoggedIn ? 'Aplicar ahora' : 'Iniciar Sesión para aplicar'}
                         </button>
                     </div>
                 </div>
@@ -114,8 +117,8 @@ export default function DetailJob() {
                 </div>
 
                 <footer className={styles.btn_footer}>
-                    <button type="button" className="btn_info btn_active">
-                        Aplicar ahora
+                    <button disabled={!isLoggedIn} type="button" className="btn_info btn_active">
+                        {isLoggedIn ? 'Aplicar ahora' : 'Iniciar Sesión para aplicar'}
                     </button>
                 </footer>
             </main>

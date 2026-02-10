@@ -1,6 +1,9 @@
 import { Link } from "../hooks/router/Link.jsx";
+import imgPerfil from '../assets/img/luffy_profile.jpg'
+import { useAuth } from "../context/AuthContext.jsx";
 
 export function Header() {
+  const { isLoggedIn, login, logout } = useAuth()
 
   return (
     <header className="header">
@@ -27,9 +30,14 @@ export function Header() {
       </div>
 
       <div>
-        <Link className="a_head" href="/subir-cv">Subir CV</Link>
+        {
+          isLoggedIn
+            ? <button className="btn_info" onClick={logout}>Cerrar Sesión</button>
+            : <button className="btn_info" onClick={login}>Iniciar Sesión</button>
+        }
+
         <img
-          src="src/assets/img/luffy_profile.jpg"
+          src={imgPerfil}
           alt="Avatar del usuario"
           width="50"
           height="50"
