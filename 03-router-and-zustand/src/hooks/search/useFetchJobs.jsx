@@ -48,5 +48,5 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
             }
         }
         fetchJobs()
-    }, [filters, currentPage])
+    },[filters, currentPage])
 }
