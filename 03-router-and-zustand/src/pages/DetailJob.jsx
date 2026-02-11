@@ -5,12 +5,12 @@ import { Spinner } from "../components/Spinner"
 import ErrorPage from "./ErrorPage.jsx"
 import { useFetchDetails } from "../hooks/detailJob/useFetchDetails.jsx"
 import { useParseJob } from "../hooks/detailJob/useParseJob.jsx"
-import { useAuth } from "../context/AuthContext.jsx"
+import { useAuthstore } from "../components/store/Authstore.js"
 
 
 export default function DetailJob({ }) {
 
-    const { isLoggedIn } = useAuth()
+    const { isLoggedIn } = useAuthstore()
 
     const { jobId } = useParams()
 

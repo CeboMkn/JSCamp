@@ -1,9 +1,9 @@
 import { Link } from "../hooks/router/Link.jsx";
 import imgPerfil from '../assets/img/luffy_profile.jpg'
-import { useAuth } from "../context/AuthContext.jsx";
+import { useAuthstore } from "./store/Authstore.js";
 
 export function Header() {
-  const { isLoggedIn, login, logout } = useAuth()
+  const { isLoggedIn, login, logout } = useAuthstore()
 
   return (
     <header className="header">
