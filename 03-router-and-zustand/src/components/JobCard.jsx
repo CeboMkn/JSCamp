@@ -2,6 +2,7 @@ import { Link } from "../hooks/router/Link"
 import { useAuthstore } from "./store/Authstore"
 import styles from '../css_module/JobCard.module.css'
 import { BtnFavorite } from "../hooks/global/btnFavorite"
+import { AplyBytton } from "../hooks/global/AplyButton"
 
 export function JobCard({ job }) {
 
@@ -23,9 +24,7 @@ export function JobCard({ job }) {
                         <p className={styles.secondP}>{job.descripcion}</p>
                     </div>
                     <div className={isLoggedIn ? styles.btnsJobCard : ''}>
-                        <button className="btn_info" type="button">
-                            Aplicar
-                        </button>
+                        <AplyBytton />
                         <BtnFavorite jobId={job.id} isLoggedIn={isLoggedIn} />
                     </div>
                 </article>
