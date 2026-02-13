@@ -1,8 +1,14 @@
 import { Link } from "../hooks/router/Link"
+import { useAuthstore } from "./store/Authstore"
+import styles from '../css_module/JobCard.module.css'
+import { BtnFavorite } from "../hooks/global/btnFavorite"
 
 export function JobCard({ job }) {
+
+    const { isLoggedIn } = useAuthstore()
+
     return (
-        <div className="res_busqueda">
+        <div className={styles.resBusqueda}>
             <li>
                 <article>
                     <div>
@@ -10,20 +16,22 @@ export function JobCard({ job }) {
                             <h3 className="title_job">{job.titulo}</h3>
                         </Link>
 
-                        <small className="first_p">
+                        <small className={styles.firstP}>
                             {job.empresa} | {job.ubicacion}
                         </small>
 
-                        <p className="second_p">{job.descripcion}</p>
+                        <p className={styles.secondP}>{job.descripcion}</p>
                     </div>
-
-                    <div>
-                        <button className="btn_info btn_active" type="button">
+                    <div className={isLoggedIn ? styles.btnsJobCard : ''}>
+                        <button className="btn_info" type="button">
                             Aplicar
                         </button>
+                        <BtnFavorite jobId={job.id} isLoggedIn={isLoggedIn} />
                     </div>
                 </article>
             </li>
         </div>
     )
 }
+
+

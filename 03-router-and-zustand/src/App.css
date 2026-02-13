@@ -82,8 +82,7 @@ h1+p {
     text-decoration: none;
     white-space: nowrap;
 
-    &:hover,
-    &:focus {
+    &:hover {
         background-color: var(--color-primary-hover);
         outline-offset: 2px;
     }
@@ -159,15 +158,12 @@ h1+p {
         justify-content: center;
         gap: 0.5rem;
     }
-
-
 }
 
 .form_princi {
+
     margin: 0 auto;
     margin-bottom: 1rem;
-
-
 
     &>div:first-child {
         display: flex;
@@ -199,6 +195,38 @@ h1+p {
         &::placeholder {
             color: #64748b;
         }
+    }
+}
+
+.btnsDetalles {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.btnFavorite {
+    width: min-content;
+    display: flex;
+    padding: 0.5rem 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-primary);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: var(--color-primary-hover);
+        outline-offset: 2px;
+    }
+
+    &:active {
+        transform: scale(0.98)
+    }
+
+    &:disabled {
+        opacity: .5;
+        pointer-events: none;
     }
 }
 
@@ -326,10 +354,10 @@ h1+p {
 /* Inicio */
 
 .env_lazy {
-  min-height: 60vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -571,46 +599,7 @@ h1+p {
     text-wrap: balance;
 }
 
-.res_busqueda {
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    transition: background 0.2s ease;
-    border-top: 1px solid var(--color-border);
 
-    &:hover {
-        background-color: #061627;
-    }
-
-    li {
-        display: block;
-        width: 100%;
-    }
-
-    article {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    div a {
-        color: var(--color-text-primary);
-        text-decoration: none;
-    }
-
-
-
-    h3 {
-        font-weight: 500;
-        display: inline-block;
-        /* <- importante para que el scale no afecte al layout */
-        transition: transform 0.1s ease;
-
-        &:hover {
-            transform: scale(1.05);
-        }
-
-    }
-}
 
 .res_first {
     border-radius: 9px 9px 0 0;
@@ -620,16 +609,9 @@ h1+p {
     border-radius: 0 0 9px 9px;
 }
 
-.first_p {
-    color: var(--color-text-muted);
-    padding-bottom: 1rem;
-    padding-top: 0.3rem;
-    display: block;
-}
 
-.second_p {
-    color: #cad4e2;
-}
+
+
 
 .mos_num_results {
     text-align: center;
@@ -681,12 +663,6 @@ h1+p {
                 flex-wrap: wrap;
             }
         }
-    }
-
-    .res_busqueda {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
     }
 
     .section_filter {

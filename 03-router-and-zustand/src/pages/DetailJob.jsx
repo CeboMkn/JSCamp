@@ -6,6 +6,7 @@ import ErrorPage from "./ErrorPage.jsx"
 import { useFetchDetails } from "../hooks/detailJob/useFetchDetails.jsx"
 import { useParseJob } from "../hooks/detailJob/useParseJob.jsx"
 import { useAuthstore } from "../components/store/Authstore.js"
+import { BtnFavorite } from "../hooks/global/btnFavorite.jsx"
 
 
 export default function DetailJob({ }) {
@@ -37,10 +38,11 @@ export default function DetailJob({ }) {
                         <h1>{job.titulo}</h1>
                         <p>{job.empresa} • {job.ubicacion}</p>
                     </section>
-                    <div>
+                    <div className="btnsDetalles">
                         <button disabled={!isLoggedIn} type="button" className="btn_info btn_active">
                             {isLoggedIn ? 'Aplicar ahora' : 'Iniciar Sesión para aplicar'}
                         </button>
+                        <BtnFavorite jobId={job.id} />
                     </div>
                 </div>
 
