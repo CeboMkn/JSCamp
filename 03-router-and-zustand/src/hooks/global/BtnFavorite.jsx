@@ -1,5 +1,6 @@
 import { useAuthstore } from "../../components/store/Authstore"
 import { useFavoritesStore } from "../../components/store/favoritesStore"
+import styles from '../../css_module/BtnFavorite.module.css'
 
 export function BtnFavorite({ jobId }) {
 
@@ -10,7 +11,7 @@ export function BtnFavorite({ jobId }) {
 
     return (
         <button
-            className="btnFavorite"
+            className={styles.btnFavorite}
             onClick={() => toggleFavorite(jobId)}
             type="button"
         >
