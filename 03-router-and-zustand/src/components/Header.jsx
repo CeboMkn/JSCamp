@@ -35,13 +35,14 @@ export function Header() {
             ? <button className="btn_info" onClick={logout}>Cerrar Sesión</button>
             : <button className="btn_info" onClick={login}>Iniciar Sesión</button>
         }
+        {isLoggedIn &&
+          <img
+            src={imgPerfil}
+            alt="Avatar del usuario"
+            width="50"
+            height="50"
+          />}
 
-        <img
-          src={imgPerfil}
-          alt="Avatar del usuario"
-          width="50"
-          height="50"
-        />
       </div>
     </header>
   )
