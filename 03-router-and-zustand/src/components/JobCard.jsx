@@ -1,6 +1,6 @@
 import { Link } from "../hooks/router/Link"
 import { useAuthstore } from "./store/Authstore"
-import styles from '../css_module/JobCard.module.css'
+import styles from './JobCard.module.css'
 import { BtnFavorite } from "../hooks/global/btnFavorite"
 import { AplyBytton } from "../hooks/global/AplyButton"
 

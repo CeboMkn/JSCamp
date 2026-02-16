@@ -1,3 +1,4 @@
+import stl from './Home.module.css'
 import { useRouter } from '../hooks/router/useRouter'
 import background from '../assets/img/background.webp'
 import { useDocumentTitle } from '../hooks/global/useDocumentTitle'
@@ -21,7 +22,7 @@ export default function HomePage() {
 
     return (
         <main>
-            <section className="sec1_index">
+            <section className={stl.sec1Index}>
                 <img
                     src={background}
                     width="200"
@@ -35,7 +36,7 @@ export default function HomePage() {
                     próxima oportunidad.
                 </p>
 
-                <form onSubmit={handleSearch} className="form_princi form_index w-100" role="search">
+                <form onSubmit={handleSearch} className={stl.formPrinci} role="search">
                     <div>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +68,7 @@ export default function HomePage() {
                 </form>
             </section>
 
-            <section className="sec2_index">
+            <section className={stl.sec2Index}>
                 <header>
                     <h2>¿Por qué DevJobs?</h2>
                     <p>

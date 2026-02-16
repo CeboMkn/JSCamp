@@ -1,4 +1,4 @@
-import styles from "../css_module/Spinner.module.css"
+import styles from "./Spinner.module.css"
 
 export function Spinner({ position = false }) {
 

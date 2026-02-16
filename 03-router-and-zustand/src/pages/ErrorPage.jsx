@@ -1,3 +1,4 @@
+import stl from './ErrorPage.module.css'
 import { errors } from "../helper/errorMesagesPage.js"
 import { useDocumentTitle } from "../hooks/global/useDocumentTitle.js"
 import { Link } from "../hooks/router/Link.jsx"
@@ -8,7 +9,7 @@ export default function ErrorPage({ codeError }) {
     useDocumentTitle(`Error ${code}`)
     return (
         <main>
-            <div className="containerNotFound">
+            <div className={stl.containerNotFound}>
                 <h1>{message}</h1>
                 <p>{description}</p>
 

@@ -1,14 +1,15 @@
 import { Link } from "../hooks/router/Link.jsx";
 import imgPerfil from '../assets/img/luffy_profile.jpg'
 import { useAuthstore } from "./store/Authstore.js";
+import stl from './Header.module.css'
 
 export function Header() {
   const { isLoggedIn, login, logout } = useAuthstore()
 
   return (
-    <header className="header">
+    <header className={stl.header}>
 
-      <div className="logo_header">
+      <div className={stl.logoHeader}>
         <Link href="/">
           <h2>
             <svg
@@ -22,7 +23,7 @@ export function Header() {
               </g>
             </svg>DevJobs</h2>
         </Link>
-        <nav className="nav">
+        <nav className={stl.navHeader}>
           <Link href="/">Inicio</Link>
           <Link href="/search">Empleos</Link>
           <Link href="/contact">Contacto</Link>

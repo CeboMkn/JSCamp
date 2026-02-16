@@ -1,6 +1,6 @@
 import { useAuthstore } from "../../components/store/Authstore"
 import { useFavoritesStore } from "../../components/store/favoritesStore"
-import styles from '../../css_module/BtnFavorite.module.css'
+import styles from './BtnFavorite.module.css'
 
 export function BtnFavorite({ jobId }) {
 

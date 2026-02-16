@@ -1,5 +1,5 @@
 import { useParams } from "react-router"
-import styles from "../css_module/DetailJob.module.css"
+import stl from "./DetailJob.module.css"
 import { Link } from "../hooks/router/Link"
 import { Spinner } from "../components/Spinner"
 import ErrorPage from "./ErrorPage.jsx"
@@ -9,7 +9,7 @@ import { useAuthstore } from "../components/store/Authstore.js"
 import { BtnFavorite } from "../hooks/global/btnFavorite.jsx"
 
 
-export default function DetailJob({ }) {
+export default function DetailJob() {
 
     const { isLoggedIn } = useAuthstore()
 
@@ -24,29 +24,29 @@ export default function DetailJob({ }) {
 
     return (
         <>
-            <section className={styles.route}>
+            <section className={stl.route}>
                 <div>
                     <Link href="/search">Empleos</Link>
-                    <span className="separator">/</span>
+                    <span>/</span>
                     <span>{job.titulo}</span>
                 </div>
             </section>
 
             <main className="main_estrecho">
-                <div className={styles.contain_title_oferta}>
+                <div className={stl.titleOferta}>
                     <section>
                         <h1>{job.titulo}</h1>
                         <p>{job.empresa} • {job.ubicacion}</p>
                     </section>
-                    <div className="btnsDetalles">
-                        <button disabled={!isLoggedIn} type="button" className="btn_info btn_active">
+                    <div className={stl.btnsDetalles}>
+                        <button disabled={!isLoggedIn} type="button" className="btn_info">
                             {isLoggedIn ? 'Aplicar ahora' : 'Iniciar Sesión para aplicar'}
                         </button>
                         <BtnFavorite jobId={job.id} />
                     </div>
                 </div>
 
-                <div className={styles.container_des_puesto}>
+                <div className={stl.desPuesto}>
                     <article>
                         <h2>Descripción del puesto</h2>
                         <p>
@@ -58,7 +58,7 @@ export default function DetailJob({ }) {
                         <h2>Responsabilidades</h2>
 
                         {responsibilities.map((text, index) => (
-                            <div key={index} className="responsibility-item">
+                            <div key={index}>
                                 <div>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ export default function DetailJob({ }) {
                         <h2>Requisitos</h2>
 
                         {requirements.map((text, index) => (
-                            <div key={index} className="responsibility-item">
+                            <div key={index}>
                                 <div>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +110,7 @@ export default function DetailJob({ }) {
                         ))}
                     </section>
 
-                    <article className="description_text">
+                    <article>
                         <h2>Acerca de la empresa</h2>
                         <p>
                             {job.content.about}
@@ -118,8 +118,8 @@ export default function DetailJob({ }) {
                     </article>
                 </div>
 
-                <footer className={styles.btn_footer}>
-                    <button disabled={!isLoggedIn} type="button" className="btn_info btn_active">
+                <footer className={stl.btnFooter}>
+                    <button disabled={!isLoggedIn} type="button" className="btn_info">
                         {isLoggedIn ? 'Aplicar ahora' : 'Iniciar Sesión para aplicar'}
                     </button>
                 </footer>

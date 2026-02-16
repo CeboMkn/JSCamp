@@ -1,5 +1,5 @@
 import { useContactForm } from "../hooks/contact/useContactForm.jsx"
-import styles from "../css_module/Contact.module.css"
+import styles from "./Contact.module.css"
 import { useDocumentTitle } from "../hooks/global/useDocumentTitle.js"
 
 export default function ContactPage() {
