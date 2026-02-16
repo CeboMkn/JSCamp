@@ -21,7 +21,7 @@ export default function RegisterPage() {
                             <input type="password" name="" id="" placeholder='Repetir Contraseña' />
                         </div>
                         <div>
-                            <BtnGlobal to='/login'>
+                            <BtnGlobal>
                                  Crear Cuenta
                             </BtnGlobal>
                         </div>

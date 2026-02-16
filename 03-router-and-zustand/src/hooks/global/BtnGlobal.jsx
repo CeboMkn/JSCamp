@@ -6,12 +6,11 @@ export const BtnGlobal = ({
     onClick,
     disabled = false,
     type = "button",
-    to, // Nueva prop para enlaces
+    to,
     className = ""
 }) => {
     const classes = `${stl.btnInfo} ${className}`;
 
-    // Si tiene la prop 'to', renderizamos un Link de React Router
     if (to && !disabled) {
         return (
             <Link to={to} className={classes} onClick={onClick}>
@@ -20,7 +19,6 @@ export const BtnGlobal = ({
         );
     }
 
-    // Si no tiene 'to' (o está deshabilitado), renderizamos un botón normal
     return (
         <button
             type={type}
