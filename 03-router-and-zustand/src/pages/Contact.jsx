@@ -1,7 +1,7 @@
-import { useContactForm } from "../hooks/contact/useContactForm.jsx"
+import { useContactForm } from "../hooks/contact/useContactForm.js"
 import styles from "./Contact.module.css"
 import { useDocumentTitle } from "../hooks/global/useDocumentTitle.js"
-import { BtnGlobal } from "../components/BtnGlobal.jsx"
+import { BtnGlobal } from "../hooks/global/BtnGlobal.jsx"
 
 export default function ContactPage() {
 

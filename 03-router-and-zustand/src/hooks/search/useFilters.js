@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useFetchJobs } from './useFetchJobs';
+import { useFetchJobs } from './useFetchJobs.js';
 
 export const useFilters = (RESULTS_PER_PAGE) => {
 

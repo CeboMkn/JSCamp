@@ -1,5 +1,5 @@
 import { useAuthstore } from "../../components/store/Authstore"
-import { BtnGlobal } from "../../components/BtnGlobal"
+import { BtnGlobal } from "./BtnGlobal"
 
 export function AplyBytton() {
     const { isLoggedIn } = useAuthstore()

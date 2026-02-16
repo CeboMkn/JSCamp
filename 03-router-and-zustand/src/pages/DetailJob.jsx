@@ -3,11 +3,11 @@ import stl from "./DetailJob.module.css"
 import { Link } from "../hooks/router/Link"
 import { Spinner } from "../components/Spinner"
 import ErrorPage from "./ErrorPage.jsx"
-import { useFetchDetails } from "../hooks/detailJob/useFetchDetails.jsx"
-import { useParseJob } from "../hooks/detailJob/useParseJob.jsx"
+import { useFetchDetails } from "../hooks/detailJob/useFetchDetails.js"
+import { useParseJob } from "../hooks/detailJob/useParseJob.js"
 import { useAuthstore } from "../components/store/Authstore.js"
 import { BtnFavorite } from "../hooks/global/btnFavorite.jsx"
-import { BtnGlobal } from "../components/BtnGlobal.jsx"
+import { BtnGlobal } from "../hooks/global/BtnGlobal.jsx"
 
 
 export default function DetailJob() {

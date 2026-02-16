@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { saveFilters } from "./saveFiltersLocalStorage.jsx"
+import { saveFilters } from "./saveFiltersLocalStorage.js"
 
 export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters, RESULTS_PER_PAGE) {
 

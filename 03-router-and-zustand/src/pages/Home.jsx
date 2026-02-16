@@ -1,8 +1,8 @@
 import stl from './Home.module.css'
-import { useRouter } from '../hooks/router/useRouter'
+import { useRouter } from '../hooks/router/useRouter.js'
 import background from '../assets/img/background.webp'
 import { useDocumentTitle } from '../hooks/global/useDocumentTitle'
-import { BtnGlobal } from '../components/BtnGlobal'
+import { BtnGlobal } from '../hooks/global/BtnGlobal.jsx'
 
 export default function HomePage() {
     useDocumentTitle('DevJobs | Bienvenido :)')

@@ -2,7 +2,7 @@ import { JobListing } from '../components/JobListing.jsx';
 import { Pagination } from '../components/Pagination.jsx';
 import { SearchFormSection } from '../components/SearchFormSection.jsx';
 import { MostrandoNumRresults } from '../components/MostrandoNumResults.jsx';
-import { useFilters } from '../hooks/search/useFilters.jsx';
+import { useFilters } from '../hooks/search/useFilters.js';
 import { useDocumentTitle } from '../hooks/global/useDocumentTitle.js';
 
 export default function SearchPage() {

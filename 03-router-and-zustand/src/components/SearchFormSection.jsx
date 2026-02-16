@@ -1,5 +1,5 @@
 import stl from './SearchFormSection.module.css'
-import { useInfoFilters } from "../hooks/search/useInfoFilters.jsx"
+import { useInfoFilters } from "../hooks/search/useInfoFilters.js"
 
 export function SearchFormSection({ onFilters, filters }) {
 

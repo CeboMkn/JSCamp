@@ -57,6 +57,7 @@ h1+p {
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
 }
+
 .env_lazy {
     min-height: 60vh;
     display: flex;
