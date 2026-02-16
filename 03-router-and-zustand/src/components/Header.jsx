@@ -1,6 +1,7 @@
 import { Link } from "../hooks/router/Link.jsx";
 import imgPerfil from '../assets/img/luffy_profile.jpg'
 import { useAuthstore } from "./store/Authstore.js";
+import { BtnGlobal } from "./BtnGlobal.jsx";
 import stl from './Header.module.css'
 
 export function Header() {
@@ -31,11 +32,9 @@ export function Header() {
       </div>
 
       <div>
-        {
-          isLoggedIn
-            ? <button className="btn_info" onClick={logout}>Cerrar Sesión</button>
-            : <button className="btn_info" onClick={login}>Iniciar Sesión</button>
-        }
+        <BtnGlobal onClick={isLoggedIn ? logout : login}>
+          {isLoggedIn ? 'Cerrar Sesión' : 'Iniciar Sesión'}
+        </BtnGlobal>
         {isLoggedIn &&
           <img
             src={imgPerfil}

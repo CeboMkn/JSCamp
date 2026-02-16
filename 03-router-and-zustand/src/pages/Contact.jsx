@@ -1,6 +1,7 @@
 import { useContactForm } from "../hooks/contact/useContactForm.jsx"
 import styles from "./Contact.module.css"
 import { useDocumentTitle } from "../hooks/global/useDocumentTitle.js"
+import { BtnGlobal } from "../components/BtnGlobal.jsx"
 
 export default function ContactPage() {
 
@@ -117,12 +118,12 @@ export default function ContactPage() {
 
                         <section>
                             <div className={styles.btnEnviar}>
-                                <button type="submit" className="btn_info" disabled={sendStatus === 'enviando' || sendStatus === 'enviado'} >
+                                <BtnGlobal type="submit" disabled={sendStatus === 'enviando' || sendStatus === 'enviado'}>
                                     {sendStatus === 'enviar' && 'Enviar'}
                                     {sendStatus === 'enviando' && 'Enviando...'}
                                     {sendStatus === 'error' && 'Error al enviar, pruebe más tarde'}
                                     {sendStatus === 'enviado' && 'Enviado :)'}
-                                </button>
+                                </BtnGlobal>
                             </div>
                         </section>
 
@@ -130,6 +131,8 @@ export default function ContactPage() {
                 </section>
 
             </div>
+
         </main>
+
     )
 }

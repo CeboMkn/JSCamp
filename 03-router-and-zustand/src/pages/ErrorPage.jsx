@@ -33,7 +33,7 @@ export default function ErrorPage({ codeError }) {
                     <path d="M20 9v.01" />
                     <path d="M20 6a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" />
                 </svg>
-                <Link to={`/`} className='btn_info'>
+                <Link to={`/`} className={stl.btnInfo}>
                     Volver al inicio
                 </Link>
             </div>

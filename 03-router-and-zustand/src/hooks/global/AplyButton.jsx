@@ -1,10 +1,11 @@
 import { useAuthstore } from "../../components/store/Authstore"
+import { BtnGlobal } from "../../components/BtnGlobal"
 
 export function AplyBytton() {
     const { isLoggedIn } = useAuthstore()
     return (
-        <button disabled={!isLoggedIn} className="btn_info" type="button">
+        <BtnGlobal disabled={!isLoggedIn}>
             Aplicar
-        </button>
+        </BtnGlobal>
     )
 }

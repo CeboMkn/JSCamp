@@ -2,6 +2,7 @@ import stl from './Home.module.css'
 import { useRouter } from '../hooks/router/useRouter'
 import background from '../assets/img/background.webp'
 import { useDocumentTitle } from '../hooks/global/useDocumentTitle'
+import { BtnGlobal } from '../components/BtnGlobal'
 
 export default function HomePage() {
     useDocumentTitle('DevJobs | Bienvenido :)')
@@ -60,10 +61,9 @@ export default function HomePage() {
                             type="text"
                             placeholder="Buscar empleos por título, habilidad o empresa"
                         />
-
-                        <button className="btn_info" type="submit">
+                        <BtnGlobal type="submit">
                             Buscar
-                        </button>
+                        </BtnGlobal>
                     </div>
                 </form>
             </section>

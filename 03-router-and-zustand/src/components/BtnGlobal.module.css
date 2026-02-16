@@ -1,13 +1,3 @@
-.containerNotFound {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    height: 100%;
-    justify-content: center;
-    gap: 1rem;
-}
-
 .btnInfo {
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;

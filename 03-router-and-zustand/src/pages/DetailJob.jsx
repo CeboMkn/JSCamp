@@ -7,6 +7,7 @@ import { useFetchDetails } from "../hooks/detailJob/useFetchDetails.jsx"
 import { useParseJob } from "../hooks/detailJob/useParseJob.jsx"
 import { useAuthstore } from "../components/store/Authstore.js"
 import { BtnFavorite } from "../hooks/global/btnFavorite.jsx"
+import { BtnGlobal } from "../components/BtnGlobal.jsx"
 
 
 export default function DetailJob() {
@@ -39,9 +40,9 @@ export default function DetailJob() {
                         <p>{job.empresa} • {job.ubicacion}</p>
                     </section>
                     <div className={stl.btnsDetalles}>
-                        <button disabled={!isLoggedIn} type="button" className="btn_info">
+                        <BtnGlobal disabled={!isLoggedIn}>
                             {isLoggedIn ? 'Aplicar ahora' : 'Iniciar Sesión para aplicar'}
-                        </button>
+                        </BtnGlobal>
                         <BtnFavorite jobId={job.id} />
                     </div>
                 </div>
