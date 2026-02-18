@@ -1,0 +1,30 @@
+Semantic Versioning (SemVer)
+El número de versión se divide en tres partes: MAJOR.MINOR.PATCH (por ejemplo, 2.1.3).
+
+1. MAJOR (Mayor): 2
+Se incrementa cuando realizas cambios críticos que rompen la compatibilidad con versiones anteriores (Breaking Changes).
+
+Cuándo ocurre: Al renombrar funciones principales, eliminar parámetros obligatorios o reescribir la arquitectura.
+
+Impacto: El usuario que actualice deberá modificar su código porque el anterior dejará de funcionar.
+
+2. MINOR (Menor): 1
+Se incrementa cuando añades funcionalidad nueva pero mantienes la compatibilidad.
+
+Cuándo ocurre: Al añadir un nuevo método, una nueva opción o una feature que no existía.
+
+Impacto: Es retrocompatible; el código antiguo del usuario seguirá funcionando perfectamente tras actualizar.
+
+3. PATCH (Parche): 3
+Se incrementa para correcciones menores que no añaden funciones nuevas.
+
+Cuándo ocurre: Para arreglar un bug (error de código), solucionar una vulnerabilidad de seguridad o mejorar el rendimiento interno.
+
+Impacto: Es seguro de actualizar y no requiere cambios por parte del usuario.
+
+¿Qué significa el símbolo circunflejo (^)?
+En tu archivo package.json, verás la versión como "^2.1.3". Este símbolo es un operador de rango que le dice a npm/pnpm lo siguiente:
+
+"Instala la versión 2.1.3 o cualquier versión superior Minor o Patch (ej. 2.2.0 o 2.1.4), pero NUNCA actualices a la versión 3.0.0 automáticamente".
+
+Esto protege tu proyecto de cambios "rompedores" (Major) mientras te mantiene al día con las mejoras y arreglos de seguridad.
