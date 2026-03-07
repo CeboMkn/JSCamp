@@ -1,4 +1,5 @@
 import express from 'express';
+import jobs from './jobs.json' with {type: 'json'}
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -21,13 +22,7 @@ app.get('/', previusMiddleware, (req, res) => {
 });
 
 app.get('/get-jobs', (req, res) => {
-  res.json({
-    jobs: [
-      { id: 1, title: 'Desarrollador Backend', company: 'Tech Company A' },
-      { id: 2, title: 'Desarrollador Frontend', company: 'Tech Company B' },
-      { id: 3, title: 'Ingeniero de Datos', company: 'Tech Company C' },
-    ]
-  })
+  return res.json(jobs);
 })
 
 app.get('/get-single-job/:id', (req, res) => {
