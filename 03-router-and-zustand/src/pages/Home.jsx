@@ -5,7 +5,7 @@ import { useDocumentTitle } from '../hooks/global/useDocumentTitle'
 import { BtnGlobal } from '../hooks/global/BtnGlobal.jsx'
 
 export default function HomePage() {
-    useDocumentTitle('DevJobs | Bienvenido :)')
+    useDocumentTitle('Bienvenido :)')
     const { navigateTo } = useRouter()
 
     const handleSearch = (e) => {

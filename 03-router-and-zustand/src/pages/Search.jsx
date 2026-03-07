@@ -9,18 +9,16 @@ export default function SearchPage() {
 
   useDocumentTitle('Buscador')
 
-  const RESULTS_PER_PAGE = 4
-
   const {
     loading,
     filters,
     currentPage,
-    setCurrentPage,
+    handleSetCurrentPage,
     jobs,
     total,
     totalPages,
     handleFilters
-  } = useFilters(RESULTS_PER_PAGE)
+  } = useFilters()
 
   return (
     <main className="main_estrecho">
@@ -30,9 +28,9 @@ export default function SearchPage() {
 
         <JobListing load={loading} jobsData={jobs} totalJobs={total} />
 
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-        
-        <MostrandoNumRresults currentPage={currentPage} results={RESULTS_PER_PAGE} jobs={total} />
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handleSetCurrentPage} />
+
+        <MostrandoNumRresults currentPage={currentPage} jobs={total} />
 
       </div>
     </main>

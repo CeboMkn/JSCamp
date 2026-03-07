@@ -1,8 +1,8 @@
 import { Link } from "../hooks/router/Link"
 import { useAuthstore } from "./store/Authstore"
 import styles from './JobCard.module.css'
-import { BtnFavorite } from "../hooks/global/btnFavorite"
-import { AplyBytton } from "../hooks/global/AplyButton"
+import { BtnFavorite } from "../hooks/global/BtnFavorite"
+import { AplyButton } from "../hooks/global/AplyButton"
 
 export function JobCard({ job }) {
 
@@ -13,7 +13,7 @@ export function JobCard({ job }) {
             <li>
                 <article>
                     <div>
-                        <Link href={`/job/${job.id}`}>
+                        <Link href={`/job/${job.id}`} /* target="_blank" rel="noreferrer" */>
                             <h3 className="title_job">{job.titulo}</h3>
                         </Link>
 
@@ -24,7 +24,7 @@ export function JobCard({ job }) {
                         <p className={styles.secondP}>{job.descripcion}</p>
                     </div>
                     <div className={isLoggedIn ? styles.btnsJobCard : ''}>
-                        <AplyBytton />
+                        <AplyButton jobId={job.id} />
                         <BtnFavorite jobId={job.id} isLoggedIn={isLoggedIn} />
                     </div>
                 </article>

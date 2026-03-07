@@ -7,6 +7,7 @@ import { Header } from './components/Header.jsx';
 import { Footer } from './components/Footer.jsx';
 import { Spinner } from './components/Spinner.jsx';
 import { ProtectedRoute } from './components/ProtectedRoute.jsx';
+import ToastContainer from './hooks/global/toast/ToastContainer.jsx';
 
 const HomePage = lazy(() => import('./pages/Home.jsx'))
 const ProfilePage = lazy(() => import('./pages/ProfilePage.jsx'))
@@ -24,6 +25,7 @@ export function App() {
     <>
       <div className='organized'>
         <Header />
+        <ToastContainer />
         <Suspense fallback={
           <div className="env_lazy">
             <Spinner />

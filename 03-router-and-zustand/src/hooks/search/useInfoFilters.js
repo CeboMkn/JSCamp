@@ -15,6 +15,7 @@ export const useInfoFilters = ({ onFilters, filters }) => {
         if (name === 'search') {
             setSearchUI(value)
 
+            /* Excelente! Muy bien hecho */
             clearTimeout(debounceRef.current)
 
             debounceRef.current = setTimeout(() => {
@@ -36,7 +37,6 @@ export const useInfoFilters = ({ onFilters, filters }) => {
     const handleDellFilters = () => {
         clearTimeout(debounceRef.current)
         setSearchUI("")
-        localStorage.removeItem('jobsFilters')
 
         onFilters({
             search: '',
