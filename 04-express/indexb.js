@@ -11,6 +11,8 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use(express.json());
+
 /* Mostrar donde esta corriendo el servidor */
 app.listen(PORT, () => {
     console.log(`Servidor correndo en http://localhost:${PORT}`);
@@ -21,7 +23,7 @@ app.get('/', (req, res) => {
     res.send('Servidor en marcha');
 });
 
-/* GET */
+/* GET ***************************************************************************************************/
 
 /* Enviar los trabajos */
 
@@ -57,8 +59,22 @@ app.get('/jobs/:id', (req, res) => {
 
 })
 
-/* POST */
+/* POST ***************************************************************************************************/
 
 app.post('/jobs', (req, res) => {
-    res.status(201).json({ message: 'Trabajo creado' });
+
+    const { titulo, empresa, descripcion, ubicacion, data } = req.body;
+
+    const newJob = {
+        id: crypto.randomUUID(),
+        titulo,
+        empresa,
+        descripcion,
+        ubicacion,
+        data
+    }
+
+    jobs.push(newJob);
+
+    res.status(201).json(newJob);
 })
