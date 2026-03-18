@@ -1,8 +1,13 @@
 import express from 'express';
-import jobs from './jobs.json' with {type: 'json'}
+import cors from 'cors';
+import datajobs from './jobs.json' with {type: 'json'}
+
+let jobs = [...datajobs];
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+
+app.use(cors());
 
 /* Mostrar tiempo de solicitud */
 app.use((req, res, next) => {
@@ -78,3 +83,48 @@ app.post('/jobs', (req, res) => {
 
     res.status(201).json(newJob);
 })
+
+/* PUT *****************************************************************************************************/
+
+app.put('/jobs/:id', (req, res) => {
+    const { id } = req.params;
+    const { titulo, empresa, descripcion, ubicacion, data } = req.body;
+
+    const jobId = jobs.find(job => job.id === id);
+
+    if (!jobId) {
+        return res.status(404).json({ error: 'Trabajo no encontrado' });
+    }
+
+    jobId.titulo = titulo || jobId.titulo;
+    jobId.empresa = empresa || jobId.empresa;
+    jobId.descripcion = descripcion || jobId.descripcion;
+    jobId.ubicacion = ubicacion || jobId.ubicacion;
+    jobId.data = data || jobId.data;
+
+    return res.status(200).json(jobId);
+
+})
+
+/* PATCH ***************************************************************************************************/
+
+app.patch('/jobs/:id', (req, res) => {
+    const { id } = req.params;
+
+    const jobIndex = jobs.findIndex(job => job.id === id);
+
+    if (jobIndex === -1) {
+        return res.status(404).json({ error: 'Trabajo no encontrado' });
+    }
+
+    const updatedJob = {
+        ...jobs[jobIndex],
+        ...req.body
+    };
+
+    updatedJob.id = jobs[jobIndex].id;
+
+    jobs[jobIndex] = updatedJob;
+
+    return res.status(200).json(updatedJob);
+});
