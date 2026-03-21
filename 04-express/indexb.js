@@ -7,7 +7,18 @@ let jobs = [...datajobs];
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors());
+const ACEPTED_ORIGINS = [
+    'http://localhost:5173'
+];
+
+app.use(cors({
+    origin: (origin, callback) => {
+        if (ACEPTED_ORIGINS.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error('Origen no permitido por CORS'));
+    }
+}));
 
 /* Mostrar tiempo de solicitud */
 app.use((req, res, next) => {
@@ -47,7 +58,7 @@ app.get('/jobs', (req, res) => {
 
     const paginatedJobs = filteredJobs.slice(offsetNumber, offsetNumber + limitNumber);
 
-    return res.json(paginatedJobs);
+    return res.json({ data: paginatedJobs });
 })
 
 /* Enviar solo un trabajo por id */
