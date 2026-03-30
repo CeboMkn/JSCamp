@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import datajobs from './jobs.json' with {type: 'json'}
+import datajobs from '../jobs.json' with {type: 'json'}
 
 let jobs = [...datajobs];
 

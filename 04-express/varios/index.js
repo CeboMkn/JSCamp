@@ -1,5 +1,5 @@
 import express from 'express';
-import jobs from './jobs.json' with {type: 'json'}
+import jobs from '../jobs.json' with {type: 'json'}
 
 const PORT = process.env.PORT || 3000;
 const app = express();
