@@ -26,7 +26,7 @@ export class JobModel {
         return job;
     }
 
-    static async createJob(titulo, empresa, descripcion, ubicacion, data) {
+    static async createJob({ titulo, empresa, descripcion, ubicacion, data }) {
         const newJob = {
             id: crypto.randomUUID(),
             titulo,
@@ -40,7 +40,7 @@ export class JobModel {
         return newJob;
     }
 
-    static async updateJob(id, titulo, empresa, descripcion, ubicacion, data) {
+    static async updateJob({ id, titulo, empresa, descripcion, ubicacion, data }) {
         const jobId = jobs.find(job => job.id === id);
 
         if (!jobId) {
@@ -55,12 +55,12 @@ export class JobModel {
         return jobId;
     }
 
-    static async patchJob(id) {
+    static async patchJob({id, input}) {
         const jobIndex = jobs.findIndex(job => job.id === id);
 
         const updatedJob = {
             ...jobs[jobIndex],
-            ...req.body
+            ...input
         };
 
         updatedJob.id = jobs[jobIndex].id;

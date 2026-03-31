@@ -30,7 +30,7 @@ export class jobsController {
         const { id } = req.params;
         const { titulo, empresa, descripcion, ubicacion, data } = req.body;
 
-        const jobId = await JobModel.updateJob(id, titulo, empresa, descripcion, ubicacion, data);
+        const jobId = await JobModel.updateJob({id, titulo, empresa, descripcion, ubicacion, data});
 
         if (!jobId) {
             return res.status(404).json({ error: 'Trabajo no encontrado' });
@@ -41,8 +41,9 @@ export class jobsController {
 
     static async patchJob(req, res) {
         const { id } = req.params;
+        const input = req.body;
 
-        const updatedJob = await JobModel.patchJob(id);
+        const updatedJob = await JobModel.patchJob({id, input});
 
         if (!updatedJob) {
             return res.status(404).json({ error: 'Trabajo no encontrado' });
