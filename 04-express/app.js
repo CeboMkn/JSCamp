@@ -17,7 +17,13 @@ app.get('/', (req, res) => {
 app.use('/jobs', jobsRouter);
 
 /* Mostrar donde esta corriendo el servidor */
-app.listen(PORT, () => {
-    console.log(`Servidor correndo en http://localhost:${PORT}`);
-})
+
+if (!process.env.NODE_ENV) {
+    app.listen(PORT, () => {
+        console.log(`Servidor correndo en http://localhost:${PORT}`);
+    })
+}
+
+
+export default app;
 
