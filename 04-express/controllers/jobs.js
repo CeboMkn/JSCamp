@@ -3,9 +3,15 @@ import { JobModel } from "../models/jobs.js";
 export class jobsController {
 
     static async getAllJobs(req, res) {
-        const { offset = 0, limit = 10, text } = req.query;
-        const paginatedJobs = await JobModel.getAllJobs({ offset, limit, text });
-        return res.json({ data: paginatedJobs });
+        const { offset = 0, limit = 10, text, technology, type, level } = req.query;
+        const { paginatedJobs, total } = await JobModel.getAllJobs({ offset, limit, text, technology, type, level });
+        return res.json({
+            total: total,
+            result: paginatedJobs.length,
+            offset: Number(offset),
+            limit: Number(limit),
+            data: paginatedJobs
+        });
     }
 
     static async getJobById(req, res) {
@@ -30,7 +36,7 @@ export class jobsController {
         const { id } = req.params;
         const { titulo, empresa, descripcion, ubicacion, data } = req.body;
 
-        const jobId = await JobModel.updateJob({id, titulo, empresa, descripcion, ubicacion, data});
+        const jobId = await JobModel.updateJob({ id, titulo, empresa, descripcion, ubicacion, data });
 
         if (!jobId) {
             return res.status(404).json({ error: 'Trabajo no encontrado' });
@@ -43,7 +49,7 @@ export class jobsController {
         const { id } = req.params;
         const input = req.body;
 
-        const updatedJob = await JobModel.patchJob({id, input});
+        const updatedJob = await JobModel.patchJob({ id, input });
 
         if (!updatedJob) {
             return res.status(404).json({ error: 'Trabajo no encontrado' });

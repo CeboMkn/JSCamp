@@ -5,19 +5,48 @@ const jobs = JSON.parse(
 );
 
 export class JobModel {
-    static async getAllJobs({ offset = 0, limit = 10, text }) {
+    static async getAllJobs({ offset = 0, limit = 10, text, technology, type, level }) {
         const limitNumber = Number(limit);
         const offsetNumber = Number(offset);
-        let filteredJobs = jobs
 
-        if (text) {
-            const lowerText = text.toLowerCase();
-            filteredJobs = filteredJobs.filter(
-                job => job.titulo.toLowerCase().includes(lowerText) || job.descripcion.toLowerCase().includes(lowerText));
-        }
+        const paginatedJobs = jobs
+            .filter(job => {
+                if (text) {
+                    const lowerText = text.toLowerCase();
+                    if (!job.titulo.toLowerCase().includes(lowerText) &&
+                        !job.descripcion.toLowerCase().includes(lowerText)) {
+                        return false;
+                    }
+                }
 
-        const paginatedJobs = filteredJobs.slice(offsetNumber, offsetNumber + limitNumber);
-        return paginatedJobs;
+                if (technology) {
+                    const lowerTechnology = technology.toLowerCase();
+                    if (!job.data.technology.some(tech => tech.toLowerCase().includes(lowerTechnology))) {
+                        return false;
+                    }
+                }
+
+                if (type) {
+                    const lowerType = type.toLowerCase();
+                    if (!job.data.modalidad.toLowerCase().includes(lowerType)) {
+                        return false;
+                    }
+                }
+
+                if (level) {
+                    const lowerLevel = level.toLowerCase();
+                    if (!job.data.nivel.toLowerCase().includes(lowerLevel)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
+        const total = paginatedJobs.length;
+        const slicedJobs = paginatedJobs.slice(offsetNumber, offsetNumber + limitNumber);
+
+        return { paginatedJobs: slicedJobs, total };
     }
 
     static async getJobById(id) {
@@ -55,7 +84,7 @@ export class JobModel {
         return jobId;
     }
 
-    static async patchJob({id, input}) {
+    static async patchJob({ id, input }) {
         const jobIndex = jobs.findIndex(job => job.id === id);
 
         const updatedJob = {

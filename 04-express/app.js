@@ -18,7 +18,7 @@ app.use('/jobs', jobsRouter);
 
 /* Mostrar donde esta corriendo el servidor */
 
-if (!process.env.NODE_ENV) {
+if (process.env.NODE_ENV === 'test') {
     app.listen(PORT, () => {
         console.log(`Servidor correndo en http://localhost:${PORT}`);
     })
