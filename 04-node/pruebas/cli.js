@@ -1,4 +1,4 @@
-import { readdir, stat } from "node:fs/promises"
+/* import { readdir, stat } from "node:fs/promises"
 import { join } from "node:path"
 
 // 1. Recuperar la carpeta a listar
@@ -31,12 +31,12 @@ for (const entry of entries) {
     const size = entry.isDir ? '' : `${entry.size}`
     console.log(`${icon}  ${entry.name.padEnd(30)}${size}`)
 }
-
+ */
 
 
 /* MEJORAS */
 
-/* import { readdir, stat } from "node:fs/promises"
+import { readdir, stat } from "node:fs/promises"
 import { join } from "node:path"
 
 // 1. Recuperar carpeta y validar existencia básica
@@ -97,4 +97,4 @@ async function listFiles() {
   }
 }
 
-listFiles() */
+listFiles()

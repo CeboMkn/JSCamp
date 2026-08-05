@@ -19,6 +19,7 @@
     border-radius: 1rem;
     box-shadow: 9px 9px 15px -3px var(--color-shadow);
     list-style: none;
+    transition: box-shadow 1s ease;
 
     &>form {
         width: 100%;
@@ -27,6 +28,10 @@
         grid-template-rows: auto 1fr auto;
         gap: 2rem;
     }
+}
+
+.formContact:hover {
+    box-shadow: 0px 0px 15px -3px var(--color-primary-hover);
 }
 
 .formLabels {
